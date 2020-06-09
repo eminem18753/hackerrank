@@ -1,0 +1,10 @@
+read var
+if [ $var = 'Y' -o $var = 'y' ]
+then
+    echo "YES"
+elif [ $var = 'N' -o $var = 'n' ]
+then
+    echo "NO"
+else
+    echo ""
+fi

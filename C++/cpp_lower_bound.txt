@@ -1,0 +1,44 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int number;
+    cin>>number;
+    vector<int> total;
+    for(int i=0;i<number;i++)
+    {
+        int temp;
+        cin>>temp;
+        total.push_back(temp);
+    }
+    sort(total.begin(),total.end());
+    int queries;
+    cin>>queries;
+    for(int i=0;i<queries;i++)
+    {
+        int find=0;
+        int value;
+        cin>>value;
+        if(binary_search(total.begin(),total.end(),value))
+        {
+            find=1;
+        }
+        vector<int>::iterator lower=lower_bound(total.begin(),total.end(),value);
+        if(find==1)
+        {
+            cout<<"Yes ";
+        }
+        else
+        {
+            cout<<"No ";
+        }
+        cout<<lower-total.begin()+1<<endl;
+    }
+    return 0;
+}

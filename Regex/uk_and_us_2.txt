@@ -1,0 +1,27 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+number=int(raw_input())
+total=""
+for i in range(0,number):
+    temp=raw_input()
+    total+=temp+" "
+queries=int(raw_input())
+
+for i in range(0,queries):
+    count=0
+    temp=raw_input()
+    index=0
+    for i in range(0,len(temp)-2):
+        if temp[i]=='o' and temp[i+1]=='u' and temp[i+2]=='r':
+            index=i
+            break
+    preOutput=temp[0:index]
+    postOutput=temp[index+3:]
+    first=preOutput+"our"+postOutput
+    second=preOutput+"or"+postOutput
+    pattern=re.compile("(?<=[ ])("+first+"|"+second+")(?=[ ])")
+    current=re.findall(pattern,total)
+    adjustment=re.compile("^("+first+"|"+second+")(?=[ ])")
+    more=re.findall(adjustment,total)
+    count+=len(current)+len(more)
+    print(count)

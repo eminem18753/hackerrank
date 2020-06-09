@@ -1,0 +1,35 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the flatlandSpaceStations function below.
+def flatlandSpaceStations(n, c):
+    result=[]
+    c=sorted(c)
+    print(c)
+    for i in range(0,len(c)-1):
+        result.append((c[i+1]-c[i])//2)
+    result.append(c[0])
+    result.append(n-1-c[len(c)-1])
+    print(result)
+    return max(result)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nm = raw_input().split()
+
+    n = int(nm[0])
+
+    m = int(nm[1])
+
+    c = map(int, raw_input().rstrip().split())
+
+    result = flatlandSpaceStations(n, c)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

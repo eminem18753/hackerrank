@@ -1,0 +1,44 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the largestPermutation function below.
+def largestPermutation(k, arr):
+    count=0;
+    number=0
+    result=[None]*(len(arr)+1)
+    for i in range(0,len(arr)):
+        result[arr[i]]=i
+    while count<len(arr)-1 and number<k:
+        if arr[count]!=len(arr)-count:
+            location=result[len(arr)-count]
+            temp=arr[count]
+            arr[count]=arr[location]
+            arr[location]=temp
+            current=result[temp]
+            result[temp]=result[len(arr)-count]
+            result[len(arr)-count]=current
+            number+=1
+        count+=1
+    return arr
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = raw_input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    arr = map(int, raw_input().rstrip().split())
+
+    result = largestPermutation(k, arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the componentsInGraph function below.
+ */
+
+vector<int> p;
+int f(int x)
+{
+    if(x!=p[x])
+    {
+        x=f(p[x]);
+    }
+    return x;
+}
+void u(int x,int y)
+{
+    p[f(x)]=f(y);
+}
+vector<int> componentsInGraph(vector<vector<int>> gb) 
+{
+    int M=-2147483648;
+    int m=2147483647;
+    int n=gb.size();
+    unordered_map<int,int> v;
+    for(int i=0;i<2*n;i++)
+    {
+        p.push_back(i);
+    }
+    for(int i=0;i<n;i++)
+    {
+        u(gb[i][0],gb[i][1]);
+    }
+    unordered_map<int,int> total;
+    for(int i=0;i<p.size();i++)
+    {
+        total[f(i)]++;
+    }
+    for(int i=0;i<p.size();i++)
+    {
+        if(total[f(i)]>1)
+        {
+            M=max(M,total[f(i)]);
+            m=min(m,total[f(i)]);
+        }
+    }
+    return {m,M};
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<vector<int>> gb(n);
+    for (int gb_row_itr = 0; gb_row_itr < n; gb_row_itr++) {
+        gb[gb_row_itr].resize(2);
+
+        for (int gb_column_itr = 0; gb_column_itr < 2; gb_column_itr++) {
+            cin >> gb[gb_row_itr][gb_column_itr];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    vector<int> result = componentsInGraph(gb);
+    fout<<result[0]<<" "<<result[1]<<endl;
+    fout.close();
+
+    return 0;
+}

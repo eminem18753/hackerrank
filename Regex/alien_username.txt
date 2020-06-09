@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args)
+    {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int number;
+        Scanner scan=new Scanner(System.in);
+        number=scan.nextInt();
+        Pattern p=Pattern.compile("^[_\\.][\\d]+[a-zA-Z]*(_)?$");
+        String temp;
+        temp=scan.nextLine();
+        for(int i=0;i<number;i++)
+        {
+            temp=scan.nextLine();
+            Matcher m=p.matcher(temp);
+            boolean b=m.matches();
+            if(b==true)
+            {
+                System.out.println("VALID");
+            }
+            else
+            {
+                System.out.println("INVALID");
+            }
+        }
+    }
+}

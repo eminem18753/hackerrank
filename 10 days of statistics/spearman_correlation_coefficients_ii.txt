@@ -1,0 +1,54 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int result=0;
+    int number;
+    cin>>number;
+    vector<double> x;
+    vector<double> y;
+    vector<double> sX;
+    vector<double> sY;
+    for(int i=0;i<number;i++)
+    {
+        double a;
+        cin>>a;
+        x.push_back(a);
+        sX.push_back(a);
+    }
+    for(int i=0;i<number;i++)
+    {
+        double a;
+        cin>>a;
+        y.push_back(a);
+        sY.push_back(a);
+    }
+    sort(sX.begin(),sX.end());
+    sort(sY.begin(),sY.end());
+    for(int i=0;i<number;i++)
+    {
+        int tA;
+        int tB;
+        for(int j=0;j<number;j++)
+        {
+            if(x[i]==sX[j])
+            {
+                tA=j+1;
+            }
+            if(y[i]==sY[j])
+            {
+                tB=j+1;
+            }
+        }
+        double dij=tA-tB;
+        result+=dij*dij;
+    }
+    cout<<1-((double)6*result)/((double)number*(double)(number*number-1))<<endl;
+    return 0;
+}

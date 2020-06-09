@@ -1,0 +1,63 @@
+/* you only have to complete the function given below.  
+Node is defined as  
+
+struct node
+{
+    int data;
+    node* left;
+    node* right;
+};
+
+*/
+
+void inOrder(node *root) 
+{
+    node *current=root;
+    vector<int> result;
+    vector<node *> temp;
+    vector<node *> traversal;
+    result.push_back(root->data);
+    while(current->left||current->right||temp.size()>0)
+    {
+        int flagLeft=0;
+        int flagRight=0;
+        for(int i=0;i<traversal.size();i++)
+        {
+            if(traversal[i]==current->left)
+            {
+                flagLeft=1;
+            }
+            if(traversal[i]==current->right)
+            {
+                flagRight=1;
+            }
+        }
+        if(current->left&&current->right&&flagLeft==0&&flagRight==0)
+        {
+            root=current;
+            temp.push_back(root);
+        }
+        if(current->left&&flagLeft==0)
+        {
+            current=current->left;
+            result.push_back(current->data);
+            traversal.push_back(current);
+        }
+        else if(current->right&&flagRight==0)
+        {
+            current=current->right;
+            result.push_back(current->data);
+            traversal.push_back(current);
+        }
+        else if(temp.size()>0)
+        {
+            current=temp[temp.size()-1];
+            temp.erase(temp.begin()+temp.size()-1);
+        }
+    }
+    sort(result.begin(),result.end());
+    for(int i=0;i<result.size();i++)
+    {
+        cout<<result[i]<<" ";
+    }
+}

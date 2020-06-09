@@ -1,0 +1,25 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(n):
+    m=1000000007
+    if n==0:
+        return 4
+    else:
+        return (pow(2,n+1,m)+2)%m
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,18 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+from collections import OrderedDict
+number=int(raw_input())
+orderedDictionary=OrderedDict()
+for i in range(0,number):
+    temp=raw_input().split(' ')
+    result=""
+    space=""
+    for j in range(0,len(temp)-1):
+        result+=space+temp[j]
+        space=" "
+    if result in orderedDictionary.keys():
+        orderedDictionary[result]+=int(temp[len(temp)-1])
+    else:
+        orderedDictionary[result]=int(temp[len(temp)-1])
+for key,value in orderedDictionary.iteritems():
+    print(str(key)+" "+str(value))

@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=0
+m=10**10
+for i in range(0,number):
+    temp=int(raw_input())
+    result+=temp
+temp=list(str(result))
+output=""
+for i in range(0,10):
+    output+=temp[i]
+print(output)

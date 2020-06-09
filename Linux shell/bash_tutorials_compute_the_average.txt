@@ -1,0 +1,23 @@
+i=0
+number=0
+summation=0
+while read line
+do
+    if (( i > 0 ))
+    then
+        array[$((i-1))]=`echo $line|bc -l`
+    else
+        number=`echo $line|bc -l`
+    fi  
+    i=$(($i+1))
+done
+array[$((i-1))]=`echo $line|bc -l`
+i=$(($i+1))
+
+for index in $(seq 0 $((i-1)))
+do
+    summation=$(($summation+array[$((index))]))
+done
+
+temp=`echo $summation/$number|bc -l`
+printf "%0.3f\n" $temp

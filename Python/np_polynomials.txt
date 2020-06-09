@@ -1,0 +1,5 @@
+import numpy
+first=list(map(float,raw_input().split(' ')))
+second=int(raw_input())
+array1=numpy.array(first)
+print(numpy.polyval(array1,second))

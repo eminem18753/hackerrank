@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import groupby
+output=""
+space=""
+for k,g in groupby(raw_input()):
+    output+=space
+    output+="("
+    output+=str(len(list(g)))
+    output+=", "
+    output+=str(k)
+    output+=")"
+    space=" "
+print(output)

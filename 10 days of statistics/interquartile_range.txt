@@ -1,0 +1,34 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+values=map(int,list(raw_input().split(' ')))
+weight=map(int,list(raw_input().split(' ')))
+total=sum(weight)
+overall=[]
+for i in range(0,number):
+    overall+=[values[i]]*weight[i]
+overall=sorted(overall)
+if total%2==1:
+    L=overall[0:(total-1)/2]
+    U=overall[(total+1)/2:]
+    if len(L)%2==1:
+        Q1=L[(len(L)-1)/2]
+    else:
+        Q1=(L[len(L)/2-1]+L[len(L)/2])/float(2)
+        
+    if len(U)%2==1:
+        Q3=U[(len(U)-1)/2]
+    else:
+        Q3=(U[len(U)/2-1]+U[len(U)/2])/float(2)
+else:
+    L=overall[0:total/2]
+    U=overall[total/2:]
+    if len(L)%2==1:
+        Q1=L[(len(L)-1)/2]
+    else:
+        Q1=(L[len(L)/2-1]+L[len(L)/2])/float(2)
+        
+    if len(U)%2==1:
+        Q3=U[(len(U)-1)/2]
+    else:
+        Q3=(U[len(U)/2-1]+U[len(U)/2])/float(2)
+print "%.1f" %(Q3-Q1)

@@ -1,0 +1,37 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the chocolateFeast function below.
+def chocolateFeast(n, c, m):
+    result=n/c
+    wrapper=result
+    while wrapper>=m:
+        increase=wrapper/m
+        result+=increase
+        wrapper=wrapper%m
+        wrapper+=increase
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        ncm = raw_input().split()
+
+        n = int(ncm[0])
+
+        c = int(ncm[1])
+
+        m = int(ncm[2])
+
+        result = chocolateFeast(n, c, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

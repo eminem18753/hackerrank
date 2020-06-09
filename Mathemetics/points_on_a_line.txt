@@ -1,0 +1,33 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(raw_input())
+    result=[]
+    for n_itr in xrange(n):
+        xy = raw_input().split()
+        x = int(xy[0])
+        y = int(xy[1])
+        result.append([x,y])
+    flag=0
+    for i in range(0,n-1):
+        if result[i][0] is not result[i+1][0]:
+            flag=1
+    if flag==0:
+        print("YES")
+    else:
+        flag=0
+        for i in range(0,n-1):
+            if result[i][1] is not result[i+1][1]:
+                flag=1
+        if flag==0:
+            print("YES")
+        else:
+            print("NO")

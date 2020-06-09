@@ -1,0 +1,33 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the getMinimumCost function below.
+def getMinimumCost(n, k, c):
+    result=sorted(c,reverse=True)
+    current=0
+    overall=0
+    
+    for i in range(1,len(result)+1):
+        overall+=result[i-1]*math.ceil(float(i)/float(k))
+    return int(overall)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = raw_input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    c = map(int, raw_input().rstrip().split())
+
+    minimumCost = getMinimumCost(n, k, c)
+
+    fptr.write(str(minimumCost) + '\n')
+
+    fptr.close()

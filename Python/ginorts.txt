@@ -1,0 +1,22 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+temp=list(raw_input())
+lower=[]
+upper=[]
+odd=[]
+even=[]
+for i in temp:
+    if i.islower():
+        lower.append(i)
+    elif i.isupper():
+        upper.append(i)
+    elif int(i)%2==1:
+        odd.append(i)
+    elif int(i)%2==0:
+        even.append(i)
+result=[]
+result+=sorted(lower)
+result+=sorted(upper)
+result+=sorted(odd)
+result+=sorted(even)
+output=''.join(result)
+print(output)

@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+total=raw_input()
+subtotal=raw_input()
+pattern=re.compile(subtotal)
+previous=-1
+flag=0
+for i in range(0,len(total)-len(subtotal)+1):
+    result=pattern.search(total,i)
+    if result is not None:
+        if result.start()!=previous:
+            print("("+str(result.start())+", "+str(result.end()-1)+")")
+        previous=result.start()
+        flag=1
+    elif flag==0:
+        print("(-1, -1)")
+        break

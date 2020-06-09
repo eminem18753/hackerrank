@@ -1,0 +1,41 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int number;
+    cin>>number;
+    long a[number][number];
+    long b[number][number];
+    memset(a,0,sizeof(a));
+    memset(a,0,sizeof(b));
+    for(int i=0;i<number;i++)
+    {
+        for(int j=0;j<number;j++)
+        {
+            cin>>a[i][j];
+        }
+    }
+    b[0][0]=a[0][0];
+    for(int i=1;i<number;i++)
+    {
+        b[i][0]=b[i-1][0]+a[i][0];
+        b[0][i]=b[0][i-1]+a[0][i];
+    }
+    for(int i=1;i<number;i++)
+    {
+        for(int j=1;j<number;j++)
+        {
+            b[i][j]=a[i][j]+(b[i-1][j]>b[i][j-1]?b[i][j-1]:b[i-1][j]);
+        }
+    }
+    cout<<b[number-1][number-1]<<endl;
+    return 0;
+}

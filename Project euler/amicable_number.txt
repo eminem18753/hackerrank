@@ -1,0 +1,90 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    int total[100001];
+    memset(total,0,sizeof(total));
+    vector<int> result;
+    for(int i=100;i<=100000;i++)
+    {
+        vector<int> temp;
+        vector<int> reversed;
+        for(int j=2;j<sqrt(i);j++)
+        {
+            if(i%j==0)
+            {
+                temp.push_back(j);    
+            }
+        }
+        for(int j=temp.size()-1;j>-1;j--)
+        {
+            reversed.push_back(i/temp[j]);    
+        }
+        if((int)floor(sqrt(i))==(int)ceil(sqrt(i)))
+        {
+            temp.push_back((int)sqrt(i));
+        }
+        for(int j=0;j<reversed.size();j++)
+        {
+            temp.push_back(reversed[j]);    
+        }
+        int summation=1;
+        for(int j=0;j<temp.size();j++)
+        {
+            summation+=temp[j];    
+        }
+        
+        temp.clear();
+        reversed.clear();
+        int a=summation;
+        for(int j=2;j<sqrt(a);j++)
+        {
+            if(a%j==0)
+            {
+                temp.push_back(j);    
+            }
+        }
+        for(int j=temp.size()-1;j>-1;j--)
+        {
+            reversed.push_back(a/temp[j]);    
+        }
+        if((int)floor(sqrt(a))==(int)ceil(sqrt(a)))
+        {
+            temp.push_back((int)sqrt(a));
+        }
+        for(int j=0;j<reversed.size();j++)
+        {
+            temp.push_back(reversed[j]);    
+        }
+        int s=1;
+        for(int j=0;j<temp.size();j++)
+        {
+            s+=temp[j];    
+        }
+        if(i==s&&i!=summation)
+        {
+            result.push_back(i);
+            total[i]=total[i-1]+i;
+        }
+        else
+        {
+            total[i]=total[i-1];
+        }
+    }
+    int number;
+    cin>>number;
+    for(int i=0;i<number;i++)
+    {
+        int current;
+        cin>>current;
+        cout<<total[current]<<endl;
+    }
+    return 0;
+}

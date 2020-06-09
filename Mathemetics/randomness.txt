@@ -1,0 +1,138 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+char s[75001];
+const int mod=1000003;
+const int base=27;
+
+struct Node
+{
+    long long str;
+    int count;
+    Node* next;
+};
+Node* hashes[mod];
+long long answer;
+int n;
+void modify(long long val,int delta)
+{
+    int m=val%mod;
+    Node *cur=hashes[m];
+    Node *temp=NULL;
+    
+    bool newStr=true;
+    while(cur!=NULL)
+    {
+        if(cur->str==val)
+        {
+            cur->count+=delta;
+            if(cur->count==0)
+            {
+                answer-=1;
+                if(temp==NULL)
+                {
+                    hashes[m]=hashes[m]->next;
+                }
+                else
+                {
+                    temp->next=cur->next;
+                }
+            }
+            return;
+        }
+        temp=cur;
+        cur=cur->next;
+    }
+    Node *node=new Node;
+    node->str=val;
+    node->count=delta;
+    answer+=delta;
+    node->next=hashes[m];
+    hashes[m]=node;
+}
+void init()
+{
+    for(int i=0;i<mod;i++)
+    {
+        hashes[i]=NULL;
+    }
+    for(int i=0;i<n;i++)
+    {
+        long long val=0;
+        for(int len=1;len<=9;len++)
+        {
+            if(i+len-1>=n)
+            {
+                break;
+            }
+            val=val*base+s[i+len-1]-'a'+1;
+            modify(val,1);
+        }
+    }
+}
+void update(int p,char ch)
+{
+    //remove
+    for(int i=p-8;i<=p;i++)
+    {
+        long long val=0;
+        for(int len=1;len<=9;len++)
+        {
+            if(i+len-1<0||i+len-1>=n)
+            {
+                break;
+            }
+            val=val*base+s[i+len-1]-'a'+1;
+            if(i+len-1>=p)
+            {
+                modify(val,-1);
+            }
+        }
+    }
+
+    s[p]=ch;
+
+    //append
+    for(int i=p-8;i<=p;i++)
+    {
+        long long val=0;
+        for(int len=1;len<=9;len++)
+        {
+            if(i+len-1<0||i+len-1>=n)
+            {
+                break;
+            }
+            val=val*base+s[i+len-1]-'a'+1;
+            if(i+len-1>=p)
+            {
+                modify(val,1);
+            }
+        }
+    }
+}
+int main() 
+{
+    int q;
+    scanf("%d %d",&n,&q);
+    getchar();
+    scanf("%s",s);
+    init();
+    for(int i=10;i<=n;i++)
+    {
+        answer+=n-i+1;
+    }
+    while(q--)
+    {
+        int p;
+        char ch;
+        scanf("%d %c",&p,&ch);
+        getchar();
+        update(p-1,ch);
+        cout<<answer<<endl;
+    }
+    return 0;
+}

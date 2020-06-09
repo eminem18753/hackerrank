@@ -1,0 +1,2 @@
+print(format(round(1-pnorm(0.25),3)))
+print(format(round(pnorm(1)-0.5, 3)))

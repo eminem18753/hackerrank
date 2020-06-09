@@ -1,0 +1,20 @@
+import numpy
+temp=raw_input().split(' ')
+first=int(temp[0])
+second=int(temp[1])
+result1=[]
+result2=[]
+for i in range(0,first):
+    temp=list(map(int,raw_input().split(' ')))
+    result1.append(temp)
+array1=numpy.array(result1)
+for i in range(0,first):
+    temp=list(map(int,raw_input().split(' ')))
+    result2.append(temp)
+array2=numpy.array(result2)
+print(array1+array2)
+print(array1-array2)
+print(array1*array2)
+print(array1/array2)
+print(array1%array2)
+print(array1**array2)

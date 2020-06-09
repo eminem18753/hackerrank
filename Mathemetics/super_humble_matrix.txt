@@ -1,0 +1,49 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def factorial(a):
+    result=1
+    for i in range(1,a+1):
+        result=((result%1000000007)*(i%1000000007))%1000000007
+    return result
+def solve(n, m):
+    temp=[]
+    if n<m:
+        temp.append(n)
+        temp.append(m)
+    else:
+        temp.append(m)
+        temp.append(n)
+    if temp[0]==1:
+        return 1
+    elif temp[0]==2:
+        return pow(2,temp[1]-1,1000000007)
+    else:
+        total=[]
+        first=1
+        for i in range(2,temp[0]):
+            total.append(first*i)
+            first=((first%1000000007)*(i%1000000007))%1000000007
+        overall=1
+        for i in total:
+            overall=((overall%1000000007)*(i%1000000007))%1000000007
+        return (((((overall*overall)%1000000007)*((total[len(total)-1]*temp[0])%1000000007))%1000000007)*pow((total[len(total)-1]*temp[0])%1000000007,temp[1]-temp[0],1000000007))%1000000007
+
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nm = raw_input().split()
+
+    n = int(nm[0])
+
+    m = int(nm[1])
+
+    result = solve(n, m)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

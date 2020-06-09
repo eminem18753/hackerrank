@@ -1,0 +1,4 @@
+		/* Enter your code here */
+        cout<<hex<<left<<showbase<<nouppercase<<(long long)(A)<<endl;
+        cout<<dec<<right<<setfill('_')<<setw(15)<<showpos<<setprecision(2)<<fixed<<B<<endl;
+        cout<<scientific<<noshowpos<<uppercase<<setprecision(9)<<C<<endl;

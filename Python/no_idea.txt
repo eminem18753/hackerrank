@@ -1,0 +1,14 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+temp=raw_input().split(' ')
+N=int(temp[0])
+M=int(temp[1])
+total=list(map(int,raw_input().split(' ')))
+A=set(map(int,raw_input().split(' ')))
+B=set(map(int,raw_input().split(' ')))
+count=0
+for index in total:
+    if A.__contains__(index):
+        count+=1
+    if B.__contains__(index):
+        count-=1
+print(count)

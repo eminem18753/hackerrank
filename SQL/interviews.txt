@@ -1,0 +1,21 @@
+/*
+Enter your query here.
+*/
+SELECT contest.contest_id,contest.hacker_id,contest.name,
+SUM(total_submissions),SUM(total_accepted_submissions),
+SUM(total_views),SUM(total_unique_views)
+FROM Contests contest
+JOIN Colleges college
+ON contest.contest_id=college.contest_id
+JOIN Challenges challenge
+ON college.college_id=challenge.college_id
+LEFT JOIN
+(SELECT challenge_id,SUM(total_submissions) as total_submissions,SUM(total_accepted_submissions) as total_accepted_submissions FROM Submission_Stats GROUP BY challenge_id) submission_stat
+ON challenge.challenge_id=submission_stat.challenge_id
+LEFT JOIN
+(SELECT challenge_id,SUM(total_views) as total_views,SUM(total_unique_views) as total_unique_views FROM View_Stats GROUP BY challenge_id) view_stat
+ON challenge.challenge_id=view_stat.challenge_id
+GROUP BY contest.contest_id,contest.hacker_id,contest.name
+HAVING SUM(total_submissions)!=0 OR SUM(total_accepted_submissions)!=0
+OR SUM(total_views)!=0 OR SUM(total_unique_views)!=0
+ORDER BY contest.contest_id;

@@ -1,0 +1,16 @@
+import numpy
+temp=raw_input().split(' ')
+N=int(temp[0])
+M=int(temp[1])
+P=int(temp[2])
+result1=[]
+result2=[]
+for i in range(0,N):
+    temp=list(map(int,raw_input().split(' ')))
+    result1.append(temp)
+array1=numpy.array(result1)
+for i in range(0,M):
+    temp=list(map(int,raw_input().split(' ')))
+    result2.append(temp)
+array2=numpy.array(result2)
+print(numpy.concatenate((array1,array2),axis=0))

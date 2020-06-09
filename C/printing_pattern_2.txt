@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+
+    int n;
+    int minimum;
+    int maximum;
+    scanf("%d", &n);
+    for(int i=0;i<n*2-1;i++)
+    {
+        for(int j=0;j<n*2-1-i;j++)
+        {
+            minimum=2147483647;
+            if(i<minimum)
+            {
+                minimum=i;
+            }
+            if(j<minimum)
+            {
+                minimum=j;
+            }
+            printf("%d ",n-minimum);
+        }
+        for(int j=n*2-1-i;j<n*2-1;j++)
+        {
+            maximum=-2147483647;
+            if(i>maximum)
+            {
+                maximum=i;
+            }
+            if(j>maximum)
+            {
+                maximum=j;
+            }
+            printf("%d ",maximum-n+2);
+        }
+        
+        /*
+        for(int j=n*2-1-i;j<n*2-1;j++)
+        {
+            printf("%d ",n-minimum);
+        }
+        */
+        printf("\n");
+    }
+    return 0;
+}

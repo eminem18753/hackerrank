@@ -1,0 +1,51 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+# Complete the checkMagazine function below.
+def checkMagazine(magazine, note):
+    m1=Counter(magazine).items()
+    n1=Counter(note).items()
+    km1=Counter(magazine).keys()
+    kn1=Counter(note).keys()
+    km1=sorted(km1)
+    kn1=sorted(kn1)
+    om1=[]
+    on1=[]
+    for i in m1:
+        if i[0] in kn1:
+            om1.append(list(i))
+    for i in n1:
+        on1.append(list(i))
+    success=1
+    om1=sorted(om1,key=lambda k:k[0])
+    on1=sorted(on1,key=lambda k:k[0])
+    if(len(om1)!=len(on1)):
+        print("No")
+        return
+    else:
+        success=1
+        for i in range(0,len(on1)):
+            if on1[i][1]>om1[i][1]:
+                success=0
+                break
+    if success==1:
+        print("Yes")
+    else:
+        print("No")
+if __name__ == '__main__':
+    mn = raw_input().split()
+
+    m = int(mn[0])
+
+    n = int(mn[1])
+
+    magazine = raw_input().rstrip().split()
+
+    note = raw_input().rstrip().split()
+
+    checkMagazine(magazine, note)

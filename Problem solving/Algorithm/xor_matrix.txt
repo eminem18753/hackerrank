@@ -1,0 +1,101 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+/*
+ * Complete the xorMatrix function below.
+ */
+typedef long long ll;
+const int maxn=100001;
+int n;
+int f[2][maxn];
+int cur;
+int next_one=1;
+ll m;
+inline int mod_add(int x,int y,int p)
+{
+    int z=x+y;
+    return z<p?z:z-p;
+}
+vector<int> xorMatrix(ll m)
+{
+    /*
+     * Write your code here.
+     */
+    vector<int> result;
+    m-=1;
+    for(int i=0,d=1;m;i++,d=mod_add(d,d,n),m>>=1)
+    {
+        if(~m&1)
+        {
+            continue;
+        }
+        for(int j=0;j<n;j++)
+        {
+            f[next_one][j]=f[cur][j]^f[cur][mod_add(j,d,n)];
+        }
+        cur^=1;
+        next_one^=1;
+    }
+    for(int i=0;i<n;i++)
+    {
+        result.push_back(f[cur][i]);
+    }
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    long long m;
+    cin>>n;
+    cin>>m;
+    
+    for(int i=0;i<n;i++)
+    {
+        cin>>f[cur][i];
+    }
+    vector<int> result=xorMatrix(m);
+    
+    for(auto i:result)
+    {
+        fout<<i<<" ";
+    }
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

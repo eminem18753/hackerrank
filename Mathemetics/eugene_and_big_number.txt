@@ -1,0 +1,54 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def prop_mod(a,m):
+    return (a%m+m)%m
+def egcd(a,b):
+    if b==0:
+        return (a,1,0)
+    else:
+        g,x,y=egcd(b,a%b)
+        return (g,y,x-(a//b)*y)
+def modInverse(a,m):
+    if egcd(a,m)[0]!=1:
+        raise Exception("Not coprime")
+    _,x,y=egcd(a,m)
+    return (m+x%m)%m
+def power_series(base,n,m):
+    if n==0:
+        return 1
+    elif n==1:
+        return (1+base)%m
+    else:
+        ret=power_series(base,(n-1)//2,m)
+        tmp=pow(base,(n+1)//2,m)
+        if n%2==0:
+            return (ret*(1+tmp)%m+pow(base,n,m))%m
+        else:
+            return (ret*(1+tmp))%m
+def solve(a, n, m):
+    l=len(str(a))
+    base=10**l
+    return a*power_series(base,n-1,m)%m
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        anm = raw_input().split()
+
+        a = int(anm[0])
+
+        n = int(anm[1])
+
+        m = int(anm[2])
+
+        result = solve(a, n, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

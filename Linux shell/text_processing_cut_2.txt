@@ -1,0 +1,10 @@
+while read var
+do
+    if ( ((echo $var|wc -c) > 6) )
+    then
+        echo $var|cut -c 2,7
+    elif ( ((echo $var|wc -c) > 1) )
+    then
+        echo $var|cut -c 2
+    fi
+done

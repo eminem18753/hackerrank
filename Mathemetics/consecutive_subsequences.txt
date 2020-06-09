@@ -1,0 +1,51 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main()
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int number;
+    cin>>number;
+    for(int i=0;i<number;i++)
+    {
+        int n;
+        int k;
+        cin>>n;
+        cin>>k;
+        vector<long> result;
+        vector<long> overall;
+        long a[k];
+        long total=0;
+        for(int j=0;j<k;j++)
+        {
+            a[j]=0;
+        }
+        for(int j=0;j<n;j++)
+        {
+            long temp;
+            cin>>temp;
+            overall.push_back(temp);
+        }
+        result.push_back(overall[0]);
+        for(int j=1;j<overall.size();j++)
+        {
+            result.push_back(result[j-1]+overall[j]);
+        }
+        for(int j=0;j<result.size();j++)
+        {
+            a[result[j]%k]+=1;
+        }
+        total+=a[0]+(a[0]*(a[0]-1))/2;
+        for(int j=1;j<k;j++)
+        {
+            total+=a[j]*(a[j]-1)/2;
+        }
+        cout<<total<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,45 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(arr, queries):
+    result=[]
+    for i in queries:
+        if i[0]>i[1]:
+            result.append("Odd")
+        elif i[0]==i[1]:
+            if arr[i[0]-1]%2==1:
+                result.append("Odd")
+            else:
+                result.append("Even")
+        elif arr[i[0]]==0:
+            result.append("Odd")
+        elif arr[i[0]-1]%2==1:
+            result.append("Odd")
+        else:
+            result.append("Even")
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr_count = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    q = int(raw_input())
+
+    queries = []
+
+    for _ in xrange(q):
+        queries.append(map(int, raw_input().rstrip().split()))
+
+    result = solve(arr, queries)
+
+    fptr.write('\n'.join(result))
+    fptr.write('\n')
+
+    fptr.close()

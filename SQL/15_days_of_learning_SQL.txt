@@ -1,0 +1,23 @@
+/*
+Enter your query here.
+*/
+SELECT submission_date,
+(SELECT COUNT(DISTINCT hacker_id)
+FROM Submissions hackerCount
+WHERE hackerCount.submission_date=dates.submission_date
+AND
+(SELECT COUNT(DISTINCT submissionCount.submission_date)
+FROM Submissions submissionCount
+WHERE submissionCount.hacker_id=hackerCount.hacker_id
+AND submissionCount.submission_date<dates.submission_date)=DATEDIFF(dates.submission_date,'2016-03-01')),
+(SELECT hacker_id
+FROM Submissions s1
+WHERE s1.submission_date=dates.submission_date
+GROUP BY hacker_id
+ORDER BY COUNT(submission_id) DESC,hacker_id LIMIT 1) top_hacker,
+(SELECT name
+FROM Hackers h
+WHERE h.hacker_id=top_hacker)
+FROM
+(SELECT DISTINCT submission_date FROM Submissions) dates
+GROUP BY submission_date;

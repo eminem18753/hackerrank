@@ -1,0 +1,31 @@
+#!/bin/python
+
+import os
+import sys
+import math
+
+# Complete the solve function below.
+maximum=10**16
+max_repetition=int(math.log(maximum)/math.log(5))+1
+multiplicities=[(i,(5**i-1)/4) for i in reversed(range(1,max_repetition+1))]
+def solve(n):
+    m=0
+    for k,p in multiplicities:
+        if p<=n:
+            i=n//p
+            n-=i*p
+            m+=i*(5**k)
+    return m
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,4 @@
+# Your code here
+def take(s,start=1)
+   s[start,s.size] 
+end

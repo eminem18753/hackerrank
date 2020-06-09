@@ -1,0 +1,57 @@
+
+/*The tree node has data, left child and right child 
+class Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+*/
+    int height(Node* root) 
+    {
+        // Write your code here.
+        int result=0;
+        int maximum=0;
+        vector<Node*> temp;
+        vector<int> current;
+        while(root->left||root->right||temp.size()>0)
+        {
+            if(root->left&&root->right)
+            {
+                root=root->right;
+                temp.push_back(root);
+                current.push_back(result);
+                result+=1;
+                if(result>maximum)
+                {
+                    maximum=result;
+                }
+            }
+            else if(root->right)
+            {
+                root=root->right;
+                result+=1;
+                if(result>maximum)
+                {
+                    maximum=result;
+                }
+            }
+            else if(root->left)
+            {
+                root=root->left;
+                result+=1;
+                if(result>maximum)
+                {
+                    maximum=result;
+                }
+            }
+            else
+            {
+                root=temp.back();
+                result=current.back();
+                temp.pop_back();
+                current.pop_back();
+            }
+        }
+        return maximum;
+    }

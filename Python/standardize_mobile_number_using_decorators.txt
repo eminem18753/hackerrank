@@ -1,0 +1,16 @@
+import re
+def wrapper(f):
+    def fun(l):
+        # complete the function
+        result=[]
+        for i in range(0,len(l)):
+            temp=re.sub(r"^(\+91){1}","+91 ",l[i])
+            temp=re.sub(r"^[0]{1}","+91 ",temp)
+            temp=re.sub(r"^(91){1}","+91 ",temp)
+            if len(l[i])==10:
+                temp="+91 "+l[i]
+            temp=temp[0:9]+" "+temp[9:]
+            result.append(temp)
+        output=sorted(result)
+        f(output)
+    return fun

@@ -1,0 +1,14 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+m=1000000007
+def modInverse(n):
+    return pow(n,m-2,m)
+number=int(raw_input())
+for i in range(0,number):
+    temp=int(raw_input())
+    n=(temp-1)/2
+    result=1
+    result+=4*(n%m)*((4*(n%m)*(n%m)-1)%m)*modInverse(3)
+    result%=m
+    result+=((n%m)*((n+1)%m)*10)%m
+    result%=m
+    print(result)

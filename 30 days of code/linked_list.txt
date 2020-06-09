@@ -1,0 +1,21 @@
+      Node* insert(Node *head,int data)
+      {
+          //Complete this method
+          Node *current;
+          current=head;
+          if(head==NULL)
+          {
+              head=new Node(data);
+              cout<<head->data<<" ";
+          }
+          else
+          {
+              while(head->next)
+              {
+                  head=head->next;
+              }
+              head->next=new Node(data);
+              cout<<head->next->data<<" ";
+          }
+          return current;
+      }

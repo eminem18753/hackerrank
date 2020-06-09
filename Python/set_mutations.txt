@@ -1,0 +1,24 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+number=int(raw_input())
+setTotal=set(map(int,raw_input().split(' ')))
+n=int(raw_input())
+for i in range(0,n):
+    temp=raw_input().split(' ')
+    if temp[0]=="update":
+        n=int(temp[1])
+        another=set(map(int,raw_input().split(' ')))
+        setTotal.update(another)
+    elif temp[0]=="intersection_update":
+        n=int(temp[1])
+        another=set(map(int,raw_input().split(' ')))
+        setTotal.intersection_update(another)
+    elif temp[0]=="difference_update":
+        n=int(temp[1])
+        another=set(map(int,raw_input().split(' ')))
+        setTotal.difference_update(another)
+    elif temp[0]=="symmetric_difference_update":
+        n=int(temp[1])
+        another=set(map(int,raw_input().split(' ')))
+        setTotal.symmetric_difference_update(another)
+print(sum(setTotal))

@@ -1,0 +1,22 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+r=""
+p=[]
+p.append("")
+counter=0
+number=int(raw_input())
+for i in range(0,number):
+    t=list(raw_input().split(' '))
+    if t[0]=='1':
+        r+=t[1]
+        p.append(r)
+    elif t[0]=='2':
+        temp=list(r)
+        temp=temp[0:len(temp)-int(t[1])]
+        r=''.join(temp)
+        p.append(r)
+    elif t[0]=='3':
+        temp=list(r)
+        print(temp[int(t[1])-1])
+    elif t[0]=='4':
+        r=p[len(p)-2]
+        p.pop()

@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+string solve(vector<vector<int>> coordinates)
+{
+    string result="YES";
+    int xMin=100000;
+    int xMax=-100000;
+    int yMin=100000;
+    int yMax=-100000;
+    for(int i=0;i<coordinates.size();i++)
+    {
+        if(coordinates[i][0]<xMin)
+        {
+            xMin=coordinates[i][0];
+        }
+        if(coordinates[i][0]>xMax)
+        {
+            xMax=coordinates[i][0];
+        }
+        if(coordinates[i][1]<yMin)
+        {
+            yMin=coordinates[i][1];
+        }
+        if(coordinates[i][1]>yMax)
+        {
+            yMax=coordinates[i][1];
+        }
+    }
+    for(int i=0;i<coordinates.size();i++)
+    {
+        if(coordinates[i][0]!=xMin&&coordinates[i][0]!=xMax&&coordinates[i][1]!=yMin&&coordinates[i][1]!=yMax)
+        {
+            result="NO";
+        }
+    }
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        vector<vector<int>> coordinates(n);
+        for (int i = 0; i < n; i++) {
+            coordinates[i].resize(2);
+
+            for (int j = 0; j < 2; j++) {
+                cin >> coordinates[i][j];
+            }
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        string result = solve(coordinates);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

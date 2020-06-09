@@ -1,0 +1,38 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+# Complete the counterGame function below.
+def counterGame(n):
+    result=list(bin(n)[2:])
+    ones=0
+    right=-1
+    for i in range(0,len(result)-1):
+        if result[i]=='1':
+            ones+=1
+            right=i
+    output=0
+    if result[len(result)-1]=='1':
+        output=ones
+    else:
+        output=ones-1+len(result)-right-1
+    if output%2==0:
+        return "Richard"
+    else:
+        return "Louise"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = counterGame(n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

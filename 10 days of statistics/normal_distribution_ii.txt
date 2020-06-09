@@ -1,0 +1,4 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+print(15.87)
+print(84.13)
+print(15.87)

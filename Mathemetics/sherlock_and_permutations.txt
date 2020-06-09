@@ -1,0 +1,34 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def combination(n,k):
+    result=1
+    for i in range(0,k):
+        result*=n-i
+    for i in range(1,k+1):
+        result/=i
+    return result
+def solve(n, m):
+    return combination(n+m-1,n)%1000000007
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        nm = raw_input().split()
+
+        n = int(nm[0])
+
+        m = int(nm[1])
+
+        result = solve(n, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

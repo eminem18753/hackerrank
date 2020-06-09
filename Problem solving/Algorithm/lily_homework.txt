@@ -1,0 +1,35 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the lilysHomework function below.
+def lilysHomework(arr):
+    count=0
+    result=sorted(arr)
+    m={}
+    for i in range(0,len(arr)):
+        m[arr[i]]=i
+    for i in range(0,len(arr)):
+        if result[i]!=arr[i]:
+            count+=1
+            toSwap=m[result[i]]
+            m[arr[i]]=m[result[i]]
+            arr[i],arr[toSwap]=arr[toSwap],arr[i]
+    return count
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    result1 = lilysHomework(list(arr))
+    result2= lilysHomework(list(reversed(arr)))
+    result=min(result1,result2)
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,36 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the theLoveLetterMystery function below.
+def theLoveLetterMystery(s):
+    result=list(s)
+    output=0
+    if len(result)%2==0:
+        first=result[0:len(result)/2]
+        second=list(reversed(result[(len(result)/2):]))
+        for i in range(0,len(first)):
+            output+=abs(ord(first[i])-ord(second[i]))
+    else:
+        first=result[0:((len(result)-1)/2)]
+        second=list(reversed(result[(((len(result)-1)/2)+1):]))
+        for i in range(0,len(first)):
+            output+=abs(ord(first[i])-ord(second[i]))
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        s = raw_input()
+
+        result = theLoveLetterMystery(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

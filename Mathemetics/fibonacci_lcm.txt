@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+const int maxn=101;
+const int mod=1000000007;
+
+struct Fibonacci
+{
+    int num1;
+    int num2;
+    bool operator ==(const Fibonacci &x) const
+    {
+        return num1==x.num1&&num2==x.num2;
+    }
+    Fibonacci operator *(const Fibonacci &x) const
+    {
+        return (Fibonacci){((long long)num1*x.num1+(long long)num2*x.num2)%mod,((long long)num1*x.num2+(long long)num2*(x.num1+x.num2))%mod};
+    }
+    Fibonacci pow(long long k)
+    {
+        Fibonacci ret=(Fibonacci){1,0};
+        Fibonacci tmp=*this;
+        while(k)
+        {
+            if(k&1)
+            {
+                ret=ret*tmp;
+            }
+            tmp=tmp*tmp;
+            k>>=1;
+        }
+        return ret;
+    }      
+}A={0,1},I={1,0};
+int fib(int x)
+{
+    return A.pow(x).num2;
+}
+int n;
+int a[maxn];
+int inv(int x)
+{
+    return x<=1?x:mod-(long long)mod/x*inv(mod%x)%mod;
+}
+map<pair<int,int>, int> Hash;
+int dfs(int g,int i)
+{
+    pair<int,int> idx=make_pair(g,i);
+    if(Hash.count(idx))
+    {
+        return Hash[idx];
+    }
+    if(!i)
+    {
+        return Hash[idx]=1;
+    }
+    int r=__gcd(g,a[i-1]);
+    if(g==r)
+    {
+        return Hash[idx]=fib(r);
+    }
+    return Hash[idx]=(long long)fib(r)*dfs(g,i-1)%mod*inv(dfs(r,i-1))%mod;
+}
+int solve(vector<int> f) 
+{
+    for(int i=0;i<f.size();i++)
+    {
+        a[i]=f[i];
+    }
+    sort(a,a+f.size());
+    
+    int t=unique(a,a+f.size())-a;
+    return dfs(0,t);
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int f_count;
+    cin >> f_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<int> f(f_count);
+
+    for (int i = 0; i < f_count; i++) {
+        int f_item;
+        cin >> f_item;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        f[i] = f_item;
+    }
+
+    int result = solve(f);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}

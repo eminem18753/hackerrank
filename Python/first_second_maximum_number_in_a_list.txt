@@ -1,0 +1,13 @@
+if __name__ == '__main__':
+    n = int(raw_input())
+    arr = map(int, raw_input().split())
+    firstMaximum=-200
+    for i in range(0,n):
+        if(arr[i]>firstMaximum):
+            firstMaximum=arr[i]
+    secondMaximum=-200
+    for i in range(0,n):
+        if(arr[i]>secondMaximum and arr[i]<firstMaximum):
+            secondMaximum=arr[i]
+    print(secondMaximum)
+        

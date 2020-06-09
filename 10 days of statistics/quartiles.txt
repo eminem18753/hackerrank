@@ -1,0 +1,33 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+total=map(int,list(raw_input().split(' ')))
+total=sorted(total)
+if number%2==1:
+    L=total[0:(number-1)/2]
+    M=total[(number-1)/2]
+    U=total[(number-1)/2+1:]
+    if len(L)%2==1:
+        Q1=L[(len(L)-1)/2]
+    else:
+        Q1=(L[(len(L)/2-1)]+L[(len(L)/2)])/float(2)
+    
+    if len(L)%2==1:
+        Q3=U[(len(U)-1)/2]
+    else:
+        Q3=(U[(len(U)/2-1)]+U[(len(U)/2)])/float(2)
+
+else:
+    L=total[0:number/2]
+    U=total[number/2+1:]
+    if len(L)%2==1:
+        Q1=L[(len(L)-1)/2]
+    else:
+        Q1=(L[(len(L)/2-1)]+L[(len(L)/2)])/float(2)
+    M=(L[-1]+U[0])/float(2)
+    if len(L)%2==1:
+        Q3=U[(len(U)-1)/2]
+    else:
+        Q3=(U[(len(U)/2-1)]+U[(len(U)/2)])/float(2)
+print(int(Q1))
+print(int(M))
+print(int(Q3))

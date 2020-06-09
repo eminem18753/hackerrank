@@ -1,0 +1,7 @@
+import numpy as np
+first=list(map(int,raw_input().split(' ')))
+second=list(map(int,raw_input().split(' ')))
+array1=np.array(first)
+array2=np.array(second)
+print(np.inner(array1,array2))
+print(np.outer(array1,array2))

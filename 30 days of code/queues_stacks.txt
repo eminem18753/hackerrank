@@ -1,0 +1,32 @@
+#include <iostream>
+#include <deque>
+
+using namespace std;
+
+class Solution 
+{
+    //Write your code here
+    public:
+    deque<char> backAll;
+    deque<char> frontAll;
+    void pushCharacter(char a)
+    {
+        backAll.push_back(a);
+    }
+    void enqueueCharacter(char a)
+    {
+        frontAll.push_front(a);
+    }
+    char popCharacter()
+    {
+        char result=backAll.back();
+        backAll.pop_back();
+        return result;
+    }
+    char dequeueCharacter()
+    {
+        char result=frontAll.back();
+        frontAll.pop_back();
+        return result;
+    }
+};

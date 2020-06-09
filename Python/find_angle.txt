@@ -1,0 +1,9 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+# -*- coding: utf-8 -*-
+import math
+
+x=float(raw_input())
+y=float(raw_input())
+result=float(math.atan2(x,y))
+output=result*180/math.pi
+print("%.0f¢X" % output)

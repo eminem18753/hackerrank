@@ -1,0 +1,30 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(balls):
+    result=0.0
+    for index in balls:
+        result+=index
+    result/=2
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    balls_count = int(raw_input())
+
+    balls = []
+
+    for _ in xrange(balls_count):
+        balls_item = int(raw_input())
+        balls.append(balls_item)
+
+    result = solve(balls)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

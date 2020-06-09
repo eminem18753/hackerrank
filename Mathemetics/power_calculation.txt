@@ -1,0 +1,45 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(k, n):
+    result=0
+    if k<100:
+        for i in range(1,k+1):
+            result+=pow(i,n,100)
+        result=result%100
+        if (result%100)>9:
+            return str(result%100)
+        else:
+            return "0"+str(result%100)
+    else:
+        for i in range(1,101):
+            result+=pow(i,n,100)
+        result*=(k//100)
+        result=result%100
+        for i in range(1,(k%100)+1):
+            result+=pow(i,n,100)
+        if (result%100)>9:
+            return str(result%100)
+        else:
+            return "0"+str(result%100)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        kn = raw_input().split()
+
+        k = int(kn[0])
+
+        n = int(kn[1])
+
+        result = solve(k, n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

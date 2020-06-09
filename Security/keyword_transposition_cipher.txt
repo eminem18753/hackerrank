@@ -1,0 +1,85 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+number=int(raw_input())
+for i in range(0,number):
+    originalSalting=list(raw_input())
+    salting=[]
+    for i in range(0,len(originalSalting)):
+        flag=0
+        for j in range(0,len(salting)):
+            if originalSalting[i]==salting[j]:
+                flag=1
+        if flag==0:
+            salting.append(originalSalting[i])
+    
+    originalString=map(list,raw_input().split(' '))
+    if len(originalString[len(originalString)-1])%len(salting)!=0:
+        toAdd=len(salting)-len(originalString[len(originalString)-1])%len(salting)
+    else:
+        toAdd=-1
+    if toAdd!=-1:
+        for i in range(0,toAdd):
+            originalString[len(originalString)-1].append(' ')
+    
+    alphabet=set(list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+    
+    another=sorted(salting)
+    toMinus=set(another)
+    alphabet=alphabet.difference(toMinus)    
+    coding=sorted(list(alphabet))
+    overall=salting+coding
+    overallFormat=[]
+    current=[]
+    for i in range(0,26):
+        current.append(overall[i])
+        if i%len(salting)==len(salting)-1:
+            overallFormat.append(current)
+            current=[]
+    lastRow=list(coding[(len(coding)-26%len(salting)):])
+    for i in range(0,len(salting)-26%len(salting)):
+        lastRow.append(' ')
+    overallFormat.append(lastRow)
+    
+    ordering=[]
+    for i in range(0,len(salting)):
+        for j in range(0,len(another)):
+            if another[i]==salting[j]:
+                ordering.append(j)
+
+    total=[]
+    total.append(another)
+    for i in range(1,len(overallFormat)):
+        current=[]
+        for j in range(0,len(overallFormat[0])):
+            current.append(overallFormat[i][ordering[j]])
+        total.append(current)
+
+    transitions=[]
+    for i in range(0,len(total[0])):
+        temp=[]
+        for j in range(0,len(total)):
+            temp.append(total[j][i])
+        transitions.append(temp)
+        
+    toUse=[]
+    for i in range(0,len(transitions)):
+        for j in range(0,len(transitions[0])):
+            if transitions[i][j]!=' ':
+                toUse.append(transitions[i][j])
+
+    recovering=[]
+    listFinal=[]
+    for i in range(0,len(originalString)):
+        temp=[]
+        for j in range(0,len(originalString[0])):
+            for k in range(0,26):
+                if originalString[i][j]==toUse[k]:
+                    temp.append(chr(k+ord('A')))
+                    listFinal.append(chr(k+ord('A')))
+        recovering.append(temp)
+    stringFinal=""
+    for i in range(len(listFinal)):
+        stringFinal+=listFinal[i]
+        if i%5==4:
+            stringFinal+=" "
+    print(stringFinal)

@@ -1,0 +1,33 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def sqrtInt(n):
+    l,r=1,n+1
+    while r-l>1:
+        mid=(l+r)//2
+        if mid*mid>n:
+            r=mid
+        else:
+            l=mid
+    return l
+def solve(i):
+    if sqrtInt(i)%2==1:
+        return "odd"
+    else:
+        return "even"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        i = int(raw_input())
+
+        result = solve(i)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,52 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    int number;
+    cin>>number;
+    double x[number];
+    double y[number];
+    double sumX=0;
+    double sumY=0;
+    double sumXSquare=0;
+    double sumYSquare=0;
+    for(int i=0;i<number;i++)
+    {
+        double a;
+        cin>>a;
+        x[i]=a;
+        sumX+=(double)a;
+        sumXSquare+=(double)a*(double)a;
+    }
+    for(int i=0;i<number;i++)
+    {
+        double a;
+        cin>>a;
+        y[i]=a;
+        sumY+=(double)a;
+        sumYSquare+=(double)a*(double)a;
+    }
+    double averageX=sumX/(double)number;
+    double averageY=sumY/(double)number;
+    
+    double averageXSquare=sumXSquare/(double)number;
+    double averageYSquare=sumYSquare/(double)number;
+
+    double sigmaX=sqrt(averageXSquare-averageX*averageX);
+    double sigmaY=sqrt(averageYSquare-averageY*averageY);
+    
+    double sumBoth=0;
+    for(int i=0;i<number;i++)
+    {
+        sumBoth+=(x[i]-averageX)*(y[i]-averageY);
+    }
+    cout<<sumBoth/((double)number*sigmaX*sigmaY)<<endl;
+    
+    return 0;
+}

@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+int gcd(int a,int b)
+{
+    if(b==0)
+    {
+        return a;
+    }
+    else
+    {
+        return gcd(b,a%b);
+    }
+}
+string solve(int n) 
+{
+    string overall="";
+    int count=0;
+    vector<int> result;
+    for(int i=1;i<sqrt(n);i++)
+    {
+        if(n%i==0)
+        {
+            result.push_back(i);
+        }
+    }
+    vector<int> more;
+    for(int i=result.size()-1;i>0;i--)
+    {
+        more.push_back(n/result[i]);
+    }
+    vector<int> total;
+    for(int i=0;i<result.size();i++)
+    {
+        if((floor(sqrt(result[i]))==ceil(sqrt(result[i])))&&(result[i]%2==0))
+        {
+            count+=1;
+        }
+        total.push_back(result[i]);
+    }
+    for(int i=0;i<more.size();i++)
+    {
+        if((floor(sqrt(more[i]))==ceil(sqrt(more[i])))&&(more[i]%2==0))
+        {
+            count+=1;
+        }
+        total.push_back(more[i]);
+    }
+    if(floor(sqrt(n))==ceil(sqrt(n)))
+    {
+        if((floor(sqrt(sqrt(n)))==ceil(sqrt(sqrt(n))))&&(int(sqrt(n))%2==0))
+        {
+            count+=1;
+        }
+        total.push_back(sqrt(n));
+    }
+    if(count==0)
+    {
+        return "0";
+    }
+    int common=gcd(total.size(),count);
+    overall+=to_string(count/common);
+    overall+="/";
+    overall+=to_string(total.size()/common);
+    
+    return overall;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        string result = solve(n);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

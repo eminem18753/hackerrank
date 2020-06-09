@@ -1,0 +1,8 @@
+def capitalize(string):
+    output=""
+    result=string.split(' ')
+    for i in range(0,len(result)):
+        output+=result[i][0:1].upper()+result[i][1:]
+        if i is not len(result)-1:
+            output+=" "
+    return output

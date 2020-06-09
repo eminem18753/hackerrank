@@ -1,0 +1,23 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    double first;
+    double second;
+    cin>>first;
+    cin>>second;
+    double success=first/second;
+    double fail=1-success;
+    double result=1;
+    result*=fail*fail*fail*fail*success;
+    cout<<setprecision(3)<<fixed<<result<<endl;
+    return 0;
+}

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+vector<long> a(1000000);
+int solve(long x) 
+{
+    int result=0;
+    vector<long>::iterator low;
+    low=lower_bound(a.begin(),a.end(),x);
+    result=(int)(low-a.begin());
+    if(binary_search(a.begin(),a.end(),x))
+    {
+        return result+1;
+    }
+
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+    for(int i=1;i<=1000000;i++)
+    {
+        a[i-1]=(long)i*(long)(i+1)*(long)(2*i+1)/(long)6;
+    }
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        long x;
+        cin >> x;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int result = solve(x);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

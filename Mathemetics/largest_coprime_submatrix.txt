@@ -1,0 +1,166 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+int t[200][200];
+int lefts[200][200];
+long long p[10000];
+
+void getp(long long n,long long *prime)
+{
+    long long i,j,flag;
+    long long index=2;
+    if(n<=1)
+    {
+        prime[0]=0;
+        return;
+    }
+    if(n==2)
+    {
+        prime[0]=2;
+        prime[1]=0;
+        return;
+    }
+    prime[0]=2;
+    prime[1]=3;
+    for(int i=5;i<=n;i+=2)
+    {
+        for(j=1,flag=1;prime[j]<=sqrt(i);j++)
+        {
+            if(i%prime[j]==0)
+            {
+                flag=0;
+                break;
+            }
+        }
+        if(flag==1)
+        {
+            prime[index]=i;
+            index+=1;
+        }
+    }
+    prime[index]=0;
+    return;
+}
+// Complete the solve function below.
+int solve(vector<vector<int>> matrix)
+{
+    int maximum=0;
+    int temp;
+    getp(10000,p);
+    for(int i=0;p[i];i++)
+    {
+        for(int j=0;j<matrix.size();j++)
+        {
+            for(int k=0;k<matrix[0].size();k++)
+            {
+                if(matrix[j][k]%p[i])
+                {
+                    t[j][k]=0;
+                }
+                else
+                {
+                    t[j][k]=1;
+                }
+            }
+        }
+        for(int j=0;j<matrix.size();j++)
+        {
+            for(int k=temp=0;k<matrix[0].size();k++)
+            {
+                if(t[j][k])
+                {
+                    lefts[j][k]=k-temp+1;
+                }
+                else
+                {
+                    temp=k+1;
+                    lefts[j][k]=0;
+                }
+            }
+        }
+        for(int j=0;j<matrix[0].size();j++)
+        {
+            for(int k=0;k<matrix.size();k++)
+            {
+                temp=j+1;
+                for(int l=k;l<matrix.size() &&temp;l++)
+                {
+                    if(lefts[l][j]<temp)
+                    {
+                        temp=lefts[l][j];
+                    }
+                    if(temp*(l-k+1)>maximum)
+                    {
+                        maximum=temp*(l-k+1);
+                    }
+                }
+            }
+        }
+    }
+    return maximum;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string nm_temp;
+    getline(cin, nm_temp);
+
+    vector<string> nm = split_string(nm_temp);
+
+    int n = stoi(nm[0]);
+
+    int m = stoi(nm[1]);
+
+    vector<vector<int>> matrix(n);
+    for (int i = 0; i < n; i++) {
+        matrix[i].resize(m);
+
+        for (int j = 0; j < m; j++) {
+            cin >> matrix[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int result = solve(matrix);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

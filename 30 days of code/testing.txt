@@ -1,0 +1,53 @@
+class TestDataEmptyArray 
+{
+public:
+    static vector<int> get_array() 
+    {
+        // complete this function
+        vector<int> result;
+        return result;
+    }
+
+};
+
+class TestDataUniqueValues 
+{
+public:
+    static vector<int> get_array() 
+    {
+        // complete this function
+        vector<int> result;
+        result.push_back(0);
+        result.push_back(1);
+        return result;
+    }
+
+    static int get_expected_result() 
+    {
+        // complete this function
+        return minimum_index(get_array());
+    }
+
+};
+
+class TestDataExactlyTwoDifferentMinimums 
+{
+public:
+    static vector<int> get_array() 
+    {
+        // complete this function
+        vector<int> result;
+        result.push_back(0);
+        result.push_back(0);
+        result.push_back(1);
+        return result;
+
+    }
+
+    static int get_expected_result() 
+    {
+        // complete this function
+        return minimum_index(get_array());
+    }
+
+};

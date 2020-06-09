@@ -1,0 +1,41 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the twoArrays function below.
+def twoArrays(k, A, B):
+    flag=1
+    first=sorted(A)
+    second=sorted(B,reverse=True)
+    for i in range(0,len(first)):
+        if first[i]+second[i]<k:
+            flag=0
+    if flag==1:
+        return "YES"
+    else:
+        return "NO"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        nk = raw_input().split()
+
+        n = int(nk[0])
+
+        k = int(nk[1])
+
+        A = map(int, raw_input().rstrip().split())
+
+        B = map(int, raw_input().rstrip().split())
+
+        result = twoArrays(k, A, B)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=map(int,list(raw_input().split(' ')))
+first=[]
+second=[]
+for i in range(0,number):
+    first.append(result[i]-1)
+for i in range(0,number):
+    second.append(result[first[i]])
+flag=1
+for i in range(0,number):
+    if second[i]!=(i+1):
+        flag=0
+if flag==1:
+    print("YES")
+else:
+    print("NO")

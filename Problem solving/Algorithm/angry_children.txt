@@ -1,0 +1,34 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the angryChildren function below.
+def angryChildren(k, arr):
+    result=sorted(arr)
+    minimum=10**10
+    for i in range(0,len(result)-k+1):
+        if result[i+k-1]-result[i]<minimum:
+            minimum=result[i+k-1]-result[i]
+    return minimum
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    k = int(raw_input())
+
+    arr = []
+
+    for _ in xrange(n):
+        arr_item = int(raw_input())
+        arr.append(arr_item)
+
+    result = angryChildren(k, arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,37 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+import math
+# Complete the solve function below.
+def modInverse(n,p):
+    return pow(n,p-2,p)
+def ncrModFermat(n,r,p):
+    if r==0:
+        return 1
+    fac=[0]*(n+1)
+    fac[0]=1
+    for i in range(1,n+1):
+        fac[i]=((i%p)*(fac[i-1]%p))%p
+    return (fac[n]*modInverse(fac[r],p)%p*modInverse(fac[n-r],p)%p)%p
+def solve(n, m):
+    return ncrModFermat(n+m-2,n-1,1000000007)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        nm = raw_input().split()
+
+        n = int(nm[0])
+
+        m = int(nm[1])
+
+        result = solve(n, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

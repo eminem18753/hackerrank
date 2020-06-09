@@ -1,0 +1,40 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def fact_large(x,mod):
+    total=1
+    while x>0:
+        total=(total*x)%mod
+        x-=1
+    return total
+
+def solve(s):
+    mod=1000000007
+    counts={}
+    for l in s:
+        if l not in counts:
+            counts[l]=1
+        else:
+            counts[l]+=1
+    psl=0
+    for l,count in counts.items():
+        psl+=count//2
+
+    output=fact_large(psl,mod)
+    for l,count in counts.items():
+        ground=pow(fact_large(count//2,mod),mod-2,mod)
+        output=(output*ground)%mod
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    result = solve(s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

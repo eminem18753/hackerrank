@@ -1,0 +1,39 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the stepPerms function below.
+def stepPerms(n):
+    if n==1:
+        return 1
+    elif n==2:
+        return 2
+    elif n==3:
+        return 4
+    a=1
+    b=2
+    c=4
+    result=7
+    for i in range(4,n):
+        a=b
+        b=c
+        c=result
+        result=a+b+c
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = int(raw_input())
+
+    for s_itr in xrange(s):
+        n = int(raw_input())
+
+        res = stepPerms(n)
+
+        fptr.write(str(res) + '\n')
+
+    fptr.close()

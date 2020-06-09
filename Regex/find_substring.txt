@@ -1,0 +1,15 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+number=int(raw_input())
+total=""
+for i in range(0,number):
+    temp=raw_input()
+    total+=temp+" "
+queries=int(raw_input())
+for i in range(0,queries):
+    count=0
+    temp=raw_input()
+    pattern=re.compile("(?<=[a-zA-Z0-9_])"+temp+"(?=[a-zA-Z0-9_])")
+    current=re.findall(pattern,total)
+    count+=len(current)
+    print(count)

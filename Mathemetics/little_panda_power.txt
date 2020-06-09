@@ -1,0 +1,49 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def modinverse(a,b):
+    b0=b
+    x=1
+    y=0
+    while(a>1):
+        q=a//b
+        t=b
+        b=a%b
+        a=t
+        t=y
+        y=x-q*y
+        x=t
+    if x<0:
+        x+=b0
+    return x
+def solve(a, b, x):
+    if b>=0:
+        return pow(a,b,x)
+    else:
+        c=-b
+        return pow(modinverse(a,x),c,x)
+        
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        abx = raw_input().split()
+
+        a = int(abx[0])
+
+        b = int(abx[1])
+
+        x = int(abx[2])
+
+        result = solve(a, b, x)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,11 @@
+from collections import OrderedDict
+def merge_the_tools(string, k):
+    # your code goes here
+    result=[]
+    for i in range(0,len(string),k):
+        temp=""
+        for j in range(0,k):
+            temp+=string[i+j]
+        result.append(''.join(OrderedDict.fromkeys(temp)))
+    for i in result:
+        print(i)

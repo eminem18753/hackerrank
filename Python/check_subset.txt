@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+number=int(raw_input())
+for i in range(0,number):
+    first=int(raw_input())
+    set1=set(map(int,raw_input().split(' ')))
+    second=int(raw_input())
+    set2=set(map(int,raw_input().split(' ')))
+    if set1.intersection(set2)==set1:
+        result=True
+    else:
+        result=False
+    print(result)

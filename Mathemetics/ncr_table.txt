@@ -1,0 +1,45 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def combination(n,k):
+    result=long(1)
+    for i in range(0,k):
+        result*=long(n-i)
+    for i in range(1,k+1):
+        result/=long(i)
+    return long(result)%1000000000
+def solve(n):
+    result=[]
+    output=[]
+    if n%2==1:
+        for i in range(0,(n+1)/2):
+            result.append(combination(n,i))
+        output=result
+        for i in range(len(result)-1,-1,-1):
+            output.append(result[i])
+    elif n%2==0:
+        for i in range(0,n/2+1):
+            result.append(combination(n,i))
+        output=result
+        for i in range(len(result)-2,-1,-1):
+            output.append(result[i])
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(' '.join(map(str, result)))
+        fptr.write('\n')
+
+    fptr.close()

@@ -1,0 +1,123 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+long long r=10000000;
+bool a[10000001];
+bool primes1[3165];
+bool primes2[218];
+bool primes3[59];
+vector<long long> overall1;
+vector<long long> overall2;
+vector<long long> overall3;
+int c[10000001];
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    memset(primes1,true,sizeof(primes1));
+    primes1[0]=false;
+    primes1[1]=false;
+    for(int i=2;i<=3164;i++)
+    {
+        if(primes1[i])
+        {
+            for(int j=2*i;j<=3164;j+=i)
+            {
+                primes1[j]=false;
+            }
+        }
+    }
+    for(int i=0;i<=3164;i++)
+    {
+        if(primes1[i])
+        {
+            overall1.push_back((long long)i);
+        }
+    }
+
+    memset(primes2,true,sizeof(primes2));
+    primes2[0]=false;
+    primes2[1]=false;
+    for(int i=2;i<=217;i++)
+    {
+        if(primes2[i])
+        {
+            for(int j=2*i;j<=217;j+=i)
+            {
+                primes2[j]=false;
+            }
+        }
+    }
+    for(int i=0;i<=217;i++)
+    {
+        if(primes2[i])
+        {
+            overall2.push_back((long long)i);
+        }
+    }
+
+    memset(primes3,true,sizeof(primes3));
+    primes3[0]=false;
+    primes3[1]=false;
+    for(int i=2;i<=58;i++)
+    {
+        if(primes3[i])
+        {
+            for(int j=2*i;j<=58;j+=i)
+            {
+                primes3[j]=false;
+            }
+        }
+    }
+    for(int i=0;i<=58;i++)
+    {
+        if(primes3[i])
+        {
+            overall3.push_back((long long)i);
+        }
+    }
+
+    memset(a,false,sizeof(a));
+    for(int i=0;i<overall1.size();i++)
+    {
+        for(int j=0;j<overall2.size();j++)
+        {
+            for(int k=0;k<overall3.size();k++)
+            {
+                if(overall1[i]*overall1[i]+overall2[j]*overall2[j]*overall2[j]+overall3[k]*overall3[k]*overall3[k]*overall3[k]>r)
+                {
+                    break;
+                }
+                else
+                {
+a[overall1[i]*overall1[i]+overall2[j]*overall2[j]*overall2[j]+overall3[k]*overall3[k]*overall3[k]*overall3[k]]=true;
+                }
+            }
+        }
+    }
+
+    overall1.clear();
+    overall2.clear();
+    overall3.clear();
+
+    c[0]=0;
+    for(int i=0;i<10000001;i++)
+    {
+        c[i]=c[i-1]+(a[i]?1:0);
+    }
+    
+    int number;
+    cin>>number;
+    for(int i=0;i<number;i++)
+    {
+        int result=0;
+        int t;
+        cin>>t;
+        cout<<c[t]<<endl;
+    }
+    return 0;
+}

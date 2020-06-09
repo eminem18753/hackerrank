@@ -1,0 +1,30 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the superDigit function below.
+def superDigit(n, k):
+    result=map(int,list(str(n)))
+    output=map(int,list(str(sum(result)*k)))
+    flag=0
+    while len(output)>1:
+        output=map(int,list(str(sum(output))))
+    return output[0]
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = raw_input().split()
+
+    n = nk[0]
+
+    k = int(nk[1])
+
+    result = superDigit(n, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

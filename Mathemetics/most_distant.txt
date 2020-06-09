@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+double solve(vector<vector<int>> coordinates) 
+{
+    double up=-2000000000;
+    double down=2000000000;
+    double left=2000000000;
+    double right=-2000000000;
+    for(int i=0;i<coordinates.size();i++)
+    {
+        if(coordinates[i][0]>up)
+        {
+            up=(double)coordinates[i][0];
+        }
+        if(coordinates[i][0]<down)
+        {
+            down=(double)coordinates[i][0];
+        }
+        if(coordinates[i][1]<left)
+        {
+            left=(double)coordinates[i][1];
+        }
+        if(coordinates[i][1]>right)
+        {
+            right=(double)coordinates[i][1];
+        }
+    }
+    double maximum=-2000000000;
+    if(up-down>maximum)
+    {
+        maximum=(double)(up-down);
+    }
+    if(right-left>maximum)
+    {
+        maximum=(double)(right-left);
+    }
+    if(sqrt(up*up+right*right)>maximum)
+    {
+        maximum=(double)sqrt((double)up*up+(double)right*right);
+    }
+    if(sqrt(up*up+left*left)>maximum)
+    {
+        maximum=(double)sqrt((double)up*up+(double)left*left);
+    }
+    if(sqrt(down*down+right*right)>maximum)
+    {
+        maximum=(double)sqrt((double)down*down+(double)right*right);
+    }
+    if(sqrt(down*down+left*left)>maximum)
+    {
+        maximum=(double)sqrt((double)down*down+(double)left*left);
+    }
+    return maximum;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<vector<int>> coordinates(n);
+    for (int coordinates_row_itr = 0; coordinates_row_itr < n; coordinates_row_itr++) {
+        coordinates[coordinates_row_itr].resize(2);
+
+        for (int coordinates_column_itr = 0; coordinates_column_itr < 2; coordinates_column_itr++) {
+            cin >> coordinates[coordinates_row_itr][coordinates_column_itr];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    double result = solve(coordinates);
+
+    fout <<fixed<< setprecision(12)<<result << "\n";
+
+    fout.close();
+
+    return 0;
+}

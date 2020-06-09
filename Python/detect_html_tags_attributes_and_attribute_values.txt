@@ -1,0 +1,19 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from HTMLParser import HTMLParser
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        print tag
+        for i in range(0,len(attrs)):
+            print "->",attrs[i][0],">",attrs[i][1]
+    def handle_startendtag(self, tag, attrs):
+        print tag
+        for i in range(0,len(attrs)):
+            print "->",attrs[i][0],">",attrs[i][1]
+
+T=int(raw_input())
+total=""
+for i in range(0,T):
+    total+=raw_input()
+
+parser=MyHTMLParser()
+parser.feed(total)

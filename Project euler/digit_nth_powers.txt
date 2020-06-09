@@ -1,0 +1,14 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+lowest=100
+highest=600000
+output=0
+for i in range(lowest,highest):
+    current=map(int,list(str(i)))
+    result=0
+    for j in current:
+        result+=pow(j,number)
+    if result==i:
+        output+=result
+print(output)
+        

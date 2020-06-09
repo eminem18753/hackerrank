@@ -1,0 +1,30 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(s):
+    temp=s*2
+    current=temp//42
+    used=temp+2*current
+    remainder=used//42
+    while remainder>current:
+        temp=used
+        used+=(remainder-current)*2
+        current=temp//42
+        remainder=used//42
+    return used%1000000007
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        s = int(raw_input())
+
+        result = solve(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

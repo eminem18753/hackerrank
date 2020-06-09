@@ -1,0 +1,18 @@
+"""
+Node is defined as
+self.left (the left child of the node)
+self.right (the right child of the node)
+self.info (the value of the node)
+"""
+def levelOrder(root):
+	#Write code Here
+    result=""
+    overall=[root] if root else []
+    while overall:
+        node=overall.pop()
+        result+=str(node.info)+" "
+        if node.left:
+            overall.insert(0,node.left)
+        if node.right:
+            overall.insert(0,node.right)
+    print(result)

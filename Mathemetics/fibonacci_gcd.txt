@@ -1,0 +1,65 @@
+#!/bin/python
+
+import os
+import sys
+import math
+from decimal import *
+m=1000000007
+# Complete the solve function below.
+class Matrix:
+    def __init__(self,rows,m,n):
+        self.m=m
+        self.n=n
+        self.rows=[[item for item in row] for row in rows]
+    def __mul__(self,other):
+        assert self.n==other.m
+        ret=[[0 for _ in range(other.n)] for _ in range(self.m)]
+        for i in range(self.m):
+            for j in range(other.n):
+                for k in range(self.n):
+                    ret[i][j]+=self.rows[i][k]*other.rows[k][j]
+                    ret[i][j]%=m
+        return Matrix(ret,self.m,other.n)
+    def __rmul__(self,other):
+        return other*self
+    def __pow__(self,n):
+        if n==0:
+            ret=[[0 for _ in range(self.m)] for _ in range(self.n)]
+            for i in range(self.m):
+                ret[i][i]=1
+            return Matrix(ret,self.m,self.m)
+        elif n==1:
+            return self
+        else:
+            tmp=self ** (n//2)
+            if n%2==0:
+                return tmp*tmp
+            else:
+                return tmp*tmp*self
+def fib(A,B,N):
+    row=Matrix([[A,B]],1,2)
+    mat=Matrix([[0,1],[1,1]],2,2)
+    mat=mat**N
+    return (row*mat).rows[0][0]
+def gcd(a,b):
+    while b!=0:
+        a,b=b,a%b
+    return a
+def solve(a):
+    a=reduce(lambda acc,x:gcd(acc,x),a,a[0])
+    return fib(0,1,a)
+if __name__ == '__main__':
+    getcontext().prec=100
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+    a=[]
+    for n_itr in xrange(n):
+        temp = float(raw_input())
+        a.append(temp)
+        
+    result = solve(a)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

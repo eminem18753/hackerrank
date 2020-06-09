@@ -1,0 +1,31 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the xorAndSum function below.
+#
+def xorAndSum(a, b):
+    #
+    # Write your code here.
+    #
+    result=0
+    for i in range(0,314160):
+        result+=a^(b<<i)
+    return result%1000000007
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    a = int(raw_input(),2)
+
+    b = int(raw_input(),2)
+
+    result = xorAndSum(a, b)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

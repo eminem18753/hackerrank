@@ -1,0 +1,82 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def square(a):
+    b=[]
+    b00=((a[0][0]*a[0][0])%1000000007+(a[0][1]*a[1][0])%1000000007)%1000000007
+    b10=((a[1][0]*a[0][0])%1000000007+(a[1][1]*a[1][0])%1000000007)%1000000007
+    b01=((a[0][0]*a[0][1])%1000000007+(a[0][1]*a[1][1])%1000000007)%1000000007
+    b11=((a[1][0]*a[0][1])%1000000007+(a[1][1]*a[1][1])%1000000007)%1000000007
+    c=[]
+    c.append(b00)
+    c.append(b01)
+    d=[]
+    d.append(b10)
+    d.append(b11)
+    b.append(c)
+    b.append(d)
+    return b
+def one_more(a):
+    b=[]
+    b00=a[0][0]*1+a[0][1]*1
+    b10=a[1][0]*1+a[1][1]*1
+    b01=a[0][0]*1+a[0][1]*0
+    b11=a[1][0]*1+a[1][1]*0
+    c=[]
+    c.append(b00)
+    c.append(b01)
+    d=[]
+    d.append(b10)
+    d.append(b11)
+    b.append(c)
+    b.append(d)
+    return b
+def power(k):
+    if k==0:
+        b=[]
+        c=[]
+        c.append(1)
+        c.append(0)
+        d=[]
+        d.append(0)
+        d.append(1)
+        b.append(c)
+        b.append(d)
+        return b
+    elif k%2==0:
+        b=power(k//2)
+        return square(b)
+    else:
+        b=power(k//2)
+        c=square(b)
+        return one_more(c)
+def solve(a, b, n):
+    if n==1:
+        return b
+    else:
+        result=power(n-1)
+        return ((result[0][0]*b)%1000000007+(result[0][1]*a)%1000000007)%1000000007
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        abn = raw_input().split()
+
+        a = int(abn[0])
+
+        b = int(abn[1])
+
+        n = int(abn[2])
+
+        result = solve(a, b, n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

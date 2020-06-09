@@ -1,0 +1,60 @@
+class Student :  public Person{
+	private:
+		vector<int> scores;
+	public:
+        Student(string firstName,string lastName,int id,vector<int> scores):Person(firstName,lastName,id)
+        {
+            this->scores=scores;
+        }
+        char calculate()
+        {
+            char total;
+            double result=0;
+            for(int i=0;i<scores.size();i++)
+            {
+                result+=scores[i];
+            }
+            result/=scores.size();
+            if(result<40)
+            {
+                total='T';
+            }
+            else if(result<55)
+            {
+                total='D';
+            }
+            else if(result<70)
+            {
+                total='P';
+            }
+            else if(result<80)
+            {
+                total='A';
+            }
+            else if(result<90)
+            {
+                total='E';
+            }
+            else if(result<=100)
+            {
+                total='O';
+            }
+            return total;
+        }
+        /*	
+        *   Class Constructor
+        *   
+        *   Parameters:
+        *   firstName - A string denoting the Person's first name.
+        *   lastName - A string denoting the Person's last name.
+        *   id - An integer denoting the Person's ID number.
+        *   scores - An array of integers denoting the Person's test scores.
+        */
+        // Write your constructor here
+
+        /*	
+        *   Function Name: calculate
+        *   Return: A character denoting the grade.
+        */
+        // Write your function here
+};

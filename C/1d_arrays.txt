@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int temp;
+    int summation=0;
+    int number=0;
+    scanf("%d",&number);
+    int *array=(int*)malloc(number*sizeof(int));
+    int count=-1;
+    while(scanf("%d",&temp)!=EOF)
+    {
+        count+=1;
+        array[count]=temp;
+    }
+    for(int i=0;i<number;i++)
+    {
+        summation+=array[i];
+    }
+    printf("%d\n",summation);
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}

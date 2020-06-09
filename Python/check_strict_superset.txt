@@ -1,0 +1,11 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+temp=set(map(int,raw_input().split(' ')))
+number=int(raw_input())
+flag=True
+for i in range(0,number):
+    current=set(map(int,raw_input().split(' ')))
+    if current!=temp.intersection(current):
+        flag=False
+    if temp==temp.intersection(current):
+        flag=False
+print(flag)

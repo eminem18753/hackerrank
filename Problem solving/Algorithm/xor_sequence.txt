@@ -1,0 +1,38 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the xorSequence function below.
+def calculate(a):
+    if a%8==0 or a%8==1:
+        return a
+    elif a%8==2 or a%8==3:
+        return 2
+    elif a%8==4 or a%8==5:
+        return a+2
+    elif a%8==6 or a%8==7:
+        return 0
+        
+def xorSequence(l, r):
+    return calculate(r)^calculate(l-1)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        lr = raw_input().split()
+
+        l = int(lr[0])
+
+        r = int(lr[1])
+
+        result = xorSequence(l, r)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

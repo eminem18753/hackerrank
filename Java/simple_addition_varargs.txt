@@ -1,0 +1,17 @@
+class Add
+{
+    public void add(int ... a)
+    {
+        int result=0;
+        String temp="";
+        for(int i:a)
+        {
+            System.out.print(temp);
+            System.out.print(i);
+            temp="+";
+            result+=i;
+        }
+        System.out.print("=");
+        System.out.println(result);
+    }
+}

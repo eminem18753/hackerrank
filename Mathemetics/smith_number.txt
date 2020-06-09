@@ -1,0 +1,123 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+int solve(int n)
+{
+    int current=n;
+    vector<int> total;
+    
+    for(int i=2;i<sqrt(n);i++)
+    {
+        if(n%i==0)
+        {
+            total.push_back(i);
+        }
+    }
+    vector<int> overall;
+    for(int i=0;i<total.size();i++)
+    {
+        int flag=0;
+        for(int j=0;j<overall.size();j++)
+        {
+            if(total[i]%overall[j]==0)
+            {
+                flag=1;
+            }
+        }
+        if(flag==0)
+        {
+            overall.push_back(total[i]);
+        }
+    }
+
+    if(floor(sqrt(n))==ceil(sqrt(n))&&n>1)
+    {
+        int flag=0;
+        for(int j=0;j<overall.size();j++)
+        {
+            if(int(sqrt(n))%overall[j]==0)
+            {
+                flag=1;
+            }
+        }
+        if(flag==0)
+        {
+            overall.push_back(int(sqrt(n)));
+        }
+    }
+    for(int i=total.size()-1;i>-1;i--)
+    {
+        int flag=0;
+        for(int j=0;j<overall.size();j++)
+        {
+            if((n/total[i])%overall[j]==0)
+            {
+                flag=1;
+            }
+        }
+        if(flag==0)
+        {
+            overall.push_back(n/total[i]);
+        }
+    }
+    
+    vector<int> counter;
+    for(int i=0;i<overall.size();i++)
+    {
+        int temp=0;
+        while(n%overall[i]==0)
+        {
+            temp+=1;
+            n/=overall[i];
+        }
+        counter.push_back(temp);
+    }
+    //compare
+    string nString=to_string(current);
+    int resultFirst=0;
+    for(int i=0;i<nString.length();i++)
+    {
+        resultFirst+=(int)(nString[i]-'0');
+    }
+    
+    int resultSecond=0;
+    for(int i=0;i<overall.size();i++)
+    {
+        int temp=0;
+        string pString=to_string(overall[i]);
+        for(int j=0;j<pString.length();j++)
+        {
+            temp+=(int)(pString[j]-'0');
+        }
+        temp*=counter[i];
+        resultSecond+=temp;
+    }
+    if(resultFirst==resultSecond)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int main()
+{
+    
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    int result = solve(n);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}

@@ -1,0 +1,7 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+first=int(raw_input())
+set1=set(map(int,raw_input().split(' ')))
+second=int(raw_input())
+set2=set(map(int,raw_input().split(' ')))
+print(len(set1.union(set2)))

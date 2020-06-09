@@ -1,0 +1,28 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumAbsoluteDifference function below.
+def minimumAbsoluteDifference(n, arr):
+    minimum=10**11
+    result=sorted(arr)
+    for i in range(0,len(result)-1):
+        if result[i+1]-result[i]<minimum:
+            minimum=result[i+1]-result[i]
+    return minimum
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    result = minimumAbsoluteDifference(n, arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

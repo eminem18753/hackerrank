@@ -1,0 +1,30 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(n):
+    if n%4==0:
+        return 3
+    elif n%4==1:
+        return 2
+    elif n%4==2:
+        return 4
+    else:
+        return 2
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

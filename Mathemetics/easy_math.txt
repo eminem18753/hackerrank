@@ -1,0 +1,41 @@
+#!/bin/python
+
+import os
+import sys
+from collections import Counter
+# Complete the solve function below.
+def solve(x):
+    countTwo=0
+    countFive=0
+    current=x
+    while x//2!=0 and x%2==0:
+        countTwo+=1
+        x=x//2
+    while x//5!=0 and x%5==0:
+        countFive+=1
+        x=x//5
+        
+    i=1
+    result=1
+    while x!=1:
+        temp=pow(10,i,9*x)
+        if temp-1==0:
+            result=i
+            break
+        i+=1
+    if countTwo-countFive>2:
+        countFive=countTwo-2
+    return 2*result+countFive
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        x = int(raw_input())
+
+        result = solve(x)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

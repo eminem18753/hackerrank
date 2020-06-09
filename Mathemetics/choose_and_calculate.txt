@@ -1,0 +1,32 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(balls, k):
+    choose=1
+    total=0
+    x=sorted(balls)
+    for i in range(0,len(balls)-k+1):
+        total+=choose*(x[k+i-1]-x[len(balls)-k-i])%1000000007
+        total=total%1000000007
+        choose*=(k+i)*pow(i+1,1000000005,1000000007)%1000000007
+        choose=choose%1000000007
+    return total
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = raw_input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    balls = map(int, raw_input().rstrip().split())
+
+    result = solve(balls, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

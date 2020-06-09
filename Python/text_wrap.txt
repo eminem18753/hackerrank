@@ -1,0 +1,12 @@
+def wrap(string, max_width):
+    result=""
+    temp=""
+    for i in range(0,len(string)):
+        temp+=string[i]
+        if i%max_width==max_width-1:
+            #print(temp)
+            result+=temp
+            result+="\n"
+            temp=""
+    result+=temp
+    return result

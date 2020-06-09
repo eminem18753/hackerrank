@@ -1,0 +1,36 @@
+// Complete the reverse function below.
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+SinglyLinkedListNode* reverse(SinglyLinkedListNode* head) 
+{
+    vector<int> result;
+    vector<int> output;
+    SinglyLinkedListNode* current;
+    while(head->next)
+    {
+        result.push_back(head->data);
+        head=head->next;
+    }
+    result.push_back(head->data);
+    for(int i=result.size()-1;i>-1;i--)
+    {
+        output.push_back(result[i]);
+    }
+    current=new SinglyLinkedListNode(output[0]);
+    SinglyLinkedListNode* finalResult=current;
+    for(int i=1;i<output.size();i++)
+    {
+        SinglyLinkedListNode* temp=new SinglyLinkedListNode(output[i]);
+        current->next=temp;
+        current=current->next;
+    }
+    return finalResult;
+}

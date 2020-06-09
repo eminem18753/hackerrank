@@ -1,0 +1,31 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumLoss function below.
+def minimumLoss(price):
+    result={}
+    minimum=10**18
+    for i in range(0,len(price)):
+        result[price[i]]=i
+    total=sorted(price)
+    for i in range(1,len(total)):
+        if total[i]-total[i-1]<minimum and result[total[i]]<result[total[i-1]]:
+            minimum=total[i]-total[i-1]
+    return minimum
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    price = map(long, raw_input().rstrip().split())
+
+    result = minimumLoss(price)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,32 @@
+// Complete the reverse function below.
+
+/*
+ * For your reference:
+ *
+ * DoublyLinkedListNode {
+ *     int data;
+ *     DoublyLinkedListNode* next;
+ *     DoublyLinkedListNode* prev;
+ * };
+ *
+ */
+DoublyLinkedListNode* reverse(DoublyLinkedListNode* head) 
+{
+    vector<int> total;
+    while(head->next)
+    {
+        total.push_back(head->data);
+        head=head->next;
+    }
+    total.push_back(head->data);
+    DoublyLinkedListNode* last=new DoublyLinkedListNode(total[total.size()-1]);
+    DoublyLinkedListNode* current=last;
+    for(int i=total.size()-2;i>-1;i--)
+    {
+        DoublyLinkedListNode* current= new DoublyLinkedListNode(total[i]);
+        current->prev=last;
+        last->next=current;
+        last=last->next;
+    }
+    return current;
+}

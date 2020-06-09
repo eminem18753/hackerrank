@@ -1,0 +1,9 @@
+x=[95 85 80 70 60];
+y=[85 95 70 65 70];
+rho=corrcoef(x,y);
+rho=rho(1,2);
+sigmaX=sqrt(var(x));
+sigmaY=sqrt(var(y));
+B=rho*sigmaY/sigmaX;
+A=mean(y)-B*mean(x)
+result=A+B*80;

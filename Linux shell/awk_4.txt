@@ -1,0 +1,9 @@
+count=0
+awk '
+{
+    count=count+1
+    if( count%2==1 )
+    printf "%s %s %s %s;",$1,$2,$3,$4;
+    else
+    printf "%s %s %s %s\n",$1,$2,$3,$4;
+}'

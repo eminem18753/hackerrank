@@ -1,0 +1,12 @@
+    def levelOrder(self,root):
+        #Write your code here
+        result=""
+        overall=[root] if root else []
+        while overall:
+            node=overall.pop()
+            result+=str(node.data)+" "
+            if node.left:
+                overall.insert(0,node.left)
+            if node.right:
+                overall.insert(0,node.right)
+        print(result)

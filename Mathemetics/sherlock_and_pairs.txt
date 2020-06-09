@@ -1,0 +1,33 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+from collections import Counter
+# Complete the solve function below.
+def solve(a):
+    result=Counter(a).items()
+    output=[]
+    total=0
+    for i in result:
+        output.append(list(i))
+    for i in range(len(output)):
+        if output[i][1]!=1:
+            total+=output[i][1]*(output[i][1]-1)
+    return total
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        a_count = int(raw_input())
+
+        a = map(int, raw_input().rstrip().split())
+
+        result = solve(a)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

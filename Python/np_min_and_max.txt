@@ -1,0 +1,11 @@
+import numpy
+current=raw_input().split(' ')
+first=int(current[0])
+second=int(current[1])
+result=[]
+for i in range(0,first):
+    temp=list(map(int,raw_input().split(' ')))
+    result.append(temp)
+output=numpy.array(result)
+print(max(numpy.min(output,axis=1)))
+

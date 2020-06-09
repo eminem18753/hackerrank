@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.security.*;
+import java.util.regex.*;
+import javax.xml.bind.DatatypeConverter;
+
+public class Solution {
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        String temp;
+        Scanner scan=new Scanner(System.in);
+        temp=scan.nextLine();
+        
+        MessageDigest md5Result=MessageDigest.getInstance("MD5");
+        md5Result.update(temp.getBytes());
+        byte[] result=md5Result.digest();
+        String hashResult=DatatypeConverter.printHexBinary(result).toLowerCase();
+        System.out.println(hashResult);
+    }
+}

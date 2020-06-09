@@ -1,0 +1,25 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import numpy as np
+
+temp=map(int,list(raw_input().split(' ')))
+fn=temp[0]
+number=temp[1]
+total=[]
+truths=[]
+for i in range(0,number):
+    lines=map(float,list(raw_input().split(' ')))
+    features=[1]
+    features+=lines[0:fn]
+    groundTruth=lines[fn]
+    total.append(features)
+    truths.append(groundTruth)
+x=np.array(total,dtype=float)
+y=np.array(truths,dtype=float)
+B=np.dot(np.dot(np.linalg.inv(np.dot(x.T,x)),x.T),y)
+
+queries=int(raw_input())
+for i in range(0,queries):
+    x_new=[1]
+    x_new+=map(float,list(raw_input().split(' ')))
+    y_new=np.dot(x_new,B)
+    print(y_new)

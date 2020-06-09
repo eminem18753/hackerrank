@@ -1,0 +1,6 @@
+import os
+number=int(raw_input())
+divider=int(raw_input())
+print(number//divider)
+print(number%divider)
+print(divmod(number,divider))

@@ -1,0 +1,7 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import math
+number=float(raw_input())
+lowest=pow(pow(10,number-1),1/number)
+lowest=long(math.ceil(lowest))
+for i in range(lowest,10):
+    print(long(long(i)**long(number)))

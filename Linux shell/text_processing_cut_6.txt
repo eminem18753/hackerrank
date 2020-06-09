@@ -1,0 +1,4 @@
+while read var
+do 
+    cut -c 13- <<< "$var"
+done

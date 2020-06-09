@@ -1,0 +1,11 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=map(int,list(raw_input().split(' ')))
+first=[]
+second=[]
+for i in range(0,number):
+    first.append(result[i]-1)
+for i in range(0,number):
+    second.append(result[first[i]])
+print('\n'.join(map(str,second)))
+    

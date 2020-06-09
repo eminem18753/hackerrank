@@ -1,0 +1,33 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(steps):
+    minimum1=10**7
+    minimum2=10**7
+    for item in steps:
+        if(item[0]<minimum1):
+            minimum1=item[0]
+        if(item[1]<minimum2):
+            minimum2=item[1]
+    result=minimum1*minimum2
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    steps = []
+
+    for _ in xrange(n):
+        steps.append(map(int, raw_input().rstrip().split()))
+
+    result = solve(steps)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

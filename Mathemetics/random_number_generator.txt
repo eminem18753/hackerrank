@@ -1,0 +1,51 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+def solve(a, b, c):
+    if a+b<=c:
+        return str(1)+"/"+str(1)
+    elif a>=c and b>=c:
+        common=gcd(a*b*2,c*c)
+        return str(c*c/common)+"/"+str(a*b*2/common)
+    elif a>=c:
+        common=gcd(a*b*2,(2*c-b)*b)
+        return str((2*c-b)*b/common)+"/"+str(a*b*2/common)
+    elif b>=c:
+        common=gcd(a*b*2,(2*c-a)*a)
+        return str((2*c-a)*a/common)+"/"+str(a*b*2/common)        
+    elif a<=c and b<=c:
+        if a>b:
+            common=gcd(a*b*2,b*(c-b)*2+(c-a+b)*(a-c+b))
+            return str((b*(c-b)*2+(c-a+b)*(a-c+b))/common)+"/"+str(a*b*2/common)
+        else:
+            common=gcd(a*b*2,a*(c-a)*2+(c-b+a)*(b-c+a))
+            return str((a*(c-a)*2+(c-b+a)*(b-c+a))/common)+"/"+str(a*b*2/common)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    for n_itr in xrange(n):
+        abc = raw_input().split()
+
+        a = int(abc[0])
+
+        b = int(abc[1])
+
+        c = int(abc[2])
+
+        result = solve(a, b, c)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

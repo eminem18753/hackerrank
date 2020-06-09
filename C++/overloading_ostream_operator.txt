@@ -1,0 +1,6 @@
+// Enter your code here.
+ostream &operator<<(ostream &output,Person result)
+{
+    output<<"first_name="<<result.get_first_name()<<",last_name="<<result.get_last_name();
+    return output;
+}

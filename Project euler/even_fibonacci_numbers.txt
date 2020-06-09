@@ -1,0 +1,25 @@
+#!/bin/python
+
+import sys
+
+temp=[0]*81
+temp[0]=1
+temp[1]=2
+for i in range(2,81):
+    temp[i]=temp[i-1]+temp[i-2]
+for i in range(0,81):
+    if temp[i]%2==1:
+        temp[i]=0
+    if temp[i]>4*10**16:
+        temp[i]=0
+t = int(raw_input().strip())
+for a0 in xrange(t):
+    n = long(raw_input().strip())
+    result=0
+    i=0
+    while temp[i]<n:
+        result+=temp[i]
+        i+=1
+        if i>=len(temp):
+            break
+    print(result)

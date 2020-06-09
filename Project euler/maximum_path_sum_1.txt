@@ -1,0 +1,23 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+for i in range(0,number):
+    current=[]
+    temp=int(raw_input())
+    overall=[0]*temp
+    previous=[0]*temp
+    for j in range(0,temp):
+        temp=map(int,list(raw_input().split(' ')))
+        current.append(temp)
+    overall[0]=current[0][0]
+    for j in range(1,len(current)):
+        overall[j]=overall[j-1]+current[j][j]
+        overall[0]+=current[j][0]
+        for k in range(1,j):
+            overall[k]=max(previous[k-1]+current[j][k],previous[k]+current[j][k])
+        for k in range(0,len(overall)):
+            previous[k]=overall[k]
+    maximum=-10000000
+    for i in overall:
+        if i>maximum:
+            maximum=i
+    print(maximum)

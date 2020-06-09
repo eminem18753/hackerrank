@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+class Node {
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int d) {
+            data = d;
+            left = NULL;
+            right = NULL;
+        }
+};
+
+class Solution {
+    public:
+  		Node* insert(Node* root, int data) {
+            if(root == NULL) {
+                return new Node(data);
+            } else {
+                Node* cur;
+                if(data <= root->data) {
+                    cur = insert(root->left, data);
+                    root->left = cur;
+                } else {
+                    cur = insert(root->right, data);
+                    root->right = cur;
+               }
+
+               return root;
+           }
+        }
+
+/*
+class Node {
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int d) {
+            data = d;
+            left = NULL;
+            right = NULL;
+        }
+};
+
+*/
+map<int,int> total;
+void topView(Node *root) 
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    deque<Node*> q;
+    deque<int> p;
+    q.push_back(root);
+    p.push_back(0);
+    total[0]=root->data;
+    while(q.size()>0)
+    {
+        Node* v=q.front();
+        int k=p.front();
+        q.pop_front();
+        p.pop_front();
+        if(total.find(k)==total.end())
+        {
+            total[k]=v->data;
+        }
+        if(v->left!=NULL)
+        {
+            q.push_back(v->left);
+            p.push_back(k-1);
+        }
+        if(v->right!=NULL)
+        {
+            q.push_back(v->right);
+            p.push_back(k+1);
+        }
+    }
+    for(map<int,int>::iterator it=total.begin();it!=total.end();it++)
+    {
+        cout<<it->second<<" ";
+    }
+    cout<<endl;
+}
+
+}; //End of Solution

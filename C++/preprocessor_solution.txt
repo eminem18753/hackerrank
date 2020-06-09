@@ -1,0 +1,10 @@
+#define INF 100000000
+#define io(a) cin>>a
+#define toStr(a) #a
+#define FUNCTION(function1,predictor)\
+void function1(int &result,int temp)\
+{\
+    if((temp predictor result))\
+        result=temp;\
+}
+#define foreach(v,i) for(int i=0;i<v.size();i++)

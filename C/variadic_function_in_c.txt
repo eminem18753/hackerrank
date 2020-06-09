@@ -1,0 +1,46 @@
+int sum (int count,...) 
+{
+    int summation=0;
+    va_list ap;
+    va_start(ap,count);
+    for(int i=0;i<count;i++)
+    {
+        summation+=va_arg(ap,int);
+    }
+    va_end(ap);
+    return summation;
+}
+
+int min(int count,...) 
+{
+    int minimum=100000000;
+    va_list ap;
+    va_start(ap,count);
+    for(int i=0;i<count;i++)
+    {
+        int temp=va_arg(ap,int);
+        if(temp<minimum)
+        {
+            minimum=temp;
+        }
+    }
+    va_end(ap);
+    return minimum;
+}
+
+int max(int count,...) 
+{
+    int maximum=0;
+    va_list ap;
+    va_start(ap,count);
+    for(int i=0;i<count;i++)
+    {
+        int temp=va_arg(ap,int);
+        if(temp>maximum)
+        {
+            maximum=temp;
+        }
+    }
+    va_end(ap);
+    return maximum;
+}

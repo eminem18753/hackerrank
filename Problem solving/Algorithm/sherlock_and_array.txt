@@ -1,0 +1,29 @@
+#!/bin/python
+
+import sys
+
+def solve(a):
+    # Complete this function
+    flag=0
+    if len(a)==1:
+        return "YES"
+    elif len(a)==2:
+        return "NO"
+    left=a[0]
+    right=sum(a[2:])
+    for i in range(2,len(a)):
+        if left==right:
+            flag=1
+            break
+        left+=a[i-1]
+        right-=a[i]
+    if flag==1:
+        return "YES"
+    else:
+        return "NO"
+T = int(raw_input().strip())
+for a0 in xrange(T):
+    n = int(raw_input().strip())
+    a = map(int, raw_input().strip().split(' '))
+    result = solve(a)
+    print(result)

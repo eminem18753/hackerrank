@@ -1,0 +1,65 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+from datetime import date
+# Complete the time_delta function below.
+def time_delta(t1, t2):
+    months={}
+    months['Jan']=1
+    months['Feb']=2
+    months['Mar']=3
+    months['Apr']=4
+    months['May']=5
+    months['Jun']=6
+    months['Jul']=7
+    months['Aug']=8
+    months['Sep']=9
+    months['Oct']=10
+    months['Nov']=11
+    months['Dec']=12
+    time1=t1.split()
+    time2=t2.split()
+    day1=int(time1[1])
+    day2=int(time2[1])
+    month1=months[time1[2]]
+    month2=months[time2[2]]
+    year1=int(time1[3])
+    year2=int(time2[3])
+    total1=time1[4].split(':')
+    total2=time2[4].split(':')
+    d1=date(year1,month1,day1)
+    d2=date(year2,month2,day2)
+
+    offset1=time1[5]
+    offset2=time2[5]
+    offset_hour1=int(time1[5][0:3])
+    offset_hour2=int(time2[5][0:3])
+    offset_minute1=int(time1[5][0]+time1[5][3:])
+    offset_minute2=int(time2[5][0]+time2[5][3:])
+
+    result_day=(d1-d2).days
+    result_time=(int(total1[0])*3600-int(total2[0])*3600+int(total1[1])*60-int(total2[1])*60+int(total1[2])-int(total2[2]))
+    result_offset=(int(offset_hour1)*3600-int(offset_hour2)*3600+int(offset_minute1)*60-int(offset_minute2)*60)
+
+    result=abs(result_day*86400+result_time-result_offset)    
+    return str(result)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        t1 = raw_input()
+
+        t2 = raw_input()
+
+        delta = time_delta(t1, t2)
+
+        fptr.write(delta + '\n')
+
+    fptr.close()

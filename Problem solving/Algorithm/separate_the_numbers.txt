@@ -1,0 +1,39 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the separateNumbers function below.
+def separateNumbers(s):
+    result=str(s)
+    flag=0
+    output=0
+    for i in range(1,len(result)):
+        temp=""
+        first=result[0:i]
+        current=int(first)
+        overall=current
+        temp+=first
+        while(len(temp)<len(result)):
+            current+=1
+            temp+=str(current)
+        if(temp==s):
+            flag=1
+            output=overall
+            break
+    if flag==1:
+        print("YES "+str(output))
+    else:
+        print("NO")
+if __name__ == '__main__':
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        s = raw_input()
+
+        separateNumbers(s)
+
+        

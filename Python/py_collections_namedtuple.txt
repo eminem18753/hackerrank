@@ -1,0 +1,4 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import namedtuple
+n,student=int(raw_input()),namedtuple('student',raw_input())
+print "%.2f" %(sum([float(index.MARKS) for index in [student(*raw_input().split()) for i in range(0,n)]])/n)

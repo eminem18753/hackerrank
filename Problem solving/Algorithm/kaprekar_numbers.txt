@@ -1,0 +1,43 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the kaprekarNumbers function below.
+flag=0
+def kaprekarNumbers(p, q):
+    result=[]
+    for i in range(p,q+1):
+        temp=map(int,list(str(i**2)))
+        currentFirst=temp[0:len(temp)-len(str(i))]
+        if len(currentFirst)>0:
+            currentFirstNumber=int(''.join(map(str,currentFirst)))
+        else:
+            currentFirstNumber=0
+        currentLast=temp[len(temp)-len(str(i)):len(temp)]
+        currentLastNumber=int(''.join(map(str,currentLast)))
+        if currentFirstNumber+currentLastNumber==i:
+            result.append(i)
+    if len(result)>0:
+        return result
+    else:
+        return "INVALID RANGE"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    p = int(raw_input())
+
+    q = int(raw_input())
+
+    result = kaprekarNumbers(p, q)
+
+    if result=="INVALID RANGE":
+        fptr.write(''.join(map(str, result)))        
+    else:
+        fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

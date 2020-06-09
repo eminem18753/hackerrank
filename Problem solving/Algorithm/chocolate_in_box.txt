@@ -1,0 +1,37 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the chocolateInBox function below.
+#
+def chocolateInBox(arr):
+    #
+    # Write your code here.
+    #
+    total=0
+    result=0
+    
+    for i in range(0,len(arr)):
+        result=result^arr[i]
+    for i in range(0,len(arr)):
+        current=arr[i]
+        temp=result^arr[i]
+        if current>temp:
+            total+=1
+    return total
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr_count = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    result = chocolateInBox(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

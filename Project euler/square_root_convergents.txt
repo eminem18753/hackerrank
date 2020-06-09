@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+last_second=1
+first=3
+second=2
+
+for i in range(2,number+1):
+    current=second
+    second=second*2+last_second    
+    first=second+current
+    last_second=current
+    if len(list(str(first)))>len(list(str(second))):
+        print(i)

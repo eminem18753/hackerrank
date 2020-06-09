@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() 
+{
+    string first;
+    string second;
+    cin>>first;
+    cin>>second;
+    cout<<first.length()<<" "<<second.length()<<endl;
+    string summation=first+second;
+    cout<<summation<<endl;
+    string temp=first;
+    first[0]=second[0];
+    second[0]=temp[0];
+    cout<<first<<" "<<second<<endl;
+    return 0;
+}

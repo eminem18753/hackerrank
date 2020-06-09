@@ -1,0 +1,29 @@
+import re
+
+N=int(raw_input())
+pattern=re.compile("^[456][\d]{15}$")
+
+total=[]
+for i in range(0,10):
+    total.append(str(i)*4)
+for i in range(0,N):
+    flag=0
+    temp=raw_input()
+            
+    if temp[4]=='-' and temp[9]=='-' and temp[14]=='-':
+        temp=temp[0:4]+temp[5:9]+temp[10:14]+temp[15:]
+
+    for j in range(0,len(total)):
+        if total[j] in temp:
+            print("Invalid")
+            flag=1
+            break
+    if flag==1:
+        continue
+
+    m=pattern.match(temp)
+    if m:
+        print("Valid")
+    else:
+        print("Invalid")
+

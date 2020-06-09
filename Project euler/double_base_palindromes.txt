@@ -1,0 +1,47 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool check(string t)
+{
+    for(int i=0;i<(t.length()+1)/2;i++)
+    {
+        if(t[i]!=t[t.length()-1-i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int n;
+    int k;
+    int summation=0;
+    cin>>n;
+    cin>>k;
+    for(int i=1;i<=n;i++)
+    {
+        string temp=to_string(i);
+        string current="";
+        int r=i;
+        while(r/k!=0)
+        {
+            int y=r%k;
+            r=r/k;
+            current+=to_string(y);
+        }
+        current+=to_string(r);
+        if(check(temp)&&check(current))
+        {
+            summation+=i;
+        }
+    }
+    cout<<summation<<endl;
+    return 0;
+}

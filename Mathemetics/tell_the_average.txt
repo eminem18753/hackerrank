@@ -1,0 +1,9 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=list(map(int,raw_input().split(' ')))
+while len(result)>1:
+    a=result[0]
+    b=result[1]
+    result.pop(1)
+    result[0]=a+b+a*b
+print(result[0]%1000000007)

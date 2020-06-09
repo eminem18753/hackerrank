@@ -1,0 +1,44 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the pageCount function below.
+#
+def pageCount(n, p):
+    #
+    # Write your code here.
+    #
+    first=0
+    second=0
+    if p%2==0:
+        first=p/2
+    else:
+        first=(p-1)/2
+    if n%2==0 and p%2==0:
+        second=(n-p)/2
+    elif n%2==0 and p%2==1:
+        second=(n-p+1)/2
+    elif n%2==1 and p%2==0:
+        second=(n-p-1)/2
+    elif n%2==1 and p%2==1:
+        second=(n-p)/2
+    if first<second:
+        return first
+    else:
+        return second
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    p = int(raw_input())
+
+    result = pageCount(n, p)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,33 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=0
+first=2
+second=3
+a=3
+b=4
+if number==1:
+    print(first)
+elif number==2:
+    print(second)
+elif number==3:
+    print(first)
+elif number==4:
+    print(second)
+else:
+    for i in range(5,number+1):
+        if i%3!=0:
+            temp=first
+            first=second
+            second=temp+first
+            s=a
+            a=b
+            b=s+a
+        else:
+            t=i/3*2
+            temp=first
+            first=second
+            second=temp+t*first
+            s=a
+            a=b
+            b=s+t*a
+    print(sum(map(int,list(str(second+2*b)))))

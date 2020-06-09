@@ -1,0 +1,13 @@
+import numpy as np
+number=int(raw_input())
+result1=[]
+result2=[]
+for i in range(0,number):
+    temp=list(map(int,raw_input().split(' ')))
+    result1.append(temp)
+array1=np.array(result1)
+for i in range(0,number):
+    temp=list(map(int,raw_input().split(' ')))
+    result2.append(temp)
+array2=np.array(result2)
+print(np.matmul(array1,array2))

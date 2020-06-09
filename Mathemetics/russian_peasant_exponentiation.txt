@@ -1,0 +1,51 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+# Complete the solve function below.
+def square(a,b,m):
+    return ((a**2%m)-(b**2%m))%m,(2*a*b)%m
+def multiplication(a,b,c,d,m):
+    return (((a*c)%m)-((b*d)%m))%m,((a*d)%m+(b*c)%m)%m
+def powers(a,b,k,m):
+    if k==0:
+        return 1,0
+    elif k%2==0:
+        c,d=powers(a,b,k//2,m)
+        return square(c,d,m)
+    elif k%2==1:
+        c,d=powers(a,b,k//2,m)
+        e,f=square(c,d,m)
+        return multiplication(a,b,e,f,m)
+def solve(a, b, k, m):
+    real_part,imaginary_part=powers(a,b,k,m)
+    result=[]
+    result.append(real_part)
+    result.append(imaginary_part)
+    return result
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        abkm = raw_input().split()
+
+        a = int(abkm[0])
+
+        b = int(abkm[1])
+
+        k = int(abkm[2])
+
+        m = int(abkm[3])
+
+        result = solve(a, b, k, m)
+
+        fptr.write(' '.join(map(str, result)))
+        fptr.write('\n')
+
+    fptr.close()

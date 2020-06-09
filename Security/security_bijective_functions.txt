@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+from collections import Counter
+number=int(raw_input())
+result=map(int,list(raw_input().split(' ')))
+total=sorted(Counter(result).values())
+if max(total)<=1:
+    print("YES")
+else:
+    print("NO")

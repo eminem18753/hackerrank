@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+from itertools import permutations
+temp=raw_input().split(' ')
+result=sorted(list(permutations(temp[0],int(temp[1]))))
+for index in result:
+    output=""
+    for total in index:
+        output+=str(total)
+    print(output)

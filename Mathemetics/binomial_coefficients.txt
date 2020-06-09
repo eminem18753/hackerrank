@@ -1,0 +1,32 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(n, p):
+    result=1
+    total=long(n)
+    m=long(n)
+    while(m//p!=0):
+        result*=(m%p)+1
+        m=m//p
+    result*=(m%p)+1
+    return total+1-result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        np = raw_input().split()
+
+        n = np[0]
+
+        p = int(np[1])
+
+        result = solve(n, p)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

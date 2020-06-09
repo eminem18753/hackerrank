@@ -1,0 +1,21 @@
+result=[]
+number=int(raw_input())
+for _ in range(0,number):
+    temp=[]
+    name = raw_input()
+    score = float(raw_input())
+    temp.append([name,score])
+    result+=temp
+output=sorted(result,key=lambda k:k[1])
+outcome=[]
+second=0
+for i in range(0,number-1):
+    if output[i][1] != output[i+1][1]:
+        second=output[i+1][1]
+        break
+for i in range(0,number):
+    if output[i][1]==second:
+        outcome.append(output[i][0])
+finalResult=sorted(outcome)
+for index in finalResult:
+    print(index)

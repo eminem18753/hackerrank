@@ -1,0 +1,20 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import deque
+number=int(raw_input())
+result=deque()
+for i in range(0,number):
+    temp=raw_input().split(' ')
+    if temp[0]=="append":
+        result.append(int(temp[1]))
+    elif temp[0]=="appendleft":
+        result.appendleft(int(temp[1]))
+    elif temp[0]=="pop":
+        result.pop()
+    elif temp[0]=="popleft":
+        result.popleft()
+output=""
+space=""
+for index in result:
+    output+=space+str(index)
+    space=" "
+print(output)

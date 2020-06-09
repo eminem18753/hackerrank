@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+//Define the structs Workshops and Available_Workshops.
+//Implement the functions initialize and CalculateMaxWorkshops
+struct Workshops
+{
+    int start_time;
+    int duration;
+    int end_time;
+};
+typedef struct Workshops Workshops;
+struct Available_Workshops
+{
+    int n;
+    Workshops* workshops;
+};
+typedef struct Available_Workshops Available_Workshops;
+bool compare1(Workshops a,Workshops b)
+{
+    return a.start_time<b.start_time;
+}
+bool compare2(Workshops a,Workshops b)
+{
+    return a.end_time<b.end_time;
+}
+Available_Workshops* initialize (int start_time[], int duration[], int n)
+{
+    Available_Workshops* result=new Available_Workshops[1];
+    result->workshops=new Workshops[n+1];
+    result->n=n;
+    for(int i=0;i<n;i++)
+    {
+        result->workshops[i].start_time=start_time[i];
+        result->workshops[i].duration=duration[i];
+        result->workshops[i].end_time=start_time[i]+duration[i];
+    }
+    result->workshops[n].start_time=-1;
+    result->workshops[n].duration=-1;
+    result->workshops[n].end_time=-1;
+    sort(result->workshops,result->workshops+n,compare2);
+    return result;
+}
+int CalculateMaxWorkshops(Available_Workshops* ptr)
+{
+    int result=0;
+    int current_end=-1;
+    int i=0;
+    while(ptr->workshops[i].start_time!=-1)
+    {
+        if(ptr->workshops[i].start_time>=current_end)
+        {
+            result+=1;
+            current_end=ptr->workshops[i].end_time;
+        }
+        i++;
+    }
+    return result;
+}
+
+int main(int argc, char *argv[]) {
+    int n; // number of workshops
+    cin >> n;
+    // create arrays of unknown size n
+    int* start_time = new int[n];
+    int* duration = new int[n];
+
+    for(int i=0; i < n; i++){
+        cin >> start_time[i];
+    }
+    for(int i = 0; i < n; i++){
+        cin >> duration[i];
+    }
+
+    Available_Workshops * ptr;
+    ptr = initialize(start_time,duration, n);
+    cout << CalculateMaxWorkshops(ptr) << endl;
+    return 0;
+}

@@ -1,0 +1,39 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+const int maxn=61;
+int t;
+int len;
+long long m,p;
+long long dig[maxn];
+long long f[maxn][maxn][2];
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    cin>>t;
+    while(t--)
+    {
+        cin>>m;
+        cin>>p;
+        for(len=0;m>0;dig[++len]=m%p,m/=p);
+        f[0][0][0]=1;
+        for(int i=1;i<=len;i++)
+        {
+            for(int j=0;j<=i;j++)
+            {
+                f[i][j][0]=(dig[i]+1)*f[i-1][j][0]+(j?dig[i]*f[i-1][j-1][1]:0);
+                f[i][j][1]=(p-1-dig[i])*f[i-1][j][0]+(j?(p-dig[i])*f[i-1][j-1][1]:0);
+            }
+        }
+        for(int i=0;i<len&&f[len][i][0];i++)
+        {
+            cout<<f[len][i][0]<<" ";
+        }
+        cout<<endl;
+    }
+    return 0;
+}

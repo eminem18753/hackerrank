@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
+
+// Complete the solve function below.
+int solve(vector<vector<long>> profits) 
+{
+    long total=0;
+    long estimation=0;
+    for(int i=0;i<profits.size();i++)
+    {
+        if(estimation<total)
+        {
+            estimation=0;
+        }
+        else
+        {
+            estimation=estimation-total;
+        }
+        total=(long)profits[i][0];
+        estimation+=(long)profits[i][1];
+    }
+    if(estimation>total)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL);
+
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin>>t;
+    for (int t_itr = 0; t_itr < t; t_itr++) 
+    {
+        int n;
+        cin>>n;
+        vector<vector<long>> profits;
+        for(int i=0;i<n;i++)
+        {
+            vector<long> temp;
+            int k;
+            cin>>k;
+            temp.push_back(k);
+            int r;
+            cin>>r;
+            temp.push_back(r);
+            profits.push_back(temp);
+        }
+    
+        int res = solve(profits);
+
+        fout << res << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
+}

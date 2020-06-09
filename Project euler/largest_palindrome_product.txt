@@ -1,0 +1,35 @@
+#!/bin/python
+
+import sys
+
+result=[]
+overall=[]
+for i in range(101,1000):
+    temp=map(int,list(str(i)))
+    temp=list(reversed(temp))
+    current=100*temp[0]+10*temp[1]+temp[2]
+    output=i*1000+current
+    result.append(output)
+for i in range(0,len(result)):
+    flag=0
+    for j in range(317,1000):
+        if result[i]%j==0:
+            if len(str(result[i]/j))==3:
+                flag=1
+                break
+    if flag==1:
+        overall.append(result[i])
+t = int(raw_input().strip())
+for a0 in xrange(t):
+    n = int(raw_input().strip())
+    flag=0
+    if n<overall[1]:
+        print(overall[0])
+        continue
+    for i in range(0,len(overall)):
+        if overall[i]>=n:
+            print(overall[i-1])
+            flag=1
+            break
+    if flag==0:
+        print(overall[i])

@@ -1,0 +1,64 @@
+/* you only have to complete the function given below.  
+Node is defined as  
+
+class Node {
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int d) {
+            data = d;
+            left = NULL;
+            right = NULL;
+        }
+};
+
+*/
+
+
+    void postOrder(Node *root) 
+    {
+        vector<int> result;
+        vector<Node *> temp;
+        Node *current=root;
+        result.push_back(root->data);
+        int flag=0;
+        while(root->left||root->right||temp.size()>0)
+        {
+            if(root->right&&root->left)
+            {
+                if(flag==0)
+                {
+                    result.push_back(root->right->data);
+                    temp.push_back(root);
+                    root=root->right;
+                }
+                else
+                {
+                    result.push_back(root->left->data);
+                    root=root->left;                    
+                    flag=0;
+                }
+            }
+            else if(root->right)
+            {
+                result.push_back(root->right->data);
+                root=root->right;
+            }
+            else if(root->left)
+            {
+                result.push_back(root->left->data);
+                root=root->left;
+            }
+            else
+            {
+                root=temp.back();
+                temp.pop_back();
+                flag=1;
+            }
+        }
+        for(int i=result.size()-1;i>-1;i--)
+        {
+            cout<<result[i]<<" ";
+        }
+    }

@@ -1,0 +1,24 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(s):
+    temp=map(int,list(str(s)))
+    result=0
+    m=1000000007
+    for i in range(0,len(temp)):
+        result+=((temp[i]%m)*pow(2,i,m)*pow(11,len(temp)-1-i,m))%m
+        result=result%m
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    result = solve(s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

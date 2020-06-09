@@ -1,0 +1,119 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+// Complete the solve function below.
+const long long m=1000000009;
+struct node
+{
+    long long h;
+    long long p[5];
+}t[300005];
+long long p1[300005];
+long long p2[300005];
+int n,d;
+inline bool compare(node a,node b)
+{
+    return a.p[0]<b.p[0];
+}
+int solve(int d, vector<vector<int>> points) 
+{
+    long long result=0;
+    int n=points.size();
+    for(int i=1;i<=points.size();i++)
+    {
+        t[i].h=(long long)points[i-1][0];
+        for(int j=1;j<=points[i-1].size();j++)
+        {
+            t[i].p[j]=(long long)points[i-1][j];
+        }
+    }
+    for(int j=1;j<=d;j++)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            t[i].p[0]=t[i].p[j];
+        }
+        sort(t+1,t+n+1,compare);
+        for(int i=1;i<=n;i++)
+        {
+            result+=(((t[i].p[0]*t[i].h)%m)*p1[i-1])%m;
+            result%=m;
+            result-=((t[i].h*p2[i-1])%m);
+            result%=m;
+            if(result<0)
+            {
+                result+=m;
+            }
+            p1[i]=p1[i-1]+t[i].h;
+            p1[i]%=m;
+            p2[i]=p2[i-1]+t[i].p[0]*t[i].h;
+            p2[i]%=m;
+        }
+    }
+    return (int)result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string nd_temp;
+    getline(cin, nd_temp);
+
+    vector<string> nd = split_string(nd_temp);
+
+    int n = stoi(nd[0]);
+
+    int d = stoi(nd[1]);
+
+    vector<vector<int>> points(n);
+    for (int i = 0; i < n; i++) {
+        points[i].resize(d+1);
+
+        for (int j = 0; j < d+1; j++) {
+            cin >> points[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int result = solve(d, points);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

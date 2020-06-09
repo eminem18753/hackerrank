@@ -1,0 +1,7 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=map(int,list(raw_input()))
+shifting=int(raw_input())
+result=[]
+for i in number:
+    result.append((i+shifting)%10)
+print(int(''.join(map(str,result))))

@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import combinations
+number=int(raw_input())
+temp=raw_input().split(' ')
+r=int(raw_input())
+result=combinations(temp,r)
+output=[]
+for i in result:
+    output.append(list(i))
+count=0
+for i in output:
+    if 'a' in i:
+        count+=1
+if len(output)!=0:
+    print(float(count)/float(len(output)))
+else:
+    print(0)

@@ -1,0 +1,65 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+def lcm(a,b):
+    return a*b//gcd(a,b)
+        
+def solve(a, days):
+    result=[]
+    bits=[0]*(1<<len(a))
+    lcms=[1]*(1<<len(a))
+    flag=False
+    a=sorted(a)
+    if a[0]==1:
+        flag=True
+    else:
+        for i in range(0,len(a)):
+            for j in range(0,(1<<i)):
+                lcms[(1<<i)|j]=lcm(a[i],lcms[j])
+                bits[(1<<i)|j]=bits[j]+1
+                
+                
+    for i in range(0,len(days)):
+        if flag==1:
+            result.append(days[i][1]-days[i][0]+1)
+        else:
+            t1=0
+            for s in range(1,1<<len(a)):
+                t1-=(days[i][1]//lcms[s]*((-1)**bits[s]))
+            t2=0
+            for s in range(1,1<<len(a)):
+                t2-=((days[i][0]-1)//lcms[s]*((-1)**bits[s]))
+            result.append(t1-t2)
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    a_count = int(raw_input())
+
+    a = []
+
+    for _ in xrange(a_count):
+        a_item = int(raw_input())
+        a.append(a_item)
+
+    d = int(raw_input())
+
+    days = []
+
+    for _ in xrange(d):
+        days.append(map(int, raw_input().rstrip().split()))
+
+    result = solve(a, days)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

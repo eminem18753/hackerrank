@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+from itertools import product
+list1=list(map(int,raw_input().split(' ')))
+list2=list(map(int,raw_input().split(' ')))
+result=list(product(list1,list2))
+output=""
+space=""
+for index in result:
+    output+=space+str(index)
+    space=" "
+print(output)

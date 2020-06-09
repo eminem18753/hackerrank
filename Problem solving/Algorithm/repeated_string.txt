@@ -1,0 +1,50 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+# Complete the repeatedString function below.
+def repeatedString(s, n):
+    if len(s)==1 and s[0]=='a':
+        return n
+    else:
+        result=Counter(list(s)).items()
+        output=[]
+        for i in result:
+            output.append(list(i))
+        for i in output:
+            i[1]*=n//len(s)
+        current=s[0:n%len(s)]
+        more=Counter(list(current)).items()
+        moreOutput=[]
+        for i in more:
+            moreOutput.append(list(i))
+        overall=[]
+        flag=0
+        for i in range(0,len(output)):
+            for j in range(0,len(moreOutput)):
+                if output[i][0]==moreOutput[j][0] and output[i][0]=='a':
+                    overall.append(output[i][1]+moreOutput[j][1])
+                    flag=1
+            if output[i][0]=='a' and flag==0:
+                overall.append(output[i][1])
+                flag=1
+        if flag==1:
+            return overall[0]
+        else:
+            return 0
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    n = int(raw_input())
+
+    result = repeatedString(s, n)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

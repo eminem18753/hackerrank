@@ -1,0 +1,58 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the almostSorted function below.
+def almostSorted(arr):
+    count=0
+    result=sorted(arr)
+    temp=[]
+    realOne=[]
+    flag=1
+    
+    for i in range(0,len(arr)):
+        if arr[i]!=result[i]:
+            count+=1
+            realOne.append(i)
+            temp.append(i+1)
+        elif i>0 and i<len(arr)-1 and arr[i-1]!=result[i-1] and arr[i+1]!=result[i+1]:
+            count+=1
+            realOne.append(i)
+            temp.append(i+1)
+
+    for i in range(0,len(temp)-1):
+        if temp[i]!=temp[i+1]-1:
+            flag=0
+    if count==0:
+        print "yes"
+    elif count==2:
+        current=sorted(temp)
+        print "yes"
+        print "swap "+str(temp[0])+" "+str(temp[1])
+    elif flag==1:
+        flagNow=1
+        current=arr[realOne[0]:realOne[len(realOne)-1]+1]
+        reverseArray=list(reversed(current))
+        index=0
+        for i in set(realOne):
+            if reverseArray[index]!=result[i]:
+                flagNow=0
+                break
+            index+=1
+        if flagNow==1:
+            print("yes")
+            print("reverse "+str(temp[0])+" "+str(temp[len(temp)-1]))
+        else:
+            print("no")
+    else:
+        print("no")
+if __name__ == '__main__':
+    n = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    almostSorted(arr)

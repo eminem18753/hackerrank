@@ -1,0 +1,26 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+import math
+# Complete the solve function below.
+def solve(n):
+    if math.floor(math.sqrt(1+8*n))==math.ceil(math.sqrt(1+8*n)):
+        return "Go On Bob "+str(int((-1+math.sqrt(1+8*n))/2))
+    else:
+        return "Better Luck Next Time"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,60 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+# Complete the happyLadybugs function below.
+def happyLadybugs(b):
+    result=Counter(b).items()
+    output=[]
+    flag=1
+    for i in result:
+        output.append(list(i))
+    for i in range(0,len(output)):
+        if output[i][1]==1 and output[i][0]!='_':
+            flag=0
+            break
+    check=0
+    for i in range(0,len(output)):
+        if output[i][0]=='_':
+            check=1
+            break
+    temp=1
+    if len(b)>1:
+        for i in range(0,len(b)-1):
+            if i==0:
+                if b[i]!=b[i+1]:
+                    temp=0
+                    break
+            elif i==len(b)-1:
+                if b[i]!=b[i-1]:
+                    temp=0
+                    break
+            else:
+                if b[i]!=b[i-1] and b[i]!=b[i+1]:
+                    temp=0
+                    break
+    if check==0 and temp==0:
+        return "NO"
+    elif flag==1:
+        return "YES"
+    else:
+        return "NO"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    g = int(raw_input())
+
+    for g_itr in xrange(g):
+        n = int(raw_input())
+
+        b = raw_input()
+
+        result = happyLadybugs(b)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

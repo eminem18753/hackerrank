@@ -1,0 +1,19 @@
+/*Write the class AddElements here*/
+template<class T>
+class AddElements
+{
+    public:
+    T element;
+    AddElements(T temp)
+    {
+        element=temp;
+    }
+    T add(T temp)
+    {
+        return element+temp;
+    }
+    T concatenate(T temp)
+    {
+        return element+temp;
+    }
+};

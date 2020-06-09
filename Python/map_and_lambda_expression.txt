@@ -1,0 +1,26 @@
+cube = lambda x:x**3 # complete the lambda function 
+
+def fibonacci(n):
+    # return a list of fibonacci numbers
+    a=0
+    b=1
+    output=[]
+    if n==0:
+        return output
+    elif n==1:
+        output.append(0)
+        return output
+    elif n==2:
+        output.append(0)
+        output.append(1)
+        return output
+    else:
+        output.append(0)
+        output.append(1)
+        for i in range(2,n):
+            result=a+b
+            a=b
+            b=result
+            output.append(result)
+        return output
+            

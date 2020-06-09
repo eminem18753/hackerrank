@@ -1,0 +1,43 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+
+def solve(a):
+    if len(a)==1:
+        return a[0]+1
+    left=[0]*len(a)
+    right=[0]*len(a)
+    left[0]=a[0]
+    right[len(a)-1]=a[len(a)-1]
+    for i in range(1,len(a)):
+        left[i]=gcd(left[i-1],a[i])
+    for i in range(len(a)-2,-1,-1):
+        right[i]=gcd(right[i+1],a[i])
+    for i in range(0,len(a)):
+        if i==0:
+            if a[i]%right[i+1]!=0:
+                return right[i+1]
+        elif i==len(a)-1:
+            if a[i]%left[i-1]!=0:
+                return left[i-1]
+        else:
+            other=gcd(left[i-1],right[i+1])
+            if a[i]%other!=0:
+                return other
+if __name__ == '__main__':
+    n = int(raw_input())
+
+    a = map(int, raw_input().rstrip().split())
+
+    # Write Your Code Here
+    print(solve(a))

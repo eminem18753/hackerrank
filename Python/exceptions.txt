@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+number=int(raw_input())
+for i in range(0,number):
+    temp=raw_input().split(' ')
+    first=temp[0]
+    second=temp[1]
+    try:
+        print(int(first)/int(second))
+    except ZeroDivisionError as e:
+        print("Error Code: "+str(e))
+    except ValueError as e:
+        print("Error Code: "+str(e))

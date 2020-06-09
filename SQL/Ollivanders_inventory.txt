@@ -1,0 +1,11 @@
+/*
+Enter your query here.
+*/
+SET sql_mode='';
+SELECT w.id,p.age,w.coins_needed,w.power
+FROM Wands w
+INNER JOIN Wands_Property p
+ON w.code=p.code
+WHERE p.is_evil=0 AND w.coins_needed=(SELECT MIN(wt.coins_needed) FROM Wands wt INNER JOIN Wands_Property pt ON wt.code=pt.code WHERE wt.power=w.power AND pt.age=p.age)
+GROUP BY p.age,w.power
+ORDER BY w.power DESC,p.age DESC;

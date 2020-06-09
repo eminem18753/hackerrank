@@ -1,0 +1,9 @@
+def person_lister(f):
+    def inner(people):
+        # complete the function
+        result=sorted(people,key=lambda k:int(k[2]))
+        output=[]
+        for person in result:
+            output.append(f(person))
+        return output
+    return inner

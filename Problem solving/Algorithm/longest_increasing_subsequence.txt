@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the longestIncreasingSubsequence function below.
+int longestIncreasingSubsequence(vector<int> arr) 
+{
+    vector<int> result;
+    for(int i=0;i<arr.size();i++)
+    {
+        if(i==0)
+        {
+            result.push_back(arr[i]);
+        }
+        else
+        {
+            vector<int>::iterator low;
+            low=lower_bound(result.begin(),result.end(),arr[i]);
+            int index=(int)(low-result.begin());
+            if(index==result.size())
+            {
+                result.push_back(arr[i]);
+            }
+            else
+            {
+                result[index]=arr[i];
+            }
+        }
+    }
+    return (int)(result.size());
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        int arr_item;
+        cin >> arr_item;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        arr[i] = arr_item;
+    }
+
+    int result = longestIncreasingSubsequence(arr);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}

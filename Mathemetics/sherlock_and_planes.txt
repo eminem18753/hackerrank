@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+string solve(vector<vector<int>> points) 
+{
+    string result;
+    int a1;
+    int a2;
+    int a3;
+    int b1;
+    int b2;
+    int b3;
+    int c1;
+    int c2;
+    int c3;
+    a1=points[2][0]-points[0][0];
+    a2=points[2][1]-points[0][1];
+    a3=points[2][2]-points[0][2];
+    b1=points[2][0]-points[1][0];
+    b2=points[2][1]-points[1][1];
+    b3=points[2][2]-points[1][2];
+    c1=a2*b3-a3*b2;
+    c2=a3*b1-a1*b3;
+    c3=a1*b2-a2*b1;
+    cout<<c1<<" "<<c2<<" "<<c3<<endl;
+    int output=c1*points[2][0]+c2*points[2][1]+c3*points[2][2];
+    if(c1*points[3][0]+c2*points[3][1]+c3*points[3][2]==output)
+    {
+        result="YES";
+    }
+    else
+    {
+        result="NO";
+    }
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        vector<vector<int>> points(4);
+        for (int points_row_itr = 0; points_row_itr < 4; points_row_itr++) {
+            points[points_row_itr].resize(3);
+
+            for (int points_column_itr = 0; points_column_itr < 3; points_column_itr++) {
+                cin >> points[points_row_itr][points_column_itr];
+            }
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        string result = solve(points);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

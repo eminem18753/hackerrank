@@ -1,0 +1,43 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the cipher function below.
+def cipher(k, s):
+    current=list(s)
+    temp=[]
+    for i in current:
+        temp.append(ord(i)-48)
+    result=[]
+    for i in range(0,len(s)-k+1):
+        if i==0:
+            result.append(temp[0])
+        elif i<k:
+            result.append(temp[i]^temp[i-1])
+        else:
+            result.append(temp[i]^temp[i-1]^result[i-k])
+    overall=[]
+    for i in result:
+        overall.append(str(i))
+    output=''.join(overall)
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = raw_input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    s = raw_input()
+
+    result = cipher(k, s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

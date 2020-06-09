@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int number;
+        Scanner scan=new Scanner(System.in);
+        number=scan.nextInt();
+        String temp;
+        temp=scan.nextLine();
+        for(int i=0;i<number;i++)
+        {
+            temp=scan.nextLine();
+            String[] result=temp.split("[- ]");
+            System.out.print("CountryCode=");
+            System.out.print(result[0]);
+            System.out.print(",LocalAreaCode=");                
+            System.out.print(result[1]);
+            System.out.print(",Number=");                
+            System.out.println(result[2]);
+        }
+    }
+}

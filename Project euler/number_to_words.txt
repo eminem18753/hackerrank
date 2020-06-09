@@ -1,0 +1,88 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+a=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"]
+b=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"]
+c=["","Hundred"]
+d=["","Thousand","Million","Billion","Trillion"]
+number=int(raw_input())
+for i in range(0,number):
+    current=int(raw_input())
+    if current==1000000000000:
+        print("One Trillion")
+        continue
+    if current==0:
+        print("Zero")
+        continue
+    result=""
+    first=(current//1000000000)%1000
+    second=(current//1000000)%1000
+    third=(current//1000)%1000
+    fourth=(current%1000)
+
+    f1=(first//100)%10
+    f2=(first//10)%10
+    f3=(first)%10
+    f4=(first)%100
+    
+    s1=(second//100)%10
+    s2=(second//10)%10
+    s3=(second)%10
+    s4=(second)%100
+
+    t1=(third//100)%10
+    t2=(third//10)%10
+    t3=(third)%10
+    t4=(third)%100
+
+    d1=(fourth//100)%10
+    d2=(fourth//10)%10
+    d3=(fourth)%10
+    d4=(fourth)%100
+    space=""
+    if f1!=0 or f2!=0 or f3!=0:
+        if f1!=0:
+            result+=space+a[f1]+" "+c[1]
+            space=" "
+        if f4<20 and f4!=0:
+            result+=space+a[f4]
+            space=" "
+        elif f4>0:
+            result+=space+b[f2]+" "+a[f3]
+            space=" "
+        result+=" Billion"
+
+    if s1!=0 or s2!=0 or s3!=0:
+        if s1!=0:
+            result+=space+a[s1]+" "+c[1]
+            space=" "
+        if s4<20 and s4!=0:
+            result+=space+a[s4]
+            space=" "
+        elif s4>0:
+            result+=space+b[s2]+" "+a[s3]
+            space=" "
+        result+=" Million"
+            
+    if t1!=0 or t2!=0 or t3!=0:
+        if t1!=0:
+            result+=space+a[t1]+" "+c[1]
+            space=" "
+        if t4<20 and t4!=0:
+            result+=space+a[t4]
+            space=" "
+        elif t4>0:
+            result+=space+b[t2]+" "+a[t3]
+            space=" "
+        result+=" Thousand"
+    
+    if d1!=0 or d2!=0 or d3!=0:
+        if d1!=0:
+            result+=space+a[d1]+" "+c[1]
+            space=" "
+        if d4<20 and d4!=0:
+            result+=space+a[d4]
+            space=" "
+        elif d4>0:
+            result+=space+b[d2]+" "+a[d3]
+            space=" "
+    print(' '.join(result.split()))
+            

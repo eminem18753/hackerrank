@@ -1,0 +1,27 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the marcsCakewalk function below.
+def marcsCakewalk(calorie):
+    result=sorted(calorie,reverse=True)
+    summation=0
+    for i in range(0,len(result)):
+        summation+=result[i]*2**i
+    return summation
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    calorie = map(int, raw_input().rstrip().split())
+
+    result = marcsCakewalk(calorie)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

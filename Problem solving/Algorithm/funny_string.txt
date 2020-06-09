@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the funnyString function below.
+string funnyString(string s) 
+{
+    int result1=0;
+    int result2=0;
+    string reverse="";
+    string output="";
+    int flag=0;
+    for(int i=s.length()-1;i>-1;i--)
+    {
+        reverse+=s[i];
+    }
+    for(int i=0;i<s.length()-1;i++)
+    {
+        result1=abs(s[i+1]-s[i]);
+        result2=abs(reverse[i]-reverse[i+1]);
+        if(result1!=result2)
+        {
+            flag=1;
+        }
+    }
+    if(flag==0)
+    {
+        output="Funny";
+    }
+    else
+    {
+        output="Not Funny";
+    }
+    cout<<result1<<endl;
+    cout<<result2<<endl;
+    return output;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        string s;
+        getline(cin, s);
+
+        string result = funnyString(s);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

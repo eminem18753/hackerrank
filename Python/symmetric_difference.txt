@@ -1,0 +1,16 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+N=int(raw_input())
+listN=map(int,(raw_input().split()))
+M=int(raw_input())
+listM=map(int,(raw_input().split()))
+setN=set(listN)
+setM=set(listM)
+setFinal=[]
+for index in setN.difference(setM):
+    setFinal.append(index)
+for index in setM.difference(setN):
+    setFinal.append(index)
+finalResult=sorted(setFinal)
+for index in finalResult:
+    print(index)

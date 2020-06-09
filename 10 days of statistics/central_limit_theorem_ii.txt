@@ -1,0 +1,3 @@
+#R version 3.3.2 
+  
+print(pnorm(0.5))//(250-2.4*100)/(sqrt(100)*sigma)

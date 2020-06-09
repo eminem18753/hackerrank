@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import math
+number=float(raw_input())
+overall=map(float,list(raw_input().split(' ')))
+result1=0
+for i in range(0,int(number)):
+    result1+=overall[i]*overall[i]
+result1/=number
+result2=sum(overall)
+result2/=float(number)
+result2=result2*result2
+print "%.1f" %(math.sqrt(result1-result2))

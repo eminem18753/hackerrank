@@ -1,0 +1,28 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(n, m):
+    result=pow(10,n,9*m)
+    result-=1
+    result/=9
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        nm = raw_input().split()
+
+        n = int(nm[0])
+
+        m = int(nm[1])
+
+        result = solve(n, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

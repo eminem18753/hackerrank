@@ -1,0 +1,81 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    bool primes[1000001];
+    bool output[1000001];
+    int overall[1000001];
+    memset(primes,true,sizeof(primes));
+    memset(output,false,sizeof(output));
+    primes[0]=false;
+    primes[1]=false;
+    vector<int> total;
+    for(int i=2;i<=1000000;i++)
+    {
+        if(primes[i])
+        {
+            for(int j=2*i;j<=1000000;j+=i)
+            {
+                primes[j]=false;
+            }
+        }
+    }
+    for(int i=0;i<1000001;i++)
+    {
+        if(primes[i])
+        {
+            total.push_back(i);
+        }
+    }
+    for(int i=0;i<total.size();i++)
+    {
+        if(!output[total[i]])
+        {
+            string temp=to_string(total[i]);
+            int l=temp.length();
+            int flag=0;
+            vector<int> r;
+            for(int j=0;j<l;j++)
+            {
+                char t=temp[l-1];
+                for(int k=l-1;k>0;k--)
+                {
+                    temp[k]=temp[k-1];
+                }
+                temp[0]=t;
+                r.push_back(stoi(temp));
+                if(primes[stoi(temp)]==false)
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==0)
+            {
+                for(int j=0;j<r.size();j++)
+                {
+                    output[r[j]]=true;
+                }
+            }
+        }
+    }
+    int number;
+    cin>>number;
+    int summation=0;
+    for(int i=0;i<=number;i++)
+    {
+        if(output[i])
+        {
+            summation+=i;
+        }
+    }
+    cout<<summation<<endl;
+    return 0;
+}

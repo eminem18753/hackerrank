@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main()
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    char temp;
+    int array[10];
+    for(int i=0;i<10;i++)
+    {
+        array[i]=0;
+    }
+    while(scanf("%c",&temp)!=EOF)
+    {
+        if(temp=='0')
+        {
+            array[0]+=1;
+        }
+        else if(temp=='1')
+        {
+            array[1]+=1;
+        }
+        else if(temp=='2')
+        {
+            array[2]+=1;
+        }
+        else if(temp=='3')
+        {
+            array[3]+=1;
+        }
+        else if(temp=='4')
+        {
+            array[4]+=1;
+        }
+        else if(temp=='5')
+        {
+            array[5]+=1;
+        }
+        else if(temp=='6')
+        {
+            array[6]+=1;
+        }
+        else if(temp=='7')
+        {
+            array[7]+=1;
+        }
+        else if(temp=='8')
+        {
+            array[8]+=1;
+        }
+        else if(temp=='9')
+        {
+            array[9]+=1;
+        }
+    }
+    for(int i=0;i<10;i++)
+    {
+        printf("%d ",array[i]);
+    }
+    return 0;
+}

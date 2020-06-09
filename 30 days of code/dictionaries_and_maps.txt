@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+output={}
+for i in range(0,number):
+    temp=raw_input().split(' ')
+    output[temp[0]]=temp[1]
+t=raw_input()
+while len(t)>0:
+    if t not in output:
+        print("Not found")
+    else:
+        print(t+"="+output[t])
+    t=raw_input()

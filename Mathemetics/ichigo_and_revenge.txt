@@ -1,0 +1,29 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+m=1000000007
+factorial=[1]*100001
+
+def modInverse(n,p):
+    return pow(n,p-2,p)   
+def init():
+    for i in range(1,100001):
+        factorial[i]=(factorial[i-1]*i)%m
+def combination(n,k,p):
+    result=(factorial[n]*modInverse(factorial[k],p))%p
+    result=(result*modInverse(factorial[n-k],p))%p
+    return result
+number=int(raw_input())
+init()
+for i in range(0,number):
+    total=map(int,list(raw_input().split(' ')))
+    u=total[0]
+    v=total[1]
+    k=total[2]
+    p=total[3]
+    val1=combination(u*p,v*p,m)
+    val2=combination(u,v,m)
+    val3=modInverse(p,m)
+    val4=(val1-val2+m)%m
+    val=(val3*val4)%m
+    if k==0:
+        val=(val+combination(u,v,m))%m
+    print(val)

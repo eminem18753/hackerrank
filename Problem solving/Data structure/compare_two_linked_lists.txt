@@ -1,0 +1,45 @@
+// Complete the compare_lists function below.
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+bool compare_lists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) 
+{
+    bool result=true;
+    if(head1->data!=head2->data)
+    {
+        result=false;
+        return result;
+    }
+    while(head1->next||head2->next)
+    {
+        if(head1->next==NULL)
+        {
+            result=false;
+            return result;
+        }
+        else if(head2->next==NULL)
+        {
+            result=false;
+            return result;
+        }
+        else
+        {
+            head1=head1->next;
+            head2=head2->next;
+            if(head1->data!=head2->data)
+            {
+                result=false;
+                return result;
+            }
+        }
+    }
+    return result;
+
+}

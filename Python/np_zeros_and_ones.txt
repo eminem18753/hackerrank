@@ -1,0 +1,4 @@
+import numpy
+temp=tuple(map(int,raw_input().split(' ')))
+print(numpy.zeros(temp,dtype=numpy.int))
+print(numpy.ones(temp,dtype=numpy.int))

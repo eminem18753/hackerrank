@@ -1,0 +1,35 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+double combination(int n,int k)
+{
+    double result=1;
+    for(int i=0;i<k;i++)
+    {
+        result*=n-i;
+    }
+    for(int i=1;i<=k;i++)
+    {
+        result/=i;
+    }
+    return result;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    double boy;
+    double girl;
+    cin>>boy;
+    cin>>girl;
+    double probabilityBoy=boy/(boy+girl);
+    double probabilityGirl=1-probabilityBoy;
+    double result=0;
+    result+=(pow(probabilityBoy,3)*pow(probabilityGirl,3)*combination(6,3))+(pow(probabilityBoy,4)*pow(probabilityGirl,2)*combination(6,4))+(pow(probabilityBoy,5)*pow(probabilityGirl,1)*combination(6,5))+pow(probabilityBoy,6);
+    cout<<setprecision(3)<<fixed<<result<<endl;
+    return 0;
+}

@@ -1,0 +1,52 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+import math
+
+# Complete the solve function below.
+def solve(d, p):
+    summation=d**2+2*p
+    count=0
+    if d<0:
+        return 0
+    if d==0 and p==0:
+        return 1
+    if -4*d**2+8*summation<0:
+        return 0
+    if -4*d**2+8*summation==0:
+        return 2
+    if int(math.sqrt(-4*d**2+8*summation))**2==-4*d**2+8*summation:
+        if math.floor((2*d+math.floor(math.sqrt(-4*d**2+8*summation)))//4)==math.ceil((2*d+math.ceil(math.sqrt(-4*d**2+8*summation)))//4): 
+            count+=1
+            if math.floor((2*d-math.floor(math.sqrt(-4*d**2+8*summation)))//4)==math.ceil((2*d-math.ceil(math.sqrt(-4*d**2+8*summation)))//4): 
+                count+=1
+                if d==0:
+                    return 2
+                else:
+                    return 4
+            else:
+                return 2
+        elif count==1:
+            return 2
+    else:
+        return 0
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        dp = raw_input().split()
+
+        d = int(dp[0])
+
+        p = int(dp[1])
+
+        result = solve(d, p)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

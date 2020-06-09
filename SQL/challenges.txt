@@ -1,0 +1,13 @@
+/*
+Enter your query here.
+*/
+SET sql_mode='';
+SELECT h.hacker_id,h.name,COUNT(c.challenge_id) as c1
+FROM Hackers h
+INNER JOIN Challenges c
+ON h.hacker_id=c.hacker_id
+GROUP BY h.hacker_id
+HAVING
+c1=(SELECT MAX(temp1.c2) FROM (SELECT COUNT(challenge_id) as c2 FROM Challenges GROUP BY hacker_id) temp1) OR
+c1 IN (SELECT temp2.c3 FROM (SELECT COUNT(challenge_id) as c3 FROM Challenges GROUP BY hacker_id) temp2 GROUP BY temp2.c3 HAVING COUNT(temp2.c3)=1)
+ORDER BY COUNT(c.challenge_id) DESC,h.hacker_id;

@@ -1,0 +1,283 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+vector<vector<int>> solve(vector<vector<int>> coordinates) 
+{
+    vector<vector<int> > first;
+    vector<vector<int> > second;
+    vector<vector<int> > third;
+    vector<vector<int> > fourth;
+    vector<vector<int> > zero;
+    vector<vector<int> > ninety;
+    vector<vector<int> > reverse;
+    vector<vector<int> > negativeNinety;
+    for(int i=0;i<coordinates.size();i++)
+    {
+        if(coordinates[i][0]>0&&coordinates[i][1]==0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            zero.push_back(temp);
+        }
+        else if(coordinates[i][0]==0&&coordinates[i][1]>0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            ninety.push_back(temp);
+        }
+        else if(coordinates[i][0]<0&&coordinates[i][1]==0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            reverse.push_back(temp);
+        }
+        else if(coordinates[i][0]==0&&coordinates[i][1]<0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            negativeNinety.push_back(temp);
+        }
+        else if(coordinates[i][0]>0&&coordinates[i][1]>0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            first.push_back(temp);            
+        }
+        else if(coordinates[i][0]<0&&coordinates[i][1]>0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            second.push_back(temp);            
+        }
+        else if(coordinates[i][0]<0&&coordinates[i][1]<0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            third.push_back(temp);            
+        }
+        else if(coordinates[i][0]>0&&coordinates[i][1]<0)
+        {
+            vector<int> temp;
+            temp.push_back(coordinates[i][0]);
+            temp.push_back(coordinates[i][1]);
+            fourth.push_back(temp);            
+        }
+    }
+    for(int i=0;i<zero.size();i++)
+    {
+        for(int j=i+1;j<zero.size();j++)
+        {
+            if(zero[i][0]>zero[j][0])
+            {
+                vector<int> temp=zero[i];
+                zero[i]=zero[j];
+                zero[j]=temp;
+            }
+        }
+    }
+    for(int i=0;i<ninety.size();i++)
+    {
+        for(int j=i+1;j<ninety.size();j++)
+        {
+            if(ninety[i][1]>ninety[j][1])
+            {
+                vector<int> temp=ninety[i];
+                ninety[i]=ninety[j];
+                ninety[j]=temp;
+            }
+        }
+    }
+    for(int i=0;i<reverse.size();i++)
+    {
+        for(int j=i+1;j<reverse.size();j++)
+        {
+            if(reverse[i][0]<reverse[j][0])
+            {
+                vector<int> temp=reverse[i];
+                reverse[i]=reverse[j];
+                reverse[j]=temp;
+            }
+        }
+    }
+    for(int i=0;i<negativeNinety.size();i++)
+    {
+        for(int j=i+1;j<negativeNinety.size();j++)
+        {
+            if(negativeNinety[i][1]<negativeNinety[j][1])
+            {
+                vector<int> temp=negativeNinety[i];
+                negativeNinety[i]=negativeNinety[j];
+                negativeNinety[j]=temp;
+            }
+        }
+    }
+    for(int i=0;i<first.size();i++)
+    {
+        for(int j=i+1;j<first.size();j++)
+        {
+            if((double)first[i][1]/(double)first[i][0]>(double)first[j][1]/(double)first[j][0])
+            {
+                vector<int> temp=first[i];
+                first[i]=first[j];
+                first[j]=temp;
+            }
+            else if((double)first[i][1]/(double)first[i][0]==(double)first[j][1]/(double)first[j][0])
+            {
+                if((first[i][0]*first[i][0]+first[i][1]*first[i][1])>(first[j][0]*first[j][0]+first[j][1]*first[j][1]))
+                {
+                    vector<int> temp=first[i];
+                    first[i]=first[j];
+                    first[j]=temp;                    
+                }
+            }
+        }
+    }
+    for(int i=0;i<second.size();i++)
+    {
+        for(int j=i+1;j<second.size();j++)
+        {
+            if((double)second[i][1]/(double)second[i][0]>(double)second[j][1]/(double)second[j][0])
+            {
+                vector<int> temp=second[i];
+                second[i]=second[j];
+                second[j]=temp;
+            }
+            else if((double)second[i][1]/(double)second[i][0]==(double)second[j][1]/(double)second[j][0])
+            {
+                if((second[i][0]*second[i][0]+second[i][1]*second[i][1])>(second[j][0]*second[j][0]+second[j][1]*second[j][1]))
+                {
+                    vector<int> temp=second[i];
+                    second[i]=second[j];
+                    second[j]=temp;                    
+                }
+            }
+        }
+    }
+    for(int i=0;i<third.size();i++)
+    {
+        for(int j=i+1;j<third.size();j++)
+        {
+            if((double)third[i][1]/(double)third[i][0]>(double)third[j][1]/(double)third[j][0])
+            {
+                vector<int> temp=third[i];
+                third[i]=third[j];
+                third[j]=temp;
+            }
+            else if((double)third[i][1]/(double)third[i][0]==(double)third[j][1]/(double)third[j][0])
+            {
+                if(third[i][0]*third[i][0]+third[i][1]*third[i][1]>third[j][0]*third[j][0]+third[j][1]*third[j][1])
+                {
+                    vector<int> temp=third[i];
+                    third[i]=third[j];
+                    third[j]=temp;                    
+                }
+            }
+        }
+    }
+    for(int i=0;i<fourth.size();i++)
+    {
+        for(int j=i+1;j<fourth.size();j++)
+        {
+            if((double)fourth[i][1]/(double)fourth[i][0]>(double)fourth[j][1]/(double)fourth[j][0])
+            {
+                vector<int> temp=fourth[i];
+                fourth[i]=fourth[j];
+                fourth[j]=temp;
+            }
+            else if((double)fourth[i][1]/(double)fourth[i][0]==(double)fourth[j][1]/(double)fourth[j][0])
+            {
+                if(fourth[i][0]*fourth[i][0]+fourth[i][1]*fourth[i][1]>fourth[j][0]*fourth[j][0]+fourth[j][1]*fourth[j][1])
+                {
+                    vector<int> temp=fourth[i];
+                    fourth[i]=fourth[j];
+                    fourth[j]=temp;                    
+                }
+            }
+        }
+    }
+    vector<vector<int> >overall;
+    for(int i=0;i<zero.size();i++)
+    {
+        overall.push_back(zero[i]);
+    }
+    for(int i=0;i<first.size();i++)
+    {
+        overall.push_back(first[i]);
+    }
+    for(int i=0;i<ninety.size();i++)
+    {
+        overall.push_back(ninety[i]);
+    }
+    for(int i=0;i<second.size();i++)
+    {
+        overall.push_back(second[i]);
+    }
+    for(int i=0;i<reverse.size();i++)
+    {
+        overall.push_back(reverse[i]);
+    }
+    for(int i=0;i<third.size();i++)
+    {
+        overall.push_back(third[i]);
+    }
+    for(int i=0;i<negativeNinety.size();i++)
+    {
+        overall.push_back(negativeNinety[i]);
+    }
+    for(int i=0;i<fourth.size();i++)
+    {
+        overall.push_back(fourth[i]);
+    }
+    return overall;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<vector<int>> coordinates(n);
+    for (int i = 0; i < n; i++) {
+        coordinates[i].resize(2);
+
+        for (int j = 0; j < 2; j++) {
+            cin >> coordinates[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    vector<vector<int>> result = solve(coordinates);
+
+    for (int i = 0; i < result.size(); i++) {
+        for (int j = 0; j < result[i].size(); j++) {
+            fout << result[i][j];
+
+            if (j != result[i].size() - 1) {
+                fout << " ";
+            }
+        }
+
+        if (i != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}

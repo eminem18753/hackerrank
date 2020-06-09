@@ -1,0 +1,6 @@
+result=$(</dev/stdin)
+set -- $result
+echo $(($1+$2))
+echo $(($1-$2))
+echo $(($1*$2))
+echo $(($1/$2))

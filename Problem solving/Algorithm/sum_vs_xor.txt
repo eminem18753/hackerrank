@@ -1,0 +1,28 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the solve function below.
+def solve(n):
+    result=list(bin(n)[2:])
+    count=0
+    if(n==0):
+        return 1
+    for index in result:
+        if index=='0':
+            count+=1
+    return 2**count
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    result = solve(n)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

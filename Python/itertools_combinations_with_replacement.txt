@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+from itertools import combinations_with_replacement
+temp=raw_input().split(' ')
+result=sorted(list(combinations_with_replacement(sorted(temp[0]),int(temp[1]))))
+for index in result:
+    output=""
+    for current in index:
+        output+=str(current)
+    print(output)

@@ -1,0 +1,39 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+if __name__ == '__main__':
+    n = int(raw_input())
+    result=[]
+    while n/2!=0:
+        y=n%2
+        n/=2
+        result.append(y)
+    result.append(n%2)
+    result=list(reversed(result))
+    maxCount=0
+    flag=0
+    if result[0]==1:
+        count=1
+        maxCount=1
+    else:
+        count=0
+    for i in range(0,len(result)-1):
+        if result[i]==result[i+1] and result[i]==1:
+            count+=1
+            flag=1
+            if count>maxCount:
+                maxCount=count
+        else:
+            if result[i+1]==1:
+                count=1
+                flag=1
+            else:
+                count=0
+    if flag==0 and result[len(result)-1]==1:
+            maxCount=1
+    print(maxCount)

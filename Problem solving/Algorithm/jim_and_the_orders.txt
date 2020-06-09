@@ -1,0 +1,33 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the jimOrders function below.
+def jimOrders(orders):
+    result=[]
+    for index in orders:
+        result.append(index[0]+index[1])
+    output=sorted(range(len(result)),key=lambda k:result[k])
+    for i in range(0,len(output)):
+        output[i]+=1
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    orders = []
+
+    for _ in xrange(n):
+        orders.append(map(int, raw_input().rstrip().split()))
+
+    result = jimOrders(orders)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

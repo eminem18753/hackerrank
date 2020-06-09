@@ -1,0 +1,57 @@
+/* you only have to complete the function given below.  
+Node is defined as  
+
+struct node
+{
+    int data;
+    node* left;
+    node* right;
+};
+
+*/
+
+void preOrder(node *root) 
+{
+    vector<node *> total;
+    vector<node *> traversal;
+    node *current=root;
+    cout<<root->data;
+    while(current->left||current->right||total.size()>0)
+    {
+        int flagLeft=0;
+        int flagRight=0;
+        for(int i=0;i<traversal.size();i++)
+        {
+            if(traversal[i]==current->left)
+            {
+                flagLeft=1;
+            }
+            if(traversal[i]==current->right)
+            {
+                flagRight=1;
+            }
+        }
+        if(current->left&&current->right&&flagLeft==0&&flagRight==0)
+        {
+            root=current;
+            total.push_back(root);
+        }
+        if(current->left&&flagLeft==0)
+        {
+            cout<<" "<<current->left->data;
+            current=current->left;
+            traversal.push_back(current);
+        }
+        else if(current->right&&flagRight==0)
+        {
+            cout<<" "<<current->right->data;
+            current=current->right;
+            traversal.push_back(current);
+        }
+        else if(total.size()>0)
+        {
+            current=total[total.size()-1];
+            total.erase(total.begin()+total.size()-1);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+import math
+
+# Complete the solve function below.
+def solve(n):
+    if math.floor(math.sqrt(5*n**2+4))==math.ceil(math.sqrt(5*n**2+4)):
+        return "IsFibo"
+    elif math.floor(math.sqrt(5*n**2-4))==math.ceil(math.sqrt(5*n**2-4)):
+        return "IsFibo"
+    else:
+        return "IsNotFibo"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        result = solve(n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,9 @@
+while read var
+do
+    temp=4
+    if ( ((echo $var|wc -c)<4) )
+    then
+        temp=echo $var|wc -c
+    fi
+    echo $var|cut -c 1-$temp
+done

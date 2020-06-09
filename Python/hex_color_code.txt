@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+number=int(raw_input())
+result=[]
+for i in range(0,number):
+    temp=raw_input()
+    current=re.findall(r"#[0-9abcdefABCDEF]{3,6}(?=[,;\\)])",temp)
+    result+=current
+for index in result:
+    print(index)

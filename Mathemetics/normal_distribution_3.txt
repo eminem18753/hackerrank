@@ -1,0 +1,3 @@
+print(format(round(1-pnorm(1),4)))
+print(format(round(pnorm(1), 4)))
+print(format(round(1-pnorm(1),4)))

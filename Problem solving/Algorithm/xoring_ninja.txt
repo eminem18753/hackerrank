@@ -1,0 +1,86 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the xoringNinja function below.
+#
+m=1000000007
+factorials=[1]*100001
+def init():
+    for i in range(1,100001):
+        factorials[i]=(factorials[i-1]*i)%m
+def modInverse(n):
+    return pow(n,m-2,m)
+def combination(n,k):
+    result=factorials[n]
+    result*=modInverse(factorials[k])
+    result=result%m
+    result*=modInverse(factorials[n-k])
+    result=result%m
+    return result
+def xoringNinja(arr):
+    #
+    # Write your code here.
+    #
+    result=[]
+    for i in arr:
+        current=i
+        temp=[]
+        while i//2!=0:
+            y=i%2
+            i=i//2
+            temp.append(y)
+        temp.append(i)
+        temp=list(reversed(temp))
+        if len(temp)<32:
+            output=[0]*(32-len(temp))
+            output+=temp
+        else:
+            output=temp
+        result.append(output)
+        
+    counter=[]
+    for i in range(0,32):
+        bits=0
+        for j in range(0,len(arr)):
+            if result[j][i]==1:
+                bits+=1
+        counter.append(bits)
+    zeros=[len(arr)]*32
+    for i in range(0,32):
+        zeros[i]=zeros[i]-counter[i]
+    
+    total=0
+    for i in range(0,32):
+        if(counter[i]==0):
+            continue
+        else:
+            bitResult=0
+            for j in range(1,counter[i]+1,2):
+                bitResult+=combination(counter[i],j)
+                bitResult=bitResult%m
+            bitResult*=pow(2,31-i,m)
+            bitResult*=pow(2,zeros[i],m)
+            total+=bitResult
+            total=total%m
+    return total
+if __name__ == '__main__':
+    init()
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        arr_count = int(raw_input())
+
+        arr = map(int, raw_input().rstrip().split())
+
+        result = xoringNinja(arr)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,107 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+// Complete the solve function below.
+const int mod=1000000007;
+bool primes[15000001];
+int factor[15000001];
+
+long long modExp(long long a,long long b)
+{
+    long long result=1;
+    while(b)
+    {
+        if(b&1)
+        {
+            result=(result*a)%mod;
+        }
+        a=a*a%mod;
+        b>>=1;
+    }
+    return result;
+}
+int solve(int n, int m)
+{
+    memset(primes,true,sizeof(primes));
+    primes[0]=false;
+    primes[1]=false;
+    int nf=0;
+    for(int i=2;i<=min(n,m);i++)
+    {
+        if(primes[i])
+        {
+            for(int j=2*i;j<=min(n,m);j+=i)
+            {
+                primes[j]=false;
+            }
+            factor[nf++]=i;
+        }
+    }
+    long long answer=1;
+    for(int i=0;i<nf;i++)
+    {
+        long long temp=0;
+        long long now=factor[i];
+        while(n/now&&m/now)
+        {
+            temp+=(n/now)*(m/now);
+            now*=factor[i];
+        }
+        answer=(answer*modExp(factor[i],temp))%mod;
+    }
+    return answer;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string nm_temp;
+    getline(cin, nm_temp);
+
+    vector<string> nm = split_string(nm_temp);
+
+    int n = stoi(nm[0]);
+
+    int m = stoi(nm[1]);
+
+    int result = solve(n, m);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

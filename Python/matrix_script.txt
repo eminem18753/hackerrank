@@ -1,0 +1,26 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+nm = raw_input().split()
+
+n = int(nm[0])
+
+m = int(nm[1])
+
+matrix = []
+
+for _ in xrange(n):
+    matrix_item = raw_input()
+    matrix.append(matrix_item)
+result=[]
+for i in range(0,m):
+    for j in range(0,n):
+        result.append(matrix[j][i])
+output=''.join(result)
+finalOutput=re.sub(r"(?<=[a-zA-Z0-9])[ ]?[$\\!@#$\\%\\& ]+[ ]?(?=[a-zA-Z0-9])"," ",output)
+print(finalOutput)

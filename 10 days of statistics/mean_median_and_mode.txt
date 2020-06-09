@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import Counter
+number=int(raw_input())
+total=sorted(map(float,list(raw_input().split(' '))))
+print(float(sum(total)/float(len(total))))
+if len(total)%2==1:
+    print(total[(len(total)-1)/2])
+else:
+    print((total[len(total)/2-1]+total[len(total)/2])/2)
+result=Counter(total).items()
+result=sorted(result)
+result=sorted(result,key=lambda k:k[1],reverse=True)
+print(list(result[0])[0])

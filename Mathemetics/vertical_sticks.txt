@@ -1,0 +1,36 @@
+#!/bin/python
+
+import os
+import sys
+from collections import Counter
+# Complete the solve function below.
+def solve(y):
+    temp=sorted(y)
+    count=Counter(temp).items()
+    count=sorted(count)
+    output=[]
+    for i in count:
+        output.append(list(i))
+    result=0
+    total=len(y)
+    for i in range(0,len(output)):
+        result+=(float)(len(y)+1)/(float)(total+1)*(float)(output[i][1])
+        print(result)
+        total-=output[i][1]
+    return "%.2f" % round(result,2)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        y_count = int(raw_input())
+
+        y = map(int, raw_input().rstrip().split())
+
+        result = solve(y)
+
+        fptr.write(str(result))
+        fptr.write('\n')
+
+    fptr.close()

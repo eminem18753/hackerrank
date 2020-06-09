@@ -1,0 +1,23 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+def solve(a, b):
+    result=pow(2,pow(2,a),b)
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    ab = raw_input().split()
+
+    a = int(ab[0])
+
+    b = int(ab[1])
+
+    result = solve(a, b)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

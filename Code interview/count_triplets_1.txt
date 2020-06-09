@@ -1,0 +1,38 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+import collections
+# Complete the countTriplets function below.
+def countTriplets(arr, r):
+    total=0
+    first=collections.defaultdict(int)
+    second=collections.defaultdict(int)
+    for i in arr:
+        if i%r==0:
+            a_r=i//r
+            if a_r in second:
+                total+=second[a_r]
+            if a_r in first:
+                second[i]+=first[a_r]
+        first[i]+=1
+    return total
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nr = raw_input().rstrip().split() 
+
+    n = int(nr[0])
+
+    r = int(nr[1])
+
+    arr = map(long, raw_input().rstrip().split())
+
+    ans = countTriplets(arr, r)
+
+    fptr.write(str(ans) + '\n')
+
+    fptr.close()

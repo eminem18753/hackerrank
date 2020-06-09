@@ -1,0 +1,11 @@
+/*
+Enter your query here.
+*/
+SELECT DISTINCT a1.X as w,a1.Y
+FROM Functions a1,Functions b1
+WHERE a1.X=b1.Y AND a1.Y=b1.X AND a1.X<b1.X
+UNION ALL SELECT a2.X as w,a2.Y FROM Functions a2
+WHERE a2.X=a2.Y
+GROUP BY a2.X,a2.Y
+HAVING COUNT(*)>1
+ORDER BY w;

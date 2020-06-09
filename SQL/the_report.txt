@@ -1,0 +1,5 @@
+/*
+Enter your query here.
+*/
+SELECT Name,Grades.Grade,Marks FROM Students JOIN Grades ON (Marks>=Grades.Min_Mark AND Marks<=Grades.Max_Mark AND Marks>69) ORDER BY Grade DESC,Name,Marks;
+SELECT CONCAT("NULL ",Grades.Grade," ",Marks) FROM Students JOIN Grades On (Marks>=Grades.Min_Mark AND Marks<=Grades.Max_Mark AND Marks<70) ORDER BY Grade DESC,Marks;

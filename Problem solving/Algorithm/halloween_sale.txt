@@ -1,0 +1,45 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the howManyGames function below.
+def howManyGames(p, d, m, s):
+    # Return the number of games you can buy
+    result=(p+(m+(p-m)%d))*((p-(m+(p-m)%d))/d+1)/2
+    current=p
+    summation=0
+    output=0
+    if s<result:
+        for i in range(0,(p-(m+(p-m)%d))/d+1):
+            if summation<=s-current:
+                summation+=current
+                current=current-d
+                output=i+1
+            else:
+                break
+    else:
+        difference=s-result
+        output=(p-(m+(p-m)%d))/d+1+difference//m
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    pdms = raw_input().split()
+
+    p = int(pdms[0])
+
+    d = int(pdms[1])
+
+    m = int(pdms[2])
+
+    s = int(pdms[3])
+
+    answer = howManyGames(p, d, m, s)
+
+    fptr.write(str(answer) + '\n')
+
+    fptr.close()

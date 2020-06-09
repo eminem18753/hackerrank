@@ -1,0 +1,13 @@
+import numpy
+temp=raw_input().split(' ')
+first=int(temp[0])
+second=int(temp[1])
+result=[]
+for i in range(0,first):
+    rows=list(map(int,raw_input().split(' ')))
+    result.append(rows)
+output=numpy.array(result)
+numpy.set_printoptions(legacy='1.13')
+print(numpy.mean(output,axis=1))
+print(numpy.var(output,axis=0))
+print(numpy.std(output,axis=None))

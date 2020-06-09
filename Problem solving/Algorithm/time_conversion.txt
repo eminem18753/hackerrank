@@ -1,0 +1,39 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the timeConversion function below.
+#
+def timeConversion(s):
+    #
+    # Write your code here.
+    #
+    temp=s.split(':')
+    hour=int(temp[0])
+    minute=int(temp[1])
+    second=int(temp[2][0:2])
+    if temp[2][2]=='P' and hour!=12:
+        hour+=12
+    if temp[2][2]=='A' and hour==12:
+        hour-=12
+    hourString=""
+    if hour>=10:
+        hourString=str(hour)
+    else:
+        hourString="0"+str(hour)
+    result=hourString+":"+temp[1]+":"+temp[2][0:2]
+    return result
+if __name__ == '__main__':
+    f = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    result = timeConversion(s)
+
+    f.write(result + '\n')
+
+    f.close()

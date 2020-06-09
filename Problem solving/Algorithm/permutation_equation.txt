@@ -1,0 +1,34 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the permutationEquation function below.
+def permutationEquation(p):
+    first=[]
+    for i in range(1,len(p)+1):
+        for j in range(0,len(p)):
+            if p[j]==i:
+                first.append(j+1)
+    second=[]
+    for i in range(0,len(first)):
+        for j in range(0,len(first)):
+            if p[j]==first[i]:
+                second.append(j+1)
+    return second
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    p = map(int, raw_input().rstrip().split())
+
+    result = permutationEquation(p)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

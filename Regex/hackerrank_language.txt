@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+number=int(raw_input())
+for i in range(0,number):
+    temp=raw_input().split(' ')
+    result=temp[1]
+    pattern=re.compile("^(C|CPP|JAVA|PYTHON|PERL|PHP|RUBY|CSHARP|HASKELL|CLOJURE|BASH|SCALA|ERLANG|CLISP|LUA|BRAINFUCK|JAVASCRIPT|GO|D|OCAML|R|PASCAL|SBCL|DART|GROOVY|OBJECTIVEC)$")
+    match=pattern.match(result)
+    if match:
+        print("VALID")
+    else:
+        print("INVALID")    

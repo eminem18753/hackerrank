@@ -1,0 +1,19 @@
+//Overload operators + and << for the class complex
+//+ should add two complex numbers as (a+ib) + (c+id) = (a+c) + i(b+d)
+//<< should print a complex number in the format "a+ib"
+Complex operator+(Complex x,Complex y)
+{
+    Complex result;
+    int real;
+    int imagine;
+    real=x.a+y.a;
+    imagine=x.b+y.b;
+    result.a=real;
+    result.b=imagine;
+    return result;
+}
+ostream &operator<<(ostream &output,Complex result)
+{
+    output<<result.a<<"+i"<<result.b;
+    return output;
+}

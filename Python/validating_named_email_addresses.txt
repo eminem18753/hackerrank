@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+number=int(raw_input())
+for i in range(0,number):
+    start=0
+    temp=raw_input()
+    result=list(temp)
+    output=""
+    for j in range(0,len(result)):
+        if result[j]=='<':
+            start=1
+        elif start==1 and result[j]!='>':
+            output+=result[j]
+    p=re.compile("^[a-zA-Z]+[a-zA-Z0-9_.\\-]*[@][a-zA-Z]+[.][a-zA-Z]{1,3}$")
+    m=p.match(output)
+    if m:
+        print(temp)

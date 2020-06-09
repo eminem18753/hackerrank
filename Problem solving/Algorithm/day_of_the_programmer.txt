@@ -1,0 +1,36 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the solve function below.
+def solve(year):
+    count=0
+    if year%400==0:
+        count=1
+    elif year%100==0 and year>2000:
+        count=0
+    elif year%4==0:
+        count=1
+    else:
+        count=0
+    if year!=1918:
+        if count==0:
+            return "13.09."+str(year)
+        else:
+            return "12.09."+str(year)
+    else:
+        return "26.09."+str(year)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    year = int(raw_input())
+
+    result = solve(year)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

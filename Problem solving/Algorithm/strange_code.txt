@@ -1,0 +1,25 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the strangeCounter function below.
+def strangeCounter(t):
+    result=int(math.log((t-1)/3+1,2))
+    start=3*pow(2,result)
+    total=3*(pow(2,result)-1)
+    index=t-total
+    return start+1-index
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    result = strangeCounter(t)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

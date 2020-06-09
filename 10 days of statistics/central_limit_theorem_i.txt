@@ -1,0 +1,3 @@
+#R version 3.3.2 
+  
+print(1-pnorm(2.333333))//(9800-49*205)/(sqrt(49)*sigma)

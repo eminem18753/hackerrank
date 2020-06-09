@@ -1,0 +1,32 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+import math
+# Complete the solve function below.
+def solve(n, k):
+    if n*n-4*n*k<=0:
+        return n-1
+    left=math.floor((n-math.sqrt(n*n-4*n*k))/2)
+    right=math.ceil((n+math.sqrt(n*n-4*n*k))/2)
+    print(str(left)+" "+str(right))
+    return int(n-right+left)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        nk = raw_input().split()
+
+        n = int(nk[0])
+
+        k = int(nk[1])
+
+        result = solve(n, k)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

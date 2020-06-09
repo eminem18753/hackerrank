@@ -1,0 +1,63 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+struct trie
+{
+    map<char,trie*> next;
+    bool isEnd{false};
+};
+typedef struct trie trie;
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n;
+    cin>>n;
+    trie* head=new trie();
+    
+    int f=0;
+    for(int i=0;i<n;i++)
+    {
+        string current;
+        cin>>current;
+        trie* c=head;
+        int check=0;
+        for(int j=0;j<current.length();j++)
+        {
+            if(c->next.find(current[j])==c->next.end())
+            {
+                c->next[current[j]]=new trie();
+                check=1;
+            }
+            c=c->next[current[j]];
+            if(c->isEnd)
+            {
+                cout<<"BAD SET"<<endl;
+                cout<<current<<endl;
+                f=1;
+                break;
+            }
+        }
+        if(f==1)
+        {
+            break;
+        }
+        if(check==0)
+        {
+            cout<<"BAD SET"<<endl;
+            cout<<current<<endl;
+            f=1;
+            break;
+        }
+        c->isEnd=true;
+    }
+    if(f==0)
+    {
+        cout<<"GOOD SET"<<endl;
+    }
+    return 0;
+}

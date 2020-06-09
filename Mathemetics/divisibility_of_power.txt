@@ -1,0 +1,174 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+// Complete the solve function below.
+long long mulmod(long long a,long long b,long long m)
+{
+    long long res=0;
+    while(a!=0)
+    {
+        if(a&1)
+        {
+            res=(res+b)%m;
+        }
+        a>>=1;
+        b=(b<<1)%m;
+    }
+    return res;
+}
+long long modExp(long long a,long long b,long long n)
+{
+    long long c=1,d=a;
+    while(b)
+    {
+        if(b&1)
+        {
+            c=mulmod(c,d,n);
+        }
+        d=mulmod(d,d,n);
+        b>>=1;
+        
+    }
+    return c%n;
+}
+long long a[300001];
+int foo(long long a,long long b)
+{
+    if(a<2)
+    {
+        return (int)a;
+    }
+    if(b==0)
+    {
+        return 1;
+    }
+    if(b==1)
+    {
+        if(a>64)
+        {
+            return 64;
+        }
+        return (int)a;
+    }
+    if(a>8||b>6)
+    {
+        return 64;
+    }
+    int ret=(int)pow(a,b);
+    return ret>64?64:ret;
+}
+vector<string> solve(vector<long> a, vector<vector<long>> queries) 
+{
+    vector<string> total;
+    for(int index=0;index<queries.size();index++)
+    {
+        long i=queries[index][0];
+        long j=queries[index][1];
+        long x=queries[index][2];
+        long res=1;
+        long k=min(j,i+6);
+        if(i+7<=j&&a[i+6]==0)
+        {
+            k--;
+        }
+        for(i=queries[index][0];k>i;k--)
+        {
+            res=foo(a[k-1],res);
+        }
+        long long output=modExp(a[i-1],res,x);
+        if(output==0)
+        {
+            total.push_back("Yes");
+        }
+        else
+        {
+            total.push_back("No");
+        }
+    }    
+    return total;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int a_count;
+    cin >> a_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string a_temp_temp;
+    getline(cin, a_temp_temp);
+
+    vector<string> a_temp = split_string(a_temp_temp);
+
+    vector<long> a(a_count);
+
+    for (int i = 0; i < a_count; i++) {
+        long a_item = stol(a_temp[i]);
+
+        a[i] = a_item;
+    }
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<vector<long>> queries(q);
+    for (int i = 0; i < q; i++) {
+        queries[i].resize(3);
+
+        for (int j = 0; j < 3; j++) {
+            cin >> queries[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    vector<string> result = solve(a, queries);
+
+    for (int i = 0; i < result.size(); i++) {
+        fout << result[i];
+
+        if (i != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

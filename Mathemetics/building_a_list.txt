@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+vector<string> solve(string s) 
+{
+    vector<string> result;
+    string temp="";
+    int totalLength=s.length();
+    for(int number=0;number<pow(2,totalLength);number++)
+    {
+        string current="";
+        int flag=0;
+        int index=number;
+        temp="";
+        while(index/2!=0)
+        {
+            int y=index%2;
+            index/=2;
+            if(y==0)
+            {
+                temp+="0";
+            }
+            else if(y==1)
+            {
+                flag=1;
+                temp+="1";
+            }
+        }
+        if(index==0)
+        {
+            temp+="0";
+        }
+        else if(index==1)
+        {
+            flag=1;
+            temp+="1";
+        }
+        if(flag==1)
+        {
+            for(int i=0;i<temp.length();i++)
+            {
+                if(temp[i]=='1')
+                {
+                    current+=s[i];
+                }
+            }
+        }
+        result.push_back(current);
+    }
+    sort(result.begin(),result.end());
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        string s;
+        getline(cin, s);
+
+        vector<string> result = solve(s);
+
+        for (int result_itr = 0; result_itr < result.size(); result_itr++) {
+            fout << result[result_itr];
+
+            if (result_itr != result.size() - 1) 
+            {
+                if(result_itr!=0||t_itr!=0)
+                {
+                    fout << "\n";
+                }
+            }
+        }
+
+        //fout << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

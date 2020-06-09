@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int number;
+        Scanner scan=new Scanner(System.in);
+        number=scan.nextInt();
+        int count=0;
+        String temp;
+        temp=scan.nextLine();
+        for(int i=0;i<number;i++)
+        {
+            temp=scan.nextLine();
+            Pattern p=Pattern.compile(".*(?i)(hackerrank).*");
+            Matcher m=p.matcher(temp);
+            boolean b=m.matches();
+            if(b==true)
+            {
+                count+=1;
+            }
+        }
+        System.out.println(count);
+    }
+}

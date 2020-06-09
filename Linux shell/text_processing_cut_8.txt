@@ -1,0 +1,4 @@
+while read var
+do
+    cut -d $' ' -f 1-3 <<< "$var"
+done

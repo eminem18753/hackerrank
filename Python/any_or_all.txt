@@ -1,0 +1,4 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+temp=list(map(int,raw_input().split(' ')))
+print(all(i>0 for i in temp) and any(str(j)==str(j)[::-1] for j in temp))

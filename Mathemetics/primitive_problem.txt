@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+map<int,int> us;
+long long zpower(long long x,long long y,long long m)
+{
+    long long temp;
+    if(y==0)
+    {
+        return 1;
+    }
+    temp=zpower(x,y/2,m);
+    temp=(temp%m*temp%m)%m;
+    if(y%2==0)
+    {
+        return temp;
+    }
+    else
+    {
+        return (x%m*temp)%m;
+    }
+}
+void euler_phi_function(int n)
+{
+    while(n%2==0)
+    {
+        n/=2;
+        us[2]+=1;
+    }
+    for(int i=3;i<=sqrt(n);i+=2)
+    {
+        while(n%i==0)
+        {
+            n/=i;
+            us[i]+=1;
+        }
+    }
+    if(n>2)
+    {
+        us[n]+=1;
+    }
+}
+void solve(int p)
+{
+    euler_phi_function(p-1);
+    for(int i=2;i<p;i++)
+    {
+        bool flag=true;
+        for(auto x:us)
+        {
+            int y=(p-1)/x.first;
+            if(zpower(i,y,p)==1)
+            {
+                flag=false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            cout<<i<<" ";
+            break;
+        }
+    }
+    p-=1;
+    for(auto x:us)
+    {
+        p=(p/x.first)*(x.first-1);
+    }
+    cout<<p<<endl;
+}
+int main()
+{
+    int p;
+    cin >> p;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    // Write Your Code Here
+    solve(p);
+    return 0;
+}

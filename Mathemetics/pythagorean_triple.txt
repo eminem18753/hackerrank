@@ -1,0 +1,31 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the pythagoreanTriple function below.
+def pythagoreanTriple(a):
+    triple=[]
+    if a%2==1:
+        triple.append(a)
+        triple.append((a**2-1)/2)
+        triple.append((a**2+1)/2)
+    else:
+        triple.append(a)
+        triple.append((a**2-4)/4)
+        triple.append((a**2+4)/4)
+    return triple
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    a = int(raw_input())
+
+    triple = pythagoreanTriple(a)
+
+    fptr.write(' '.join(map(str, triple)))
+    fptr.write('\n')
+
+    fptr.close()

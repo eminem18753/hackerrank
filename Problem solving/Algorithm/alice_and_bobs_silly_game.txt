@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the sillyGame function below.
+ */
+bool primes[100010];
+int counter[100010];
+string sillyGame(int n) {
+    /*
+     * Write your code here.
+     */
+    if(counter[n]%2==0)
+    {
+        return "Bob";
+    }
+    else
+    {
+        return "Alice";
+    }
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+    
+    memset(primes,true,sizeof(primes));
+    memset(counter,0,sizeof(counter));
+    primes[0]=false;
+    primes[1]=false;
+    for(int i=2;i<=100000;i++)
+    {
+        if(primes[i])
+        {
+            for(int j=2*i;j<=100000;j+=i)
+            {
+                primes[j]=false;
+            }
+        }
+    }
+    for(int i=2;i<=100000;i++)
+    {
+        counter[i]=counter[i-1]+((primes[i]==true)?1:0);
+    }
+    
+    int g;
+    cin >> g;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int g_itr = 0; g_itr < g; g_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        string result = sillyGame(n);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

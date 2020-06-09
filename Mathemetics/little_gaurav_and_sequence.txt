@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+int solve(long long int n) 
+{
+    long long int first=0;
+    long long int second=0;
+    if(n%2==1)
+    {
+        first=5;
+    }
+    else
+    {
+        first=1;
+    }
+    if(abs((int)log2(n))==0)
+    {
+        second=2;
+    }
+    else
+    {
+        second=(6*abs((int)log2(n)))%10;
+    }
+    return (first*second)%10;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        long long int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int result = solve(n);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}

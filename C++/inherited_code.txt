@@ -1,0 +1,15 @@
+/* Define the exception here */
+class BadLengthException
+{
+    public:
+    BadLengthException(int n)
+    {
+        number=n;
+    }
+    int what()
+    {
+        return number;
+    }
+    private:
+    int number;
+};

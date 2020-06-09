@@ -1,0 +1,36 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the fairRations function below.
+def fairRations(B):
+    currentIndex=-1
+    flag=0
+    result=0
+    if sum(B)%2==1:
+        return "NO"
+    else:
+        for i in range(0,len(B)):
+            if B[i]%2==1 and flag==0:
+                currentIndex=i
+                flag=1
+            elif B[i]%2==1 and flag==1:
+                result+=(i-currentIndex)*2
+                flag=0
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    N = int(raw_input())
+
+    B = map(int, raw_input().rstrip().split())
+
+    result = fairRations(B)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

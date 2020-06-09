@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import math
+fib=[0]*23931
+fib[1]=1
+fib[2]=1
+for i in range(2,23931):
+    fib[i]=fib[i-1]+fib[i-2]
+mapping=[0]*5001
+counter=1
+for i in range(1,23931):
+    if math.log(fib[i],10)>=counter:
+        mapping[counter]=i
+        counter+=1
+number=int(raw_input())
+for i in range(0,number):
+    current=int(raw_input())
+    print(mapping[current-1])

@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int next_permutation(int n, char **s)
+{
+	/**
+	* Complete this method
+	* Return 0 when there is no next permutation and 1 otherwise
+	* Modify array s to its next permutation
+	*/
+    int result=0;
+    int flag=0;
+    int over=0;
+    int total=0;
+    int terminate=0;
+    char** output;
+    for(int i=0;i<n-1;i++)
+    {
+        if(strcmp(s[i],s[i+1])<0)
+        {
+            terminate=1;
+            break;
+        }
+    }
+    if(terminate==0)
+    {
+        return 0;
+    }
+    for(int i=n-1;i>0;i--)
+    {
+        char* temp[n-i];
+        char* compare=s[i-1];
+        for(int j=i;j<n;j++)
+        {
+            temp[j-i]=s[j];
+        }
+        for(int k=0;k<n-i;k++)
+        {
+            for(int r=k+1;r<n-i;r++)
+            {
+                if(strcmp(temp[k],temp[r])>0)
+                {
+                    char* current=temp[k];
+                    temp[k]=temp[r];
+                    temp[r]=current;
+                }
+            }
+        }
+        for(int k=0;k<n-i;k++)
+        {
+            if(strcmp(temp[k],compare)>0)
+            {
+                s[i-1]=temp[k];
+                temp[k]=compare;
+                over=1;
+                flag=1;
+                result=1;
+                total=n-i;
+                int count=0;
+                
+                for(int index=n-total;index<n;index++)
+                {
+                    s[index]=temp[count];
+                    count+=1;
+                }                
+                break;
+            }
+        }
+        if(over==1)
+        {
+            break;
+        }
+    }
+    if(flag==0)
+    {
+        result=0;
+    }
+    return result;
+}

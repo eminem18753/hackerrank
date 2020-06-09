@@ -1,0 +1,21 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+k,n=map(int,list(raw_input().split(' ')))
+if k==1:
+    print(str(2*n-4)+" / "+str(3))
+elif k==2:
+    result=40*n*n-144*n+131
+    print(str(result/gcd(result,90))+" / "+str(90/gcd(result,90)))
+elif k==3:
+    result=280*n**3-1344*n**2+2063*n-1038
+    print(str(result/gcd(result,945))+" / "+str(945/gcd(result,945)))
+elif k==4:
+    result=2800*n**4-15680*n**3+28844*n**2-19288*n+4263
+    print(str(result/gcd(result,14175))+" / "+str(14175/gcd(result,14175)))
+elif k==5:
+    result=12320*n**5-73920*n**4+130328*n**3-29568*n**2-64150*n-5124
+    print(str(result/gcd(result,93555))+" / "+str(93555/gcd(result,93555)))

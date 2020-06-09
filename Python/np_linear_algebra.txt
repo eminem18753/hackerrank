@@ -1,0 +1,8 @@
+import numpy
+number=int(raw_input())
+result=[]
+for i in range(0,number):
+    temp=list(map(float,raw_input().split(' ')))
+    result.append(temp)
+output=numpy.array(result)
+print(numpy.linalg.det(output))

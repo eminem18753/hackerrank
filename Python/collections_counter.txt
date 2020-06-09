@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import Counter
+number=int(raw_input())
+listTotal=list(map(int,raw_input().split(' ')))
+customer=int(raw_input())
+result=0
+for i in range(0,customer):
+    temp=raw_input().split(' ')
+    if int(temp[0]) in Counter(listTotal).keys():
+        result+=int(temp[1])
+        listTotal.remove(int(temp[0]))
+print(result)

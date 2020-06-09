@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import OrderedDict
+from collections import Counter
+class OrderedCounter(Counter,OrderedDict):
+    pass
+number=int(raw_input())
+result=[]
+for i in range(0,number):
+    result.append(raw_input())
+d=OrderedCounter(result)
+print(len(d))
+output=""
+space=""
+for i in d.values():
+    output+=space+str(i)
+    space=" "
+print(output)

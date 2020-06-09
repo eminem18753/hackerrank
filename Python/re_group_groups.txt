@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+temp=raw_input()
+pattern=re.compile("^.*([a-zA-Z0-9])\\1+.*$")
+b=pattern.match(temp)
+m=re.search(r"([a-zA-Z0-9])\1+",temp)
+if b:
+    print(m.group(1))
+else:
+    print(-1)

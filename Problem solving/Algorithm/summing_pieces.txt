@@ -1,0 +1,54 @@
+#!/bin/python
+
+from __future__ import print_function
+
+import os
+import sys
+
+#
+# Complete the summingPieces function below.
+#
+def summingPieces(arr):
+    #
+    # Write your code here.
+    #
+    temp=len(arr)
+    result=[]
+    used=temp-2
+    if temp%2==0:
+        current=0
+        k=1
+        for i in range(0,len(arr)/2):
+            result.append(pow(2,temp,1000000007)-1+current)
+            current+=(pow(2,used,1000000007)-k%1000000007)%1000000007
+            current%=1000000007
+            used-=1
+            k=pow(2,i+1,1000000007)
+        result+=reversed(result)
+    else:
+        current=0
+        k=1
+        for i in range(0,(len(arr)+1)/2):
+            result.append(pow(2,temp,1000000007)-1+current)
+            current+=(pow(2,used,1000000007)-k%1000000007)%1000000007
+            current%=1000000007
+            used-=1
+            k=pow(2,i+1,1000000007)
+        result+=reversed(result[0:(len(arr)-1)/2])
+    summation=0
+    for i in range(0,len(arr)):
+        summation+=(arr[i]%1000000007*result[i]%1000000007)%1000000007
+        summation%=1000000007
+    return summation
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr_count = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    result = summingPieces(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

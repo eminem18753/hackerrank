@@ -1,0 +1,50 @@
+read var
+declare -A array
+for i in {0..63}
+do
+    for j in {0..99}
+    do
+        array[$i,$j]=0
+    done
+done
+
+index=0
+number=49
+array[0,49]=1
+initial=16
+offset=0
+while [ $index -lt $var ]
+do
+    index=$(($index+1))
+    for i in {0..99}
+    do
+        if [[ ${array[$offset,$i]} -eq 1 ]]
+        then
+            number=$i
+            for i in $(seq $(($offset+1)) $(($offset+$initial)))
+            do
+                array[$i,$number]=1
+            done
+            for i in $(seq $(($offset+$(($initial+1)))) $(($offset+$(($initial*2)))))
+            do
+                array[$i,$(($number-$initial-$offset+$i))]=1
+                array[$i,$(($number+$initial+$offset-$i))]=1
+            done
+        fi
+    done
+    offset=$(($offset+$(($initial*2))))
+    initial=$(($initial/2))
+done
+for i in {63..1}
+do
+    for j in {0..99}
+    do
+        if [[ ${array[$i,$j]} -eq 1 ]]
+        then
+            echo -n '1'
+        else
+            echo -n '_'
+        fi
+    done
+    echo ''
+done

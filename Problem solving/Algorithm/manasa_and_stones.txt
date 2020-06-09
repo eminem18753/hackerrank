@@ -1,0 +1,34 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the stones function below.
+def stones(n, a, b):
+    result=[]
+    for i in range(0,n):
+        output=0
+        output+=i*a+(n-i-1)*b
+        result.append(output)
+    return sorted(list(set(result)))
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    T = int(raw_input())
+
+    for T_itr in xrange(T):
+        n = int(raw_input())
+
+        a = int(raw_input())
+
+        b = int(raw_input())
+
+        result = stones(n, a, b)
+
+        fptr.write(' '.join(map(str, result)))
+        fptr.write('\n')
+
+    fptr.close()

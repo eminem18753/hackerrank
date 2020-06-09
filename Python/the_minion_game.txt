@@ -1,0 +1,21 @@
+def minion_game(string):
+    counter=0
+    total1=0
+    total2=0
+    test=['A','E','I','O','U']
+    for i in range(len(string)-1,-1,-1):
+        counter+=1
+        if string[i] not in test:
+            total1+=counter
+    total2=len(string)*(len(string)+1)/2-total1
+    if total1>total2:
+        print("Stuart "+str(total1))
+    elif total1<total2:
+        print("Kevin "+str(total2))
+    else:
+        print("Draw")
+    # your code goes here
+
+if __name__ == '__main__':
+    s = raw_input()
+    minion_game(s)

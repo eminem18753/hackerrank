@@ -1,0 +1,8 @@
+def average(array):
+    # your code goes here
+    output=0
+    result=set(array)
+    for i in result:
+        output+=i
+    output/=len(result)
+    return output

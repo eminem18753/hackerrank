@@ -1,0 +1,24 @@
+	// Add your code here
+    Difference(vector<int> a)
+    {
+        this->elements=a;
+    }
+    void computeDifference()
+    {
+        int result=0;
+        int maximum=-10000000;
+        int minimum=10000000;
+        for(int i=0;i<elements.size();i++)
+        {
+            if(elements[i]>maximum)
+            {
+                maximum=elements[i];
+            }
+            if(elements[i]<minimum)
+            {
+                minimum=elements[i];
+            }
+        }
+        result=maximum-minimum;
+        this->maximumDifference=result;
+    }

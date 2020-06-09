@@ -1,0 +1,46 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the taumBday function below.
+def taumBday(b, w, bc, wc, z):
+    cost_white=0
+    cost_black=0
+    if bc+z<wc:
+        cost_white=bc+z
+    else:
+        cost_white=wc
+    if wc+z<bc:
+        cost_black=wc+z
+    else:
+        cost_black=bc
+    return cost_white*w+cost_black*b
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        bw = raw_input().split()
+
+        b = int(bw[0])
+
+        w = int(bw[1])
+
+        bcWcz = raw_input().split()
+
+        bc = int(bcWcz[0])
+
+        wc = int(bcWcz[1])
+
+        z = int(bcWcz[2])
+
+        result = taumBday(b, w, bc, wc, z)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

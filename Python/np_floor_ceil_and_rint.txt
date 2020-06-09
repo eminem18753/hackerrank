@@ -1,0 +1,7 @@
+import numpy
+temp=list(map(float,raw_input().split(' ')))
+result=numpy.array(temp)
+numpy.set_printoptions(legacy='1.13')
+print(numpy.floor(result))
+print(numpy.ceil(result))
+print(numpy.rint(result))

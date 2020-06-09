@@ -1,0 +1,48 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+mod=1000000007
+
+class Interval(object):
+    def __init__(self,l,r):
+        self.l=l
+        self.r=r
+    def card(self):
+        if self.is_empty():
+            return 0
+        return self.r-self.l+1
+    def intersect(self,other):
+        if self.is_empty() or other.is_empty():
+            return Interval(0,-1)
+        l=max(self.l,other.l)
+        r=min(self.r,other.r)
+        return Interval(l,r)
+    def is_empty(self):
+        return self.l>self.r
+class Solution(object):
+    def solve(self,cipher):
+        R=[Interval(cipher[2*i],cipher[2*i+1]) for i in range(0,4)]
+        w0=0
+        w0+=R[0].card()*R[1].card()*R[2].card()*R[3].card()
+        w0%=mod
+        w1=0
+        for i in range(0,4):
+            w1+=R[i%4].intersect(R[(i+1)%4]).card()*R[(i+2)%4].card()*R[(i+3)%4].card()
+            w1%=mod
+        w2=0
+        for i in range(0,4):
+            w2+=R[i%4].intersect(R[(i+1)%4]).intersect(R[(i+2)%4]).card()*R[(i+3)%4].card()
+        for i in range(0,2):
+            w2+=R[i%4].intersect(R[(i+1)%4]).card()*R[(i+2)%4].intersect(R[(i+3)%4]).card()
+        w3=0
+        for i in range(0,4):
+            w3+=R[i%4].intersect(R[(i+1)%4]).intersect(R[(i+2)%4]).intersect(R[(i+3)%4]).card()
+        w4=0
+        w4+=R[0].intersect(R[1]).intersect(R[2]).intersect(R[3]).card()
+        w4%=mod
+        return (w0-w1+w2-w3+w4)%mod
+    
+if __name__=="__main__":
+    solution=Solution()
+    number=int(raw_input())
+    for i in range(0,number):
+        cipher=map(int,list(raw_input().split(' ')))
+        print(solution.solve(cipher))

@@ -1,0 +1,41 @@
+#!/bin/python
+
+import os
+import sys
+
+# Complete the solve function below.
+maxn=5050
+m=1000000009
+def modInverse(n):
+    return pow(n,m-2,m)
+def gen_catalan(n):
+    res=[1]
+    for i in range(1,n+1):
+        res.append(2*(2*i-1)*res[-1]*modInverse(i+1)%m)
+    return res
+def init():
+    n=maxn
+    catalans=gen_catalan(maxn)
+    ans=[0]*(n+1)
+    C=[1]
+    for i in range(1,n+1):
+        res=0
+        C=map(lambda (x,y):(x+y)%m,zip(C+[0],[0]+C))
+        for j in range(1,i+1):
+            res=(res+C[j]*catalans[j])%m
+        ans[i]=res
+    return ans
+def solve(n,total):
+    return total[n]
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    t = int(raw_input())
+
+    total=init()
+    for t_itr in xrange(t):
+        n = int(raw_input())
+        result = solve(n,total)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,32 @@
+#!/bin/python
+
+import os
+import sys
+from collections import Counter
+# Complete the solve function below.
+def factorial(n):
+    result=1
+    for i in range(1,n+1):
+        result*=i
+    return result
+def solve(P):
+    if P==sorted(P):
+        return 0
+    temp=Counter(P).values()
+    result=factorial(sum(temp))
+    for i in temp:
+        if i>1:
+            result/=factorial(i)
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    P_count = int(raw_input())
+
+    P = map(int, raw_input().rstrip().split())
+
+    result = solve(P)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

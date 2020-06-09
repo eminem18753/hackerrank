@@ -1,0 +1,44 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the organizingContainers function below.
+def organizingContainers(container):
+    total=[]
+    overall=[]    
+    for i in range(0,len(container)):
+        temp=0
+        current=0
+        for j in range(0,len(container[0])):
+            temp+=container[i][j]
+            current+=container[j][i]
+        total.append(temp)
+        overall.append(current)
+    total=sorted(total)
+    overall=sorted(overall)
+    if total==overall:
+        return "Possible"
+    else:
+        return "Impossible"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(raw_input())
+
+    for q_itr in xrange(q):
+        n = int(raw_input())
+
+        container = []
+
+        for _ in xrange(n):
+            container.append(map(int, raw_input().rstrip().split()))
+
+        result = organizingContainers(container)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

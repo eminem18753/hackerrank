@@ -1,0 +1,45 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the appendAndDelete function below.
+def appendAndDelete(s, t, k):
+    result=0
+    count=0
+    minimum=1000
+    if len(s)<len(t):
+        minimum=len(s)
+    else:
+        minimum=len(t)
+    for i in range(0,minimum):
+        if s[i]==t[i]:
+            count+=1
+        else:
+            break
+    if len(s)+len(t)-2*count<=k:
+        if (len(s)+len(t)-2*count-k)%2==0:
+            return "Yes"
+        elif len(s)+len(t)<=k:
+            return "Yes"
+        else:
+            return "No"
+    else:
+        return "No"
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    t = raw_input()
+
+    k = int(raw_input())
+
+    result = appendAndDelete(s, t, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

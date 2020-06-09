@@ -1,0 +1,29 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import itertools
+
+K,M=map(int,raw_input().split(' '))
+maximum=0
+total_element=[]
+total_length=[]
+for i in range(0,K):
+    temp=map(int,raw_input().split(' '))
+    temp=temp[1:]
+    total_element.append(tuple(temp))
+    total_length.append(len(temp))
+
+indices=[0]*len(total_length)
+
+overall=tuple(total_element)
+result=list(itertools.product(*overall))
+
+for i in range(0,len(result)):
+    total=0
+
+    for j in range(0,len(indices)):
+        total+=long(pow(result[i][j],2,M))
+        total=long(total%M)
+    
+    if total>maximum:
+        maximum=total
+
+print(maximum)

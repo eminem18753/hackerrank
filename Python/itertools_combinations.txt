@@ -1,0 +1,13 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import os
+from itertools import combinations
+temp=raw_input().split(' ')
+result=[]
+for i in range(1,int(temp[1])+1):
+    result+=sorted((list(combinations(sorted(temp[0]),i))))
+
+for index in result:
+    output=""
+    for number in index:
+        output+=str(number)
+    print(output)

@@ -1,0 +1,38 @@
+#!/bin/python
+
+import os
+import sys
+import math
+
+from collections import Counter
+# Complete the solve function below.
+def solve(a):
+    temp=Counter(a).items()
+    output=[]
+    result=0
+    for i in temp:
+        output.append(list(i))
+    output=sorted(output,key=lambda k:k[0])
+    for i in output:
+        if i[0]==1:
+            result+=int(i[1])*(len(a)-1)
+        elif i[0]==2:
+            result+=int(i[1]*(i[1]-1))/2
+        else:
+            break
+    return result
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        a_count = int(raw_input())
+
+        a = map(int, raw_input().rstrip().split())
+
+        result = solve(a)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

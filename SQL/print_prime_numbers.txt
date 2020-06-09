@@ -1,0 +1,23 @@
+/*
+Enter your query here.
+*/
+SELECT GROUP_CONCAT(NUMA SEPARATOR '&')
+FROM
+(
+    SELECT @num1:=@num1+1 as NUMA FROM
+    information_schema.tables t1,
+    information_schema.tables t2,
+    (SELECT @num1:=1) temp1
+) tempNum1
+WHERE NUMA<=1000 AND NOT EXISTS
+(
+    SELECT * FROM
+    (
+        SELECT @num2:=@num2+1 as NUMB FROM
+        information_schema.tables t1,
+        information_schema.tables t2,
+        (SELECT @num2:=1) temp2
+        LIMIT 1000
+    )tempNum2
+    WHERE FLOOR(NUMA/NUMB)=NUMA/NUMB AND NUMA>NUMB
+);

@@ -1,0 +1,4 @@
+/*
+Enter your query here.
+*/
+SELECT (months*salary) as earning, count(*) FROM EMPLOYEE GROUP BY 1 ORDER BY earning DESC LIMIT 1;

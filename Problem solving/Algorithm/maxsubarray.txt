@@ -1,0 +1,54 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the maxSubarray function below.
+def maxSubarray(arr):
+    result=arr[0]
+    maximum=result
+    current=result
+    flagFirst=0
+    for i in range(1,len(arr)):
+        if arr[i]>0:
+            flagFirst=1
+        if arr[i]+result>maximum:
+            result+=arr[i]
+            maximum=result
+        elif arr[i]+result<0:
+            result=0
+        else:
+            result+=arr[i]
+    if flagFirst==0:
+        maximum=max(arr)
+    summation=0
+    flag=0
+    for i in range(0,len(arr)):
+        if arr[i]>0:
+            summation+=arr[i]
+            flag=1
+    if flag==0:
+        summation=max(arr)
+    output=[]
+    output.append(maximum)
+    output.append(summation)
+    return output
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(raw_input())
+
+    for t_itr in xrange(t):
+        n = int(raw_input())
+
+        arr = map(int, raw_input().rstrip().split())
+
+        result = maxSubarray(arr)
+
+        fptr.write(' '.join(map(str, result)))
+        fptr.write('\n')
+
+    fptr.close()

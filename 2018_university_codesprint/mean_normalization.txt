@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int m[n];
+    long double means[n];
+    vector<long double> result;
+    vector<long double> overall;
+    for(int i=0;i<n;i++)
+    {
+        cin>>m[i];
+        long double total=0;
+        for(int j=0;j<m[i];j++)
+        {
+            long double temp;
+            cin>>temp;
+            result.push_back(temp);
+            total+=temp;
+        }
+        means[i]=total/(double)m[i];
+    }
+    sort(result.begin(),result.end());
+    for(int i=0;i<result.size();i++)
+    {
+        overall.push_back(0);
+    }
+    overall[0]=result[0];
+    for(int i=1;i<result.size();i++)
+    {
+        overall[i]=overall[i-1]+result[i];
+    }
+    
+    int flag=0;
+    long double minimum;
+    for(int i=0;i<n;i++)
+    {
+        long double output=0;
+        vector<long double>::iterator position=lower_bound(result.begin(),result.end(),means[i]);
+        int r=position-result.begin();
+        double l=(double)r;
+        output+=(overall[overall.size()-1]-overall[l-1])-means[i]*(overall.size()-l);
+        output+=means[i]*l-overall[l-1];
+        
+        if(flag==0)
+        {
+            minimum=output;
+            flag=1;
+        }
+        if(output<minimum)
+        {
+            minimum=output;
+        }
+    }
+    cout<<setprecision(8)<<minimum<<endl;
+    return 0;
+}

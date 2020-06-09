@@ -1,0 +1,24 @@
+/*
+ * Modify and return the array so that all even elements are doubled and all odd elements are tripled.
+ * 
+ * Parameter(s):
+ * nums: An array of numbers.
+ */
+function modifyArray(nums) 
+{
+    const evenNumber=(a)=>{return 2*a};
+    const oddNumber=(a)=>{return 3*a};
+    var i=0;
+    for(i=0;i<nums.length;i++)
+    {
+        if(nums[i]%2==0)
+        {
+            nums[i]=evenNumber(nums[i]);
+        }
+        else
+        {
+            nums[i]=oddNumber(nums[i]);
+        }
+    }
+    return nums;
+}

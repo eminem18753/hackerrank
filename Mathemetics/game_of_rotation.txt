@@ -1,0 +1,16 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+result=list(map(int,raw_input().split(' ')))
+output=0
+maxOutput=-10**100
+summation=0
+total=sum(result)
+for i in range(0,len(result)):
+    summation+=(i+1)*result[i]
+maxOutput=summation
+for i in range(0,len(result)):
+    summation-=total
+    summation+=len(result)*result[i]
+    if summation>maxOutput:
+        maxOutput=summation
+print(maxOutput)

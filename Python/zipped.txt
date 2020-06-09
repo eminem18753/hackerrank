@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+temp=raw_input().split(' ')
+column=int(temp[0])
+row=int(temp[1])
+result=[]
+for i in range(0,row):
+    result.append(list(map(float,raw_input().split(' '))))
+output=zip(*result)
+for i in output:
+    print(sum(i)/row)

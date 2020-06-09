@@ -1,0 +1,27 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the substrings function below.
+def substrings(n):
+    result=map(int,list(reversed(list(str(n)))))
+    current=1
+    total=0
+    for i in range(0,len(result)):
+        total+=result[i]*(len(result)-i)*current
+        current=current*10+1
+    return total%1000000007
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = raw_input()
+
+    result = substrings(n)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

@@ -1,0 +1,121 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+// Complete the playingWithNumbers function below.
+vector<long long> playingWithNumbers(vector<long long> arr, vector<long long> queries) 
+{
+    vector<long long> result;
+    long long a[arr.size()];
+    sort(arr.begin(),arr.end());
+    a[0]=arr[0];
+    for(int i=1;i<arr.size();i++)
+    {
+        a[i]=a[i-1]+arr[i];
+    }
+    int total=0;
+    for(int i=0;i<queries.size();i++)
+    {
+        long long overall;
+        total+=queries[i];
+        vector<long long>::iterator position=upper_bound(arr.begin(),arr.end(),-total);
+        long long first=(long long)(position-arr.begin());
+        long long second=arr.size()-first;
+        if(first==0)
+        {
+            overall=total*second+a[arr.size()-1];
+        }
+        else
+        {
+            overall=total*second+(a[arr.size()-1]-a[first-1])-(total*first+a[first-1]);
+        }
+        result.push_back(overall);
+    }
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
+
+    vector<string> arr_temp = split_string(arr_temp_temp);
+
+    vector<long long> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
+
+        arr[i] = (long long)arr_item;
+    }
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string queries_temp_temp;
+    getline(cin, queries_temp_temp);
+
+    vector<string> queries_temp = split_string(queries_temp_temp);
+
+    vector<long long> queries(q);
+
+    for (int i = 0; i < q; i++) {
+        int queries_item = stoi(queries_temp[i]);
+
+        queries[i] = (long long)queries_item;
+    }
+
+    vector<long long> result = playingWithNumbers(arr, queries);
+
+    for (int i = 0; i < result.size(); i++) {
+        fout << result[i];
+
+        if (i != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}

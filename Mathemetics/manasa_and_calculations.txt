@@ -1,0 +1,23 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+number=int(raw_input())
+m=1000000007
+p=[]
+a=[]
+b=[]
+for i in range(0,number):
+    p1,a1,b1=map(int,list(raw_input().split()))
+    p.append(p1)
+    a.append(a1)
+    b.append(b1)
+result=1
+flag=1
+for i in range(0,len(p)):
+    if a[i]==b[i]:
+        result*=(pow(p[i],a[i],m))
+    else:
+        result*=(pow(p[i],a[i],m)+pow(p[i],b[i],m))%m
+        flag=0
+    result=result%m
+if flag==1:
+    result=(result*2)%m
+print(result)

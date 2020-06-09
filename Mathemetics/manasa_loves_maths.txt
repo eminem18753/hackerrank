@@ -1,0 +1,220 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the solve function below.
+string solve(string n) 
+{
+    string result="";
+    int a[10];
+    for(int i=0;i<10;i++)
+    {
+        a[i]=0;
+    }
+    for(int i=0;i<n.length();i++)
+    {
+        a[n[i]-'0']+=1;
+    }
+    if(n.length()==1)
+    {
+        if(n[0]=='0'||n[0]=='8')
+        {
+            return "YES";
+        }
+        else
+        {
+            return "NO";
+        }
+    }
+    else if(n.length()==2)
+    {
+        if(a[1]==1&&a[6]==1)
+        {
+            return "YES";
+        }
+        else if(a[2]==1&&a[4]==1)
+        {
+            return "YES";
+        }
+        else if(a[3]==1&&a[2]==1)
+        {
+            return "YES";
+        }
+        else if(a[4]==1&&a[0]==1)
+        {
+            return "YES";
+        }
+        else if(a[4]==1&&a[8]==1)
+        {
+            return "YES";
+        }
+        else if(a[5]==1&&a[6]==1)
+        {
+            return "YES";
+        }
+        else if(a[6]==1&&a[4]==1)
+        {
+            return "YES";
+        }
+        else if(a[7]==1&&a[2]==1)
+        {
+            return "YES";
+        }
+        else if(a[8]==1&&a[0]==1)
+        {
+            return "YES";
+        }
+        else if(a[8]==2)
+        {
+            return "YES";
+        }
+        else if(a[9]==1&&a[6]==1)
+        {
+            return "YES";
+        }
+        else
+        {
+            return "NO";
+        }
+    }
+    else
+    {
+        int countOdd=0;
+        int countEven=0;
+        for(int i=1;i<11;i+=2)
+        {
+            countOdd+=a[i];
+        }
+        for(int i=0;i<10;i+=2)
+        {
+            countEven+=a[i];
+        }
+        if(a[0]==1&&a[4]==1)
+        {
+            return "YES";
+        }
+        else if(a[1]>=1&&a[2]>=1&&countOdd>=2)
+        {
+            return "YES";
+        }
+        else if(a[2]>=1&&a[0]>=1)
+        {
+            return "YES";
+        }
+        else if(a[2]>=1&&a[8]>=1)
+        {
+            return "YES";
+        }
+        else if(a[3]>=1&&a[6]>=1&&countOdd>=2)
+        {
+            return "YES";
+        }
+        else if(a[4]>=2)
+        {
+            return "YES";
+        }
+        else if(a[5]>=1&&a[2]>=1&&countOdd>=2)
+        {
+            return "YES";
+        }
+        else if(a[6]>=1&&a[0]>=1)
+        {
+            return "YES";
+        }
+        else if(a[6]>=1&&a[8]>=1)
+        {
+            return "YES";
+        }
+        else if(a[7]>=1&&a[6]>=1&&countOdd>=2)
+        {
+            return "YES";
+        }
+        else if(a[8]>=1&&a[4]>=1)
+        {
+            return "YES";
+        }
+        else if(a[9]>=1&&a[2]>=1&&countOdd>=2)
+        {
+            return "YES";
+        }
+        else if(a[0]>=2&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[0]>=1&&a[8]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[1]>=1&&a[6]>=1&&countEven>=2)
+        {
+            return "YES";
+        }
+        else if(a[2]>=1&&a[4]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[3]>=1&&a[2]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[4]>=1&&a[0]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[4]>=1&&a[8]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[5]>=1&&a[6]>=1&&countEven>=2)
+        {
+            return "YES";
+        }
+        else if(a[6]>=1&&a[4]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[7]>=1&&a[2]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[8]>=1&&a[0]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[8]>=2&&countEven>=3)
+        {
+            return "YES";
+        }
+        else if(a[9]>=1&&a[6]>=1&&countEven>=3)
+        {
+            return "YES";
+        }
+        else
+        {
+            return "NO";
+        }
+    }
+    return result;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        string n;
+        getline(cin, n);
+
+        string result = solve(n);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
